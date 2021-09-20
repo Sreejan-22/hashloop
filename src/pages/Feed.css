@@ -34,6 +34,11 @@
   margin-bottom: 1rem;
 }
 
+.feed-header {
+  display: flex;
+  align-items: center;
+}
+
 .feed-right-container {
   width: 100%;
 }

@@ -3,7 +3,6 @@ import "./Feed.css";
 const Feed = () => {
   return (
     <div className="feed">
-      <div></div>
       <div className="feed-left-container">
         <div className="feed-left"></div>
       </div>
@@ -15,7 +14,6 @@ const Feed = () => {
       <div className="feed-right-container">
         <div className="feed-right"></div>
       </div>
-      <div></div>
     </div>
   );
 };
