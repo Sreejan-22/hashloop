@@ -1,9 +1,10 @@
+import Feed from "./pages/Feed";
 import "./App.css";
 
 function App() {
   return (
     <div>
-      <h1>Project Hunt</h1>
+      <Feed />
     </div>
   );
 }
