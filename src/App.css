@@ -2,3 +2,7 @@
   --main-bg-color: #f2f7fa;
   --border-radius: 20px;
 }
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
