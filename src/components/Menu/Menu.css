@@ -1,0 +1,28 @@
+.feed-menu {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+  background-color: white;
+  padding: 1rem;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.menu-item {
+  height: 3.5rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+  cursor: pointer;
+}
+
+.active-menu-item {
+  background-color: #f4f2f9;
+}

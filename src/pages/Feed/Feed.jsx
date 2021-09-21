@@ -1,22 +1,18 @@
+import Menu from "../../components/Menu/Menu";
+import Trending from "../../components/Trending/Trending";
 import HomeIcon from "@mui/icons-material/Home";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-// import MessageOutlinedIcon from "@mui/icons-material/MessageOutlined";
 import {
   BiUpvote,
   BiCommentDetail,
   BiShareAlt,
   BiBookmark,
-  BiSearch,
+  // BiSearch,
 } from "react-icons/bi";
-import ExploreIcon from "@mui/icons-material/Explore";
-import PersonIcon from "@mui/icons-material/Person";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 
 import profile from "../../assets/profile.png";
 import project from "../../assets/project.png";
-import trending from "../../assets/trending.png";
 import "./Feed.css";
 
 const Feed = () => {
@@ -24,37 +20,7 @@ const Feed = () => {
     <div className="feed">
       <div className="feed-left-container">
         <div className="feed-left">
-          <div className="feed-menu">
-            <br />
-            <br />
-            <br />
-            <div className="menu-items">
-              <div className="menu-item active-menu-item">
-                <HomeIcon />
-                &nbsp;&nbsp;Feed
-              </div>
-              <div className="menu-item">
-                <ExploreIcon />
-                &nbsp;&nbsp;Explore
-              </div>
-              <div className="menu-item">
-                <PersonIcon />
-                &nbsp;&nbsp;Profile
-              </div>
-              <div className="menu-item">
-                <BookmarkIcon />
-                &nbsp;&nbsp;Saved
-              </div>
-              <div className="menu-item">
-                <NotificationsIcon />
-                &nbsp;&nbsp;Notifications
-              </div>
-              <div className="menu-item">
-                <PersonIcon />
-                &nbsp;&nbsp;Logout
-              </div>
-            </div>
-          </div>
+          <Menu />
         </div>
       </div>
       <div className="feed-content-container">
@@ -150,40 +116,7 @@ const Feed = () => {
         </div>
       </div>
       <div className="feed-right-container">
-        <div className="feed-right">
-          <input type="text" placeholder="Search" className="search" />
-          <div className="trending">
-            <h5>Trending</h5>
-            <div className="trending-project">
-              <div className="trending-project-desc">
-                <p>A better Twitter</p>
-                <h6>by Rahul Mehra</h6>
-              </div>
-              <img src={trending} alt="" className="trending-project-img" />
-            </div>
-            <div className="trending-project">
-              <div className="trending-project-desc">
-                <p>A better Twitter</p>
-                <h6>by Rahul Mehra</h6>
-              </div>
-              <img src={trending} alt="" className="trending-project-img" />
-            </div>
-            <div className="trending-project">
-              <div className="trending-project-desc">
-                <p>A better Twitter</p>
-                <h6>by Rahul Mehra</h6>
-              </div>
-              <img src={trending} alt="" className="trending-project-img" />
-            </div>
-            <div className="trending-project">
-              <div className="trending-project-desc">
-                <p>A better Twitter</p>
-                <h6>by Rahul Mehra</h6>
-              </div>
-              <img src={trending} alt="" className="trending-project-img" />
-            </div>
-          </div>
-        </div>
+        <Trending />
       </div>
     </div>
   );
