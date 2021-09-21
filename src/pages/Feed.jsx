@@ -175,6 +175,13 @@ const Feed = () => {
               </div>
               <img src={trending} alt="" className="trending-project-img" />
             </div>
+            <div className="trending-project">
+              <div className="trending-project-desc">
+                <p>A better Twitter</p>
+                <h6>by Rahul Mehra</h6>
+              </div>
+              <img src={trending} alt="" className="trending-project-img" />
+            </div>
           </div>
         </div>
       </div>
