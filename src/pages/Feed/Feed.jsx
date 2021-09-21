@@ -14,9 +14,9 @@ import PersonIcon from "@mui/icons-material/Person";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 
-import profile from "../assets/profile.png";
-import project from "../assets/project.png";
-import trending from "../assets/trending.png";
+import profile from "../../assets/profile.png";
+import project from "../../assets/project.png";
+import trending from "../../assets/trending.png";
 import "./Feed.css";
 
 const Feed = () => {
