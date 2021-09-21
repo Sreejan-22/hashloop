@@ -1,6 +1,4 @@
 import Layout from "../../components/Layout/Layout";
-import HomeIcon from "@mui/icons-material/Home";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   BiUpvote,
@@ -11,6 +9,12 @@ import {
   BiArrowBack,
 } from "react-icons/bi";
 import { GrLocation } from "react-icons/gr";
+import {
+  AiOutlineGithub,
+  AiOutlineTwitter,
+  AiFillLinkedin,
+} from "react-icons/ai";
+import LanguageIcon from "@mui/icons-material/Language";
 
 import profile from "../../assets/profile.png";
 import profilecover from "../../assets/profilecover.png";
@@ -18,8 +22,7 @@ import project from "../../assets/project.png";
 import message from "../../assets/message.svg";
 import "./Profile.css";
 
-const profileBio =
-  "Senior Software Engineer @Microsoft | Creator of India’s biggest programming community | Tweets about JavaScript, ReactJS, Career and Startups";
+const tags = ["HTML", "CSS", "Javascript", "React", "Node", "MongoDB"];
 
 const Profile = () => {
   return (
@@ -32,20 +35,77 @@ const Profile = () => {
         </div>
         <div className="profile-info-container">
           <img src={profilecover} alt="" className="profile-cover-img" />
-          <br />
-          <br />
+          <div className="profile-pic">
+            <img
+              src={profile}
+              alt=""
+              style={{
+                height: "100%",
+                width: "100%",
+                objectFit: "cover",
+                borderRadius: "inherit",
+                border: "1px solid white",
+              }}
+            />
+          </div>
           <div className="profile-details">
             <div className="profile-name-container">
               <h4>Mahesh Sharma</h4>
-              <span>
+              <div>
                 <img
                   src={message}
                   alt=""
                   className="message-icon"
-                  style={{ width: "24px", height: "24px" }}
+                  style={{
+                    width: "34px",
+                    height: "34px",
+                    marginRight: "1rem",
+                    cursor: "pointer",
+                  }}
                 />
                 <button className="follow-btn">Follow</button>
-              </span>
+              </div>
+            </div>
+            <div className="profile-bio">
+              Senior Software Engineer @Microsoft | Creator of India’s biggest
+              programming community | Tweets about JavaScript, ReactJS, Career
+              and Startups
+            </div>
+            <div className="profile-location">
+              <GrLocation />
+              &nbsp;&nbsp;
+              <h5>Bangalore, India</h5>
+            </div>
+            <div className="profile-tags">
+              {tags.map((item) => (
+                <button className="profile-tag">{item}</button>
+              ))}
+            </div>
+            <div className="profile-links">
+              <a href="">
+                <AiOutlineGithub />
+              </a>
+              <a href="">
+                <AiOutlineTwitter />
+              </a>
+              <a href="">
+                <AiFillLinkedin />
+              </a>
+              <a href="">
+                <LanguageIcon />
+              </a>
+            </div>
+            <div className="profile-follower-data">
+              <div className="followers">
+                <span>316</span>&nbsp;
+                <span style={{ fontSize: "0.8rem" }}>Followers</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+              </div>
+              <div className="following">
+                <span>116</span>&nbsp;
+                <span style={{ fontSize: "0.8rem" }}>Following</span>
+                &nbsp;&nbsp;
+              </div>
             </div>
           </div>
         </div>

@@ -19,20 +19,49 @@
   width: 100%;
   height: 163px;
   border-radius: 20px 20px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-cover-img > img {
+  width: 90%;
+  height: 90%;
+}
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  background-color: white;
+  border-radius: 50%;
+  position: relative;
+  top: -45px;
+  left: 1.5rem;
+  margin-bottom: -2rem;
 }
 
 .profile-details {
-  padding: 1rem;
+  padding: 1rem 1.5rem;
+}
+
+.profile-details > * {
+  margin-bottom: 1rem;
 }
 
 .profile-name-container {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
-.message-icon {
-  height: 24px;
-  width: 24px;
+.profile-name-container > h4 {
+  align-self: center;
+  font-size: 1.2rem;
+}
+
+.profile-name-container > div {
+  display: flex;
+  align-items: center;
 }
 
 .follow-btn {
@@ -40,6 +69,56 @@
   border: 1px solid black;
   padding: 0.5rem;
   border-radius: 4px;
+}
+
+.profile-bio {
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+
+.profile-location {
+  display: flex;
+  align-items: center;
+}
+
+.profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.profile-tag {
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 28px;
+  background-color: #e2e2e2;
+  /* color: #013d55; */
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 8px;
+}
+
+.profile-tag:hover {
+  border: 2px solid rgb(48, 47, 47);
+  outline: black;
+}
+
+.profile-links {
+  display: flex;
+  align-items: center;
+}
+
+.profile-links svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 0.8rem;
+}
+
+.profile-follower-data {
+  display: flex;
+  align-items: center;
 }
 
 .feed-content {
@@ -93,6 +172,7 @@
 
 .project-tags {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .project-tag {
