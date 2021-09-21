@@ -110,6 +110,8 @@
 .project-tag {
   margin-right: 0.5rem;
   height: 28px;
+  background-color: #e2e2e2;
+  /* color: #013d55; */
   border-radius: 8px;
   display: flex;
   justify-content: center;

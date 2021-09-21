@@ -34,6 +34,7 @@
   background-color: #f4f2f9;
   border-radius: 8px;
   margin-bottom: 0.7rem;
+  cursor: pointer;
 }
 
 .trending-project-desc {
