@@ -16,6 +16,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 
 import profile from "../assets/profile.png";
 import project from "../assets/project.png";
+import trending from "../assets/trending.png";
 import "./Feed.css";
 
 const Feed = () => {
@@ -151,7 +152,30 @@ const Feed = () => {
       <div className="feed-right-container">
         <div className="feed-right">
           <input type="text" placeholder="Search" className="search" />
-          <div className="trending"></div>
+          <div className="trending">
+            <h5>Trending</h5>
+            <div className="trending-project">
+              <div className="trending-project-desc">
+                <p>A better Twitter</p>
+                <h6>by Rahul Mehra</h6>
+              </div>
+              <img src={trending} alt="" className="trending-project-img" />
+            </div>
+            <div className="trending-project">
+              <div className="trending-project-desc">
+                <p>A better Twitter</p>
+                <h6>by Rahul Mehra</h6>
+              </div>
+              <img src={trending} alt="" className="trending-project-img" />
+            </div>
+            <div className="trending-project">
+              <div className="trending-project-desc">
+                <p>A better Twitter</p>
+                <h6>by Rahul Mehra</h6>
+              </div>
+              <img src={trending} alt="" className="trending-project-img" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
