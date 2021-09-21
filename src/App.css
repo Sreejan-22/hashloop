@@ -1,8 +1,24 @@
 :root {
   --main-bg-color: #f2f7fa;
   --border-radius: 20px;
+  --text-gray: #999999;
 }
 
 body {
   font-family: "Montserrat", sans-serif;
+}
+
+button {
+  border: none;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+input {
+  border: none;
+  outline: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
 }
