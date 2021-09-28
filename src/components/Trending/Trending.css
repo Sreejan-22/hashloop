@@ -2,6 +2,7 @@
   width: 65%;
   display: flex;
   flex-direction: column;
+  font-weight: 500;
 }
 
 .search {
@@ -41,4 +42,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.trending-project-desc > h6 {
+  color: #999999;
 }
