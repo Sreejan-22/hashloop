@@ -1,6 +1,7 @@
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from "@mui/icons-material/Logout";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import "./Menu.css";
@@ -33,7 +34,7 @@ const Menu = () => {
           &nbsp;&nbsp;Notifications
         </div>
         <div className="menu-item">
-          <PersonIcon />
+          <LogoutIcon />
           &nbsp;&nbsp;Logout
         </div>
       </div>

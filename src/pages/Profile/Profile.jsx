@@ -5,7 +5,6 @@ import {
   BiCommentDetail,
   BiShareAlt,
   BiBookmark,
-  // BiSearch,
   BiArrowBack,
 } from "react-icons/bi";
 import { GrLocation } from "react-icons/gr";

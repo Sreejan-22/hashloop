@@ -1,6 +1,5 @@
 import Layout from "../../components/Layout/Layout";
 import HomeIcon from "@mui/icons-material/Home";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   BiUpvote,
@@ -9,6 +8,7 @@ import {
   BiBookmark,
   // BiSearch,
 } from "react-icons/bi";
+import { FiEdit } from "react-icons/fi";
 
 import profile from "../../assets/profile.png";
 import project from "../../assets/project.png";
@@ -25,7 +25,7 @@ const Feed = () => {
         </div>
         <button className="new-project-btn">
           <span>
-            <AddCircleOutlineIcon />
+            <FiEdit style={{ height: "1.2rem", width: "1.2rem" }} />
           </span>
           <span>&nbsp;&nbsp;New Project</span>
         </button>

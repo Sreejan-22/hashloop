@@ -8,8 +8,8 @@ function App() {
     <Router>
       <Switch>
         <Route path="/profile" component={Profile} />
+        <Route path="/error" component={Profile}></Route>
         <Route exact path="/" component={Feed} />
-        {/* <Route path="/"></Route> */}
       </Switch>
     </Router>
   );
