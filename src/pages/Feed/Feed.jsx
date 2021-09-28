@@ -6,7 +6,6 @@ import {
   BiCommentDetail,
   BiShareAlt,
   BiBookmark,
-  // BiSearch,
 } from "react-icons/bi";
 import { FiEdit } from "react-icons/fi";
 
