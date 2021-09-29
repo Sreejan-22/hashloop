@@ -1,0 +1,98 @@
+.project {
+  width: 100%;
+  border-radius: var(--border-radius);
+  box-shadow: 0px 2px 24px 2px rgba(0, 6, 148, 0.08);
+  background-color: white;
+  padding: 2rem 2rem 1rem 2rem;
+  margin-bottom: 1rem;
+}
+
+.project > * {
+  margin-bottom: 1rem;
+}
+
+.project svg {
+  cursor: pointer;
+}
+
+.project-header {
+  display: grid;
+  grid-template-columns: 10% 85% 5%;
+  column-gap: 4px;
+}
+
+.project-header > div {
+  display: flex;
+  flex-direction: column;
+  font-size: 16px;
+}
+
+.project-header span {
+  color: var(--text-gray);
+  font-size: 12px;
+}
+
+.profile-img {
+  height: 44px;
+  width: 44px;
+}
+
+.project-desc {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.project-tags {
+  display: flex;
+}
+
+.project-tag {
+  margin-right: 0.5rem;
+  height: 28px;
+  background-color: #e2e2e2;
+  /* color: #013d55; */
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 8px;
+}
+
+.project-tag:hover {
+  border: 2px solid rgb(48, 47, 47);
+  outline: black;
+}
+
+.project-links {
+  display: flex;
+}
+
+.project-links > a {
+  color: black;
+}
+
+.project-img {
+  width: 100%;
+  height: 240px;
+  border-radius: 16px;
+}
+
+.project-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project-options svg {
+  font-size: 1.3rem;
+}
+
+.project-options > span {
+  /* font-size: 1.3rem; */
+  display: flex;
+}
+
+.upvotes {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
