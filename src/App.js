@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Signup from "./pages/Signup/Signup";
+import Login from "./pages/Login/Login";
 import Feed from "./pages/Feed/Feed";
 import Profile from "./pages/Profile/Profile";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
@@ -11,6 +12,7 @@ function App() {
       <Switch>
         <Route path="/profile" component={Profile} />
         <Route path="/signup" component={Signup} />
+        <Route path="/login" component={Login} />
         <Route exact path="/" component={Feed} />
         <Route path="*">
           <PageNotFound />
