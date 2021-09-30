@@ -32,6 +32,11 @@
   font-size: 12px;
 }
 
+.project-header > a {
+  height: 44px;
+  width: 44px;
+}
+
 .profile-img {
   height: 44px;
   width: 44px;
@@ -69,6 +74,8 @@
 
 .project-links > a {
   color: black;
+  font-size: 0.8rem;
+  text-decoration: underline;
 }
 
 .project-img {

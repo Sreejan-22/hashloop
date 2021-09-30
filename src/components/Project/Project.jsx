@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -48,10 +49,14 @@ const Project = () => {
   return (
     <div className="project">
       <div className="project-header">
-        <img src={profile} alt="" className="profile-img" />
+        <Link to="/profile">
+          <img src={profile} alt="" className="profile-img" />
+        </Link>
         <div className="project-header-child">
           <div>
-            Mahesh Sharma &#8226; <span>21/03/21</span>
+            <Link to="/profile">
+              Mahesh Sharma &#8226; <span>21/03/21</span>
+            </Link>
           </div>
           <div>
             <span>React / Vue Developer</span>
