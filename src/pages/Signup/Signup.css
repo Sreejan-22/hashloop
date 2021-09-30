@@ -1,18 +1,20 @@
 .signup-wrapper {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   --marginvalue: 5rem;
 }
 
 .left-signup-part,
 .right-signup-part {
-  height: 100%;
+  height: 100vh;
   width: 50%;
 }
 
 .left-signup-part {
-  background-color: #282c40;
+  background: linear-gradient(327.38deg, #2a2f48 43.25%, #000c46 100%);
+  display: flex;
+  justify-content: center;
 }
 
 .right-signup-part {
@@ -47,6 +49,10 @@
   margin: 0rem var(--marginvalue) 0rem var(--marginvalue);
 }
 
+.signup-form > div {
+  margin-top: 1.5rem;
+}
+
 .signup-submit-btn {
   height: 70px;
   /* background: linear-gradient(180deg, #ffb648 0%, #fdc064 100%); */
@@ -58,9 +64,10 @@
   font-size: 20px;
   line-height: 110%;
   color: #ffffff;
-  margin-top: 1rem;
+  margin-top: 3rem;
   margin-bottom: 1.5rem;
   font-weight: 700;
+  font-family: "DM Sans", sans-serif;
 }
 
 .line {
@@ -104,7 +111,7 @@
 
 @media screen and (min-width: 1700px) {
   .signup-wrapper {
-    --marginvalue: 8rem;
+    --marginvalue: 10rem;
   }
 }
 

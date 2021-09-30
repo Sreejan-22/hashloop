@@ -1,6 +1,6 @@
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import sign from "../../assets/sign.svg";
+import amico from "../../assets/amico.svg";
 import "./Login.css";
 
 const theme = createTheme({
@@ -28,7 +28,7 @@ const Login = () => {
     <ThemeProvider theme={theme}>
       <div className={`signin-wrapper ${classes.root}`}>
         <div className="left-signin-part">
-          <img src={sign} alt="" style={{ width: "100%", height: "100%" }} />
+          <img src={amico} alt="" style={{ width: "80%", height: "100%" }} />
         </div>
         <div className="right-signin-part">
           <div className="signin-heading">Sign In</div>
@@ -37,12 +37,14 @@ const Login = () => {
             <TextField
               label="Email"
               type="text"
+              variant="standard"
               className={classes.textField}
               required
             />
             <TextField
               label="Password"
               type="password"
+              variant="standard"
               className={classes.textField}
               required
             />
@@ -53,6 +55,7 @@ const Login = () => {
             <input
               type="submit"
               value="Sign In"
+              variant="standard"
               className="signin-submit-btn"
             />
           </form>
