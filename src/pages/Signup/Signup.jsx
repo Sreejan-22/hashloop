@@ -36,26 +36,20 @@ const Signup = () => {
           <div className="signup-subheading">Welcome!</div>
           <form noValidate autoComplete="off" className="signup-form">
             <TextField
-              // id="standard-password-input"
               label="Name"
               type="text"
-              // autoComplete="current-password"
               className={classes.textField}
               required
             />
             <TextField
-              // id="standard-password-input"
               label="Email"
               type="text"
-              // autoComplete="current-password"
               className={classes.textField}
               required
             />
             <TextField
-              // id="standard-password-input"
               label="Password"
               type="password"
-              // autoComplete="current-password"
               className={classes.textField}
               required
             />
