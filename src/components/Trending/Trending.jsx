@@ -8,8 +8,8 @@ const Trending = () => {
       <div className="trending">
         <h5>Trending</h5>
         <>
-          {[1, 2, 3, 4].map((item) => (
-            <div className="trending-project">
+          {[1, 2, 3, 4].map((item, index) => (
+            <div className="trending-project" key={`trending-${index}`}>
               <div className="trending-project-desc">
                 <p>A better Twitter</p>
                 <h6>by Rahul Mehra</h6>
