@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import Menu from "@mui/material/Menu";
@@ -36,7 +37,8 @@ const StyledMenu = styled((props) => (
   },
 }));
 
-const Project = () => {
+const Project = (props) => {
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -46,6 +48,9 @@ const Project = () => {
     setAnchorEl(null);
   };
 
+  if (history.location.pathname.includes("/projects")) {
+    console.log("yes");
+  }
   return (
     <div className="project">
       <div className="project-header">
@@ -102,6 +107,7 @@ const Project = () => {
         <BiShareAlt />
         <BiBookmark />
       </div>
+      <hr className="divider" />
     </div>
   );
 };
