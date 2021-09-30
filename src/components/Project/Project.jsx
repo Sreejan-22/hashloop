@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { styled } from "@mui/material/styles";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   BiUpvote,
@@ -9,7 +13,38 @@ import profile from "../../assets/profile.png";
 import project from "../../assets/project.png";
 import "./Project.css";
 
+const StyledMenu = styled((props) => (
+  <Menu
+    elevation={0}
+    anchorOrigin={{
+      vertical: "bottom",
+      horizontal: "right",
+    }}
+    transformOrigin={{
+      vertical: "top",
+      horizontal: "right",
+    }}
+    {...props}
+  />
+))(({ theme }) => ({
+  "& .MuiPaper-root": {
+    borderRadius: 20,
+    boxShadow: "0px 2px 24px 2px rgba(0, 6, 148, 0.08);",
+    width: "150px",
+    padding: 10,
+  },
+}));
+
 const Project = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <div className="project">
       <div className="project-header">
@@ -22,7 +57,20 @@ const Project = () => {
             <span>React / Vue Developer</span>
           </div>
         </div>
-        <MoreVertIcon />
+        <MoreVertIcon onClick={handleClick} />
+        <StyledMenu
+          id="basic-menu"
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleClose}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+        >
+          <MenuItem onClick={handleClose}>Message</MenuItem>
+          <MenuItem onClick={handleClose}>Follow</MenuItem>
+          <MenuItem onClick={handleClose}>Report</MenuItem>
+        </StyledMenu>
       </div>
       <div className="project-desc">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta ea fuga
