@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import Menu from "@mui/material/Menu";
+import { StyledMenu, StyledCommentMenu } from "../StyledMenu/StyledMenu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
@@ -15,32 +14,20 @@ import profile from "../../assets/profile.png";
 import project from "../../assets/project.png";
 import "./Project.css";
 
-const StyledMenu = styled((props) => (
-  <Menu
-    elevation={0}
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "right",
-    }}
-    transformOrigin={{
-      vertical: "top",
-      horizontal: "right",
-    }}
-    {...props}
-  />
-))(({ theme }) => ({
-  "& .MuiPaper-root": {
-    borderRadius: 20,
-    boxShadow: "0px 2px 24px 2px rgba(0, 6, 148, 0.08);",
-    width: "150px",
-    padding: 10,
-  },
-}));
-
 const Project = (props) => {
   const history = useHistory();
+  const [showComments, setShowComments] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorComment, setAnchorComment] = useState(null);
   const open = Boolean(anchorEl);
+  const open2 = Boolean(anchorComment);
+
+  useEffect(() => {
+    if (history.location.pathname.includes("/projects")) {
+      setShowComments(true);
+    }
+  }, []);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -48,9 +35,13 @@ const Project = (props) => {
     setAnchorEl(null);
   };
 
-  if (history.location.pathname.includes("/projects")) {
-    console.log("yes");
-  }
+  const handleClick2 = (e) => {
+    setAnchorComment(e.currentTarget);
+  };
+  const handleClose2 = () => {
+    setAnchorComment(null);
+  };
+
   return (
     <div className="project">
       <div className="project-header">
@@ -107,7 +98,51 @@ const Project = (props) => {
         <BiShareAlt />
         <BiBookmark />
       </div>
-      <hr className="divider" />
+      {showComments && (
+        <>
+          <hr className="divider" />
+          <div className="comment-section">
+            {[1, 2].map((item) => (
+              <div className="comment-box">
+                <div className="project-header">
+                  <Link to="/profile">
+                    <img src={profile} alt="" className="profile-img" />
+                  </Link>
+                  <div className="project-header-child">
+                    <div>
+                      <Link to="/profile">
+                        Mahesh Sharma &#8226; <span>21/03/21</span>
+                      </Link>
+                    </div>
+                    <div>
+                      <span>React / Vue Developer</span>
+                    </div>
+                  </div>
+                  <MoreVertIcon onClick={handleClick2} />
+                  <StyledCommentMenu
+                    id="basic-menu"
+                    anchorEl={anchorComment}
+                    open={open2}
+                    onClose={handleClose2}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                    borderRadius="6"
+                    padding="0"
+                  >
+                    <MenuItem onClick={handleClose2}>Report</MenuItem>
+                  </StyledCommentMenu>
+                </div>
+                <div className="comment-text">Looks cool lets talk</div>
+                <div className="comment-icons">
+                  <BiUpvote />{" "}
+                  <span> &nbsp;&nbsp;Upvote &nbsp;&#8226;&nbsp; 2</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 };
