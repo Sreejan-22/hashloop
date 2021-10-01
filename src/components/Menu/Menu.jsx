@@ -72,7 +72,8 @@ const Menu = () => {
           <BookmarkIcon />
           &nbsp;&nbsp;Saved
         </Link>
-        <div
+        <Link
+          to="/notifications"
           className={`menu-item ${
             active === "notifications" ? "active-menu-item" : ""
           }`}
@@ -80,7 +81,7 @@ const Menu = () => {
         >
           <NotificationsIcon />
           &nbsp;&nbsp;Notifications
-        </div>
+        </Link>
         <div
           className={`menu-item ${
             active === "logout" ? "active-menu-item" : ""
