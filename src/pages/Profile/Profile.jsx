@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import Project from "../../components/Project/Project";
 import { BiArrowBack } from "react-icons/bi";
@@ -17,11 +18,13 @@ import "./Profile.css";
 const tags = ["HTML", "CSS", "Javascript", "React", "Node", "MongoDB"];
 
 const Profile = () => {
+  const history = useHistory();
+
   return (
     <Layout>
       <>
         <div className="profile-page-header">
-          <BiArrowBack />
+          <BiArrowBack onClick={() => history.goBack()} />
           &nbsp;&nbsp;&nbsp;
           <span>Mahesh Sharma</span>
         </div>
