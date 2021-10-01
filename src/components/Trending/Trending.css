@@ -21,6 +21,7 @@
   flex-direction: column;
   border-radius: var(--border-radius);
   padding: 1rem;
+  margin-bottom: 1rem;
 }
 
 .trending > h5 {
@@ -46,4 +47,42 @@
 
 .trending-project-desc > h6 {
   color: #999999;
+}
+
+.follow-suggestions {
+  background: #ffffff;
+  box-shadow: 0px 2px 24px 2px rgba(0, 6, 148, 0.08);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+}
+
+.follow-suggestions > h5 {
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+
+.follow-profile-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.7rem;
+}
+
+.follow-profile {
+  display: flex;
+  align-items: center;
+}
+
+.follow-profile > span {
+  margin-left: 5px;
+  font-size: 0.8rem;
+}
+
+.follow-profile-img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
 }
