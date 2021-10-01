@@ -29,7 +29,7 @@ const Menu = () => {
     if (history.location.pathname.includes("/notifications")) {
       setActive("notifications");
     }
-  }, []);
+  }, [history.location.pathname]);
 
   return (
     <div className="feed-menu">
@@ -62,7 +62,8 @@ const Menu = () => {
           <PersonIcon />
           &nbsp;&nbsp;Profile
         </Link>
-        <div
+        <Link
+          to="/saved"
           className={`menu-item ${
             active === "saved" ? "active-menu-item" : ""
           }`}
@@ -70,7 +71,7 @@ const Menu = () => {
         >
           <BookmarkIcon />
           &nbsp;&nbsp;Saved
-        </div>
+        </Link>
         <div
           className={`menu-item ${
             active === "notifications" ? "active-menu-item" : ""
