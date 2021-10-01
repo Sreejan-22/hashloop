@@ -1,0 +1,20 @@
+.tags-wrapper {
+  background-color: white;
+  box-shadow: 0px 2px 24px 2px rgba(0, 6, 148, 0.08);
+  border-radius: 20px;
+}
+
+.tags-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tags-container > h5 {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.explore-tags {
+  justify-content: center;
+}
