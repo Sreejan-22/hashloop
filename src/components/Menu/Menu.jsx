@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import PersonIcon from "@mui/icons-material/Person";
@@ -8,7 +10,26 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import "./Menu.css";
 
 const Menu = () => {
+  const history = useHistory();
   const [active, setActive] = useState("feed");
+
+  useEffect(() => {
+    if (history.location.pathname === "/") {
+      setActive("feed");
+    }
+    if (history.location.pathname.includes("/explore")) {
+      setActive("explore");
+    }
+    if (history.location.pathname.includes("/profile")) {
+      setActive("profile");
+    }
+    if (history.location.pathname.includes("/saved")) {
+      setActive("saved");
+    }
+    if (history.location.pathname.includes("/notifications")) {
+      setActive("notifications");
+    }
+  }, []);
 
   return (
     <div className="feed-menu">
@@ -16,13 +37,13 @@ const Menu = () => {
       <br />
       <br />
       <div className="menu-items">
-        <div
+        <Link
+          to="/"
           className={`menu-item ${active === "feed" ? "active-menu-item" : ""}`}
-          onClick={() => setActive("feed")}
         >
           <HomeIcon />
           &nbsp;&nbsp;Feed
-        </div>
+        </Link>
         <div
           className={`menu-item ${
             active === "explore" ? "active-menu-item" : ""
@@ -32,15 +53,15 @@ const Menu = () => {
           <ExploreIcon />
           &nbsp;&nbsp;Explore
         </div>
-        <div
+        <Link
+          to="/profile"
           className={`menu-item ${
             active === "profile" ? "active-menu-item" : ""
           }`}
-          onClick={() => setActive("profile")}
         >
           <PersonIcon />
           &nbsp;&nbsp;Profile
-        </div>
+        </Link>
         <div
           className={`menu-item ${
             active === "saved" ? "active-menu-item" : ""
