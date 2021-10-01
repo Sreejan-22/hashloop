@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { StyledMenu, StyledCommentMenu } from "../StyledMenu/StyledMenu";
 import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
   BiUpvote,
@@ -102,6 +103,26 @@ const Project = (props) => {
         <>
           <hr className="divider" />
           <div className="comment-section">
+            <div className="post-comment">
+              <div>
+                <Link to="/profile">
+                  <img src={profile} alt="" className="profile-img" />
+                </Link>
+                <OutlinedInput
+                  placeholder="Enter comment"
+                  multiline
+                  minRows="1"
+                  style={{
+                    padding: "10px 14px",
+                    marginLeft: "1rem",
+                    flexGrow: "0.9",
+                  }}
+                />
+              </div>
+              <button className="post-comment-btn">Post</button>
+            </div>
+            <br />
+            <br />
             {[1, 2].map((item) => (
               <div className="comment-box">
                 <div className="project-header">

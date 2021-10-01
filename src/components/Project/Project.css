@@ -108,6 +108,8 @@
   width: 100%;
   border: none;
   border-bottom: 1px solid rgb(163, 163, 163);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .comment-section {
@@ -137,4 +139,24 @@
   font-size: 0.7rem;
   font-weight: 500;
   align-self: center;
+}
+
+.post-comment {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-comment > div {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  flex-grow: 1;
+}
+
+.post-comment-btn {
+  padding: 0.7rem;
+  background-color: #4399ff;
+  color: white;
+  border-radius: 5px;
 }
