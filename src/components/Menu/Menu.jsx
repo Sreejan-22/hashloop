@@ -44,15 +44,15 @@ const Menu = () => {
           <HomeIcon />
           &nbsp;&nbsp;Feed
         </Link>
-        <div
+        <Link
+          to="/explore"
           className={`menu-item ${
             active === "explore" ? "active-menu-item" : ""
           }`}
-          onClick={() => setActive("explore")}
         >
           <ExploreIcon />
           &nbsp;&nbsp;Explore
-        </div>
+        </Link>
         <Link
           to="/profile"
           className={`menu-item ${
@@ -67,7 +67,6 @@ const Menu = () => {
           className={`menu-item ${
             active === "saved" ? "active-menu-item" : ""
           }`}
-          onClick={() => setActive("saved")}
         >
           <BookmarkIcon />
           &nbsp;&nbsp;Saved
@@ -77,7 +76,6 @@ const Menu = () => {
           className={`menu-item ${
             active === "notifications" ? "active-menu-item" : ""
           }`}
-          onClick={() => setActive("notifications")}
         >
           <NotificationsIcon />
           &nbsp;&nbsp;Notifications

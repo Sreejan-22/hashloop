@@ -4,6 +4,7 @@ import Login from "./pages/Login/Login";
 import Feed from "./pages/Feed/Feed";
 import Profile from "./pages/Profile/Profile";
 import SingleProject from "./pages/SingleProject/SingleProject";
+import Explore from "./pages/Explore/Explore";
 import Saved from "./pages/Saved/Saved";
 import Notifications from "./pages/Notifications/Notifications";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
@@ -15,6 +16,7 @@ function App() {
       <Switch>
         <Route path="/profile" component={Profile} />
         <Route path="/projects" component={SingleProject} />
+        <Route path="/explore" component={Explore} />
         <Route path="/saved" component={Saved} />
         <Route path="/notifications" component={Notifications} />
         <Route path="/signup" component={Signup} />
