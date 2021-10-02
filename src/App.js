@@ -17,8 +17,8 @@ function App() {
       <Switch>
         <Route path="/profile" component={Profile} />
         <Route path="/projects" component={SingleProject} />
-        <Route path="/tags" component={ExploreAll} />
-        <Route path="/explore" component={Explore} />
+        <Route path="/tags" component={Explore} />
+        <Route path="/explore" component={ExploreAll} />
         <Route path="/saved" component={Saved} />
         <Route path="/notifications" component={Notifications} />
         <Route path="/signup" component={Signup} />
