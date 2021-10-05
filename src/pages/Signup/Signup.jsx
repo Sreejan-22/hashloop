@@ -101,13 +101,13 @@ const Signup = () => {
     ) {
       setLoading(true);
 
-      fetch(process.env.REACT_APP_URL, {
+      fetch(`${process.env.REACT_APP_URL}/signup`, {
         method: "POST",
         body: JSON.stringify({
-          name,
-          email,
-          username,
-          password,
+          name: name.text,
+          email: email.text,
+          username: username.text,
+          password: password.text,
         }),
         headers: {
           "Content-type": "application/json",
@@ -129,7 +129,10 @@ const Signup = () => {
             console.log(data.errors);
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setLoading(false);
+          console.log(err);
+        });
     }
   };
 
