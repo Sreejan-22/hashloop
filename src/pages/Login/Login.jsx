@@ -48,7 +48,10 @@ const Login = () => {
               className={classes.textField}
               required
             />
-            <a href="#" class="forgot-password-text">
+            <a
+              href="https://github.com/Sreejan-22"
+              class="forgot-password-text"
+            >
               Forgot Password?
             </a>
             <br />
