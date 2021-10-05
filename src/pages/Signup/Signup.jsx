@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authenticate } from "../../slices/auth.slice";
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import { CircularProgress } from "@mui/material";
 import amico from "../../assets/amico.svg";
 import "./Signup.css";
 
@@ -20,6 +24,25 @@ const useStyles = makeStyles({
     width: "510",
     marginBottom: "1.5rem",
     color: "textPrimary",
+  },
+  loaderWrapper: {
+    position: "absolute",
+    top: "40px",
+    left: "50%",
+    display: "flex",
+    justifyContent: "center",
+  },
+  loader: {
+    zIndex: "5",
+  },
+  wrapper: {
+    position: "fixed",
+    top: "0px",
+    left: "0px",
+    width: "100vw",
+    height: "100vh",
+    backgroundColor: "rgba(0,0,0,0.3)",
+    zIndex: "5",
   },
 });
 
@@ -45,6 +68,9 @@ const Signup = () => {
     error: false,
     errorText: null,
   });
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -73,7 +99,37 @@ const Signup = () => {
       email.text.length &&
       password.text.length
     ) {
-      console.log(name.text, username.text, email.text, password.text);
+      setLoading(true);
+
+      fetch(process.env.REACT_APP_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          email,
+          username,
+          password,
+        }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setLoading(false);
+          if (data.success) {
+            localStorage.setItem("token", data.token);
+            const userData = {
+              name,
+              username,
+              email,
+            };
+            dispatch(authenticate(userData));
+            history.push("/");
+          } else {
+            console.log(data.errors);
+          }
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -137,6 +193,14 @@ const Signup = () => {
           </form>
         </div>
       </div>
+      {loading ? (
+        <>
+          <div className={classes.loaderWrapper}>
+            <CircularProgress className={classes.loader} />
+          </div>
+          <div className={classes.wrapper}></div>
+        </>
+      ) : null}
     </ThemeProvider>
   );
 };
