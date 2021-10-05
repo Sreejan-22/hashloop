@@ -77,16 +77,16 @@ const Profile = () => {
               ))}
             </div>
             <div className="profile-links">
-              <a href="">
+              <a href="https://github.com/Sreejan-22">
                 <AiOutlineGithub />
               </a>
-              <a href="">
+              <a href="https://github.com/Sreejan-22">
                 <AiOutlineTwitter />
               </a>
-              <a href="">
+              <a href="https://github.com/Sreejan-22">
                 <AiFillLinkedin />
               </a>
-              <a href="">
+              <a href="https://github.com/Sreejan-22">
                 <LanguageIcon />
               </a>
             </div>

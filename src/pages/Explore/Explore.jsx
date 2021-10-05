@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import Project from "../../components/Project/Project";
 import { BiArrowBack } from "react-icons/bi";
