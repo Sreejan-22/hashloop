@@ -1,4 +1,4 @@
-// import { notifyError } from "./noltifyToasts";
+import { notifyError } from "./noltifyToasts";
 
 export const handleServerError = (message) => {
   alert(message);
@@ -6,19 +6,19 @@ export const handleServerError = (message) => {
 
 export const handleSignupError = (errors) => {
   if (errors.email.length) {
-    // notifyError(errors.email);
-    alert(errors.email);
+    notifyError(errors.email);
+    // alert(errors.email);
   }
 
   if (errors.name.length) {
-    alert(errors.name);
+    notifyError(errors.name);
   }
 
   if (errors.username.length) {
-    alert(errors.username);
+    notifyError(errors.username);
   }
 
   if (errors.password.length) {
-    alert(errors.password);
+    notifyError(errors.password);
   }
 };

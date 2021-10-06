@@ -4,7 +4,8 @@ import {
   handleServerError,
   handleSignupError,
 } from "../../utils/handleSignupError";
-// import { ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { CircularProgress } from "@mui/material";
@@ -145,76 +146,75 @@ const Signup = () => {
   };
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <div className={`signup-wrapper ${classes.root}`}>
-          <div className="left-signup-part">
-            <img src={amico} alt="" style={{ width: "80%", height: "100%" }} />
-          </div>
-          <div className="right-signup-part">
-            <div className="signup-heading">Sign Up</div>
-            <div className="signup-subheading">Welcome!</div>
-            <form noValidate autoComplete="off" className="signup-form">
-              <TextField
-                label="Name"
-                type="text"
-                variant="standard"
-                className={classes.textField}
-                required
-                onChange={(e) => setName({ ...name, text: e.target.value })}
-                error={name.error}
-                helperText={name.errorText}
-              />
-              <TextField
-                label="Username"
-                type="text"
-                variant="standard"
-                className={classes.textField}
-                required
-                onChange={(e) =>
-                  setUsername({ ...username, text: e.target.value })
-                }
-                error={username.error}
-                helperText={username.errorText}
-              />
-              <TextField
-                label="Email"
-                type="text"
-                variant="standard"
-                className={classes.textField}
-                required
-                onChange={(e) => setEmail({ ...email, text: e.target.value })}
-                error={email.error}
-                helperText={email.errorText}
-              />
-              <TextField
-                label="Password"
-                type="password"
-                variant="standard"
-                className={classes.textField}
-                required
-                onChange={(e) =>
-                  setPassword({ ...password, text: e.target.value })
-                }
-                error={password.error}
-                helperText={password.errorText}
-              />
-              <button className="signup-submit-btn" onClick={handleSubmit}>
-                Sign Up
-              </button>
-            </form>
-          </div>
+    <ThemeProvider theme={theme}>
+      <div className={`signup-wrapper ${classes.root}`}>
+        <div className="left-signup-part">
+          <img src={amico} alt="" style={{ width: "80%", height: "100%" }} />
         </div>
-        {loading ? (
-          <>
-            <div className={classes.loaderWrapper}>
-              <CircularProgress className={classes.loader} />
-            </div>
-            <div className={classes.wrapper}></div>
-          </>
-        ) : null}
-      </ThemeProvider>
-    </>
+        <div className="right-signup-part">
+          <div className="signup-heading">Sign Up</div>
+          <div className="signup-subheading">Welcome!</div>
+          <form noValidate autoComplete="off" className="signup-form">
+            <TextField
+              label="Name"
+              type="text"
+              variant="standard"
+              className={classes.textField}
+              required
+              onChange={(e) => setName({ ...name, text: e.target.value })}
+              error={name.error}
+              helperText={name.errorText}
+            />
+            <TextField
+              label="Username"
+              type="text"
+              variant="standard"
+              className={classes.textField}
+              required
+              onChange={(e) =>
+                setUsername({ ...username, text: e.target.value })
+              }
+              error={username.error}
+              helperText={username.errorText}
+            />
+            <TextField
+              label="Email"
+              type="text"
+              variant="standard"
+              className={classes.textField}
+              required
+              onChange={(e) => setEmail({ ...email, text: e.target.value })}
+              error={email.error}
+              helperText={email.errorText}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              variant="standard"
+              className={classes.textField}
+              required
+              onChange={(e) =>
+                setPassword({ ...password, text: e.target.value })
+              }
+              error={password.error}
+              helperText={password.errorText}
+            />
+            <button className="signup-submit-btn" onClick={handleSubmit}>
+              Sign Up
+            </button>
+          </form>
+        </div>
+      </div>
+      {loading ? (
+        <>
+          <div className={classes.loaderWrapper}>
+            <CircularProgress className={classes.loader} />
+          </div>
+          <div className={classes.wrapper}></div>
+        </>
+      ) : null}
+      <ToastContainer />
+    </ThemeProvider>
   );
 };
 
