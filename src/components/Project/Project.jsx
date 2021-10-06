@@ -92,8 +92,21 @@ const Project = (props) => {
         <button className="project-tag">Node</button>
       </div>
       <div className="project-links">
-        <a href="https://github.com/Sreejan-22">View Live</a>&nbsp;&nbsp;&nbsp;
-        <a href="https://github.com/Sreejan-22">View Source</a>
+        <a
+          href="https://github.com/Sreejan-22"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View Live
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <a
+          href="https://github.com/Sreejan-22"
+          target="_blank"
+          rel="noreferrer"
+        >
+          View Source
+        </a>
       </div>
       <img src={project} alt="" className="project-img" />
       <div className="project-options">
