@@ -74,7 +74,6 @@ const Signup = () => {
   });
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  // const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
