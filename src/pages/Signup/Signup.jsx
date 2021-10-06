@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { authenticate } from "../../slices/auth.slice";
 import { notifyError } from "../../utils/noltifyToasts";
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
@@ -73,7 +71,7 @@ const Signup = () => {
   });
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -120,14 +118,13 @@ const Signup = () => {
         .then((data) => {
           setLoading(false);
           if (data.success) {
-            localStorage.setItem("token", data.token);
             const userData = {
-              name,
-              username,
-              email,
+              name: name.text,
+              username: username.text,
+              email: email.text,
+              token: data.token,
             };
-            localStorage.setItem("user", userData);
-            dispatch(authenticate(userData));
+            localStorage.setItem("user", JSON.stringify(userData));
             history.push("/");
           } else {
             const errors = data.errors;
