@@ -53,51 +53,53 @@ const Menu = () => {
           <ExploreIcon />
           &nbsp;&nbsp;Explore
         </Link>
-        <Link
-          to="/profile"
-          className={`menu-item ${
-            active === "profile" ? "active-menu-item" : ""
-          }`}
-        >
-          <PersonIcon />
-          &nbsp;&nbsp;Profile
-        </Link>
-        <Link
-          to="/saved"
-          className={`menu-item ${
-            active === "saved" ? "active-menu-item" : ""
-          }`}
-        >
-          <BookmarkIcon />
-          &nbsp;&nbsp;Saved
-        </Link>
-        <Link
-          to="/notifications"
-          className={`menu-item ${
-            active === "notifications" ? "active-menu-item" : ""
-          }`}
-        >
-          <NotificationsIcon />
-          &nbsp;&nbsp;Notifications
-        </Link>
         {localStorage.getItem("user") && (
-          <div
-            className={`menu-item ${
-              active === "logout" ? "active-menu-item" : ""
-            }`}
-            onClick={() => {
-              setActive("logout");
-              localStorage.removeItem("user");
-              if (history.location.pathname === "/") {
-                window.location.reload();
-              } else {
-                history.push("/");
-              }
-            }}
-          >
-            <LogoutIcon />
-            &nbsp;&nbsp;Logout
-          </div>
+          <>
+            <Link
+              to="/profile"
+              className={`menu-item ${
+                active === "profile" ? "active-menu-item" : ""
+              }`}
+            >
+              <PersonIcon />
+              &nbsp;&nbsp;Profile
+            </Link>
+            <Link
+              to="/saved"
+              className={`menu-item ${
+                active === "saved" ? "active-menu-item" : ""
+              }`}
+            >
+              <BookmarkIcon />
+              &nbsp;&nbsp;Saved
+            </Link>
+            <Link
+              to="/notifications"
+              className={`menu-item ${
+                active === "notifications" ? "active-menu-item" : ""
+              }`}
+            >
+              <NotificationsIcon />
+              &nbsp;&nbsp;Notifications
+            </Link>
+            <div
+              className={`menu-item ${
+                active === "logout" ? "active-menu-item" : ""
+              }`}
+              onClick={() => {
+                setActive("logout");
+                localStorage.removeItem("user");
+                if (history.location.pathname === "/") {
+                  window.location.reload();
+                } else {
+                  history.push("/");
+                }
+              }}
+            >
+              <LogoutIcon />
+              &nbsp;&nbsp;Logout
+            </div>
+          </>
         )}
       </div>
     </div>

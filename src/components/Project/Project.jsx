@@ -71,7 +71,6 @@ const Project = (props) => {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleClose}>Message</MenuItem>
           <MenuItem onClick={handleClose}>Follow</MenuItem>
           <MenuItem onClick={handleClose}>Report</MenuItem>
         </StyledMenu>
