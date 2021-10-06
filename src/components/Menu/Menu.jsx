@@ -8,6 +8,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import "./Menu.css";
+import { isAuthenticated } from "../../utils/auth";
 
 const Menu = () => {
   const history = useHistory();
@@ -53,7 +54,7 @@ const Menu = () => {
           <ExploreIcon />
           &nbsp;&nbsp;Explore
         </Link>
-        {localStorage.getItem("user") && (
+        {isAuthenticated() && (
           <>
             <Link
               to="/profile"

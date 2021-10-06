@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { StyledMenu, StyledCommentMenu } from "../StyledMenu/StyledMenu";
 import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import {
   BiUpvote,
   BiCommentDetail,
@@ -14,6 +14,7 @@ import {
 import profile from "../../assets/profile.png";
 import project from "../../assets/project.png";
 import "./Project.css";
+import { isAuthenticated } from "../../utils/auth";
 
 const Project = (props) => {
   const history = useHistory();
@@ -61,19 +62,23 @@ const Project = (props) => {
             <span>React / Vue Developer</span>
           </div>
         </div>
-        <MoreVertIcon onClick={handleClick} />
-        <StyledMenu
-          id="basic-menu"
-          anchorEl={anchorEl}
-          open={open}
-          onClose={handleClose}
-          MenuListProps={{
-            "aria-labelledby": "basic-button",
-          }}
-        >
-          <MenuItem onClick={handleClose}>Follow</MenuItem>
-          <MenuItem onClick={handleClose}>Report</MenuItem>
-        </StyledMenu>
+        {isAuthenticated() && (
+          <>
+            <MoreHorizIcon onClick={handleClick} />
+            <StyledMenu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "basic-button",
+              }}
+            >
+              <MenuItem onClick={handleClose}>Follow</MenuItem>
+              <MenuItem onClick={handleClose}>Report</MenuItem>
+            </StyledMenu>
+          </>
+        )}
       </div>
       <div className="project-desc">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta ea fuga
@@ -140,20 +145,24 @@ const Project = (props) => {
                       <span>React / Vue Developer</span>
                     </div>
                   </div>
-                  <MoreVertIcon onClick={handleClick2} />
-                  <StyledCommentMenu
-                    id="basic-menu"
-                    anchorEl={anchorComment}
-                    open={open2}
-                    onClose={handleClose2}
-                    MenuListProps={{
-                      "aria-labelledby": "basic-button",
-                    }}
-                    borderRadius="6"
-                    padding="0"
-                  >
-                    <MenuItem onClick={handleClose2}>Report</MenuItem>
-                  </StyledCommentMenu>
+                  {isAuthenticated() && (
+                    <>
+                      <MoreHorizIcon onClick={handleClick2} />
+                      <StyledCommentMenu
+                        id="basic-menu"
+                        anchorEl={anchorComment}
+                        open={open2}
+                        onClose={handleClose2}
+                        MenuListProps={{
+                          "aria-labelledby": "basic-button",
+                        }}
+                        borderRadius="6"
+                        padding="0"
+                      >
+                        <MenuItem onClick={handleClose2}>Report</MenuItem>
+                      </StyledCommentMenu>
+                    </>
+                  )}
                 </div>
                 <div className="comment-text">Looks cool lets talk</div>
                 <div className="comment-icons">
