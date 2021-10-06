@@ -1,4 +1,4 @@
-import { notifyError } from "./noltifyToasts";
+import { notifyError } from "./notifyToasts";
 
 export const handleServerError = (message) => {
   alert(message);

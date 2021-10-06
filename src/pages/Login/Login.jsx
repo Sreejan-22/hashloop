@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { notifyError } from "../../utils/noltifyToasts";
+import { notifyError } from "../../utils/notifyToasts";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
