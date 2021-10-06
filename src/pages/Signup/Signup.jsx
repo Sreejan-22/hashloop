@@ -2,11 +2,14 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { authenticate } from "../../slices/auth.slice";
+import { notifyError } from "../../utils/noltifyToasts";
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { CircularProgress } from "@mui/material";
 import amico from "../../assets/amico.svg";
 import "./Signup.css";
+
+localStorage.removeItem("token");
 
 const theme = createTheme({
   palette: {
@@ -123,10 +126,12 @@ const Signup = () => {
               username,
               email,
             };
+            localStorage.setItem("user", userData);
             dispatch(authenticate(userData));
             history.push("/");
           } else {
-            console.log(data.errors);
+            const errors = data.errors;
+            console.log(errors);
           }
         })
         .catch((err) => {
