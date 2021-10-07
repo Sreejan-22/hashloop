@@ -25,7 +25,7 @@ const Project = ({
   live,
   image,
   createdAt,
-  id,
+  upvotes,
 }) => {
   const history = useHistory();
   const [showComments, setShowComments] = useState(false);
@@ -109,7 +109,7 @@ const Project = ({
       <div className="project-options">
         <span>
           <BiUpvote />
-          &nbsp; <span className="upvotes">123</span>
+          &nbsp; <span className="upvotes">{upvotes}</span>
         </span>
         <BiCommentDetail />
         <BiShareAlt />
