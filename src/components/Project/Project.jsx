@@ -26,6 +26,7 @@ const Project = ({
   live,
   image,
   createdAt,
+  id,
 }) => {
   const history = useHistory();
   const [showComments, setShowComments] = useState(false);
@@ -67,9 +68,6 @@ const Project = ({
             <Link to="/profile">
               {author} &#8226; <span>{getDate(createdAt)}</span>
             </Link>
-          </div>
-          <div>
-            <span>React / Vue Developer</span>
           </div>
         </div>
         {isAuthenticated() && (
@@ -143,7 +141,7 @@ const Project = ({
             <br />
             <br />
             {[1, 2].map((item) => (
-              <div className="comment-box">
+              <div className="comment-box" key={item}>
                 <div className="project-header">
                   <Link to="/profile">
                     <img src={profile} alt="" className="profile-img" />

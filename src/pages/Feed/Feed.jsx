@@ -55,6 +55,7 @@ const Feed = () => {
                 live,
                 image,
                 createdAt,
+                _id,
               }) => (
                 <Project
                   author={author}
@@ -65,6 +66,8 @@ const Feed = () => {
                   live={live}
                   image={image}
                   createdAt={createdAt}
+                  id={_id}
+                  key={_id}
                 />
               )
             )}
