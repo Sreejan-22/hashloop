@@ -80,6 +80,7 @@ const Project = (props) => {
           </>
         )}
       </div>
+      <div className="project-title">A better plugin store</div>
       <div className="project-desc">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta ea fuga
         laboriosam labore blanditiis, dolor animi voluptatem. Nihil corrupti
