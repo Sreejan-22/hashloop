@@ -12,7 +12,6 @@ import {
   BiBookmark,
 } from "react-icons/bi";
 import profile from "../../assets/profile.png";
-import project from "../../assets/project.png";
 import "./Project.css";
 import { isAuthenticated } from "../../utils/auth";
 import { getDate } from "../../utils/date";

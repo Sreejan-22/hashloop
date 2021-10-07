@@ -15,7 +15,6 @@ const projectSlice = createSlice({
       state.projectsLoading = true;
     },
     getProjectsSuccess: (state, { payload }) => {
-      console.log(payload);
       state.allProjects = payload;
       state.projectsError = false;
       state.projectsLoading = false;
