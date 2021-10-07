@@ -27,7 +27,8 @@ const projectSlice = createSlice({
 });
 
 // actions
-export const { fetchProjects } = projectSlice.actions;
+export const { loadProjects, getProjectsSuccess, getProjectsFailure } =
+  projectSlice.actions;
 
 // selector
 export const projectSelector = (state) => state.project;
