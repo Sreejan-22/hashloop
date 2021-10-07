@@ -15,8 +15,18 @@ import profile from "../../assets/profile.png";
 import project from "../../assets/project.png";
 import "./Project.css";
 import { isAuthenticated } from "../../utils/auth";
+import { getDate } from "../../utils/date";
 
-const Project = (props) => {
+const Project = ({
+  author,
+  projectName,
+  details,
+  tags,
+  code,
+  live,
+  image,
+  createdAt,
+}) => {
   const history = useHistory();
   const [showComments, setShowComments] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -55,7 +65,7 @@ const Project = (props) => {
         <div className="project-header-child">
           <div>
             <Link to="/profile">
-              Mahesh Sharma &#8226; <span>21/03/21</span>
+              {author} &#8226; <span>{getDate(createdAt)}</span>
             </Link>
           </div>
           <div>
@@ -80,36 +90,25 @@ const Project = (props) => {
           </>
         )}
       </div>
-      <div className="project-title">A better plugin store</div>
-      <div className="project-desc">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dicta ea fuga
-        laboriosam labore blanditiis, dolor animi voluptatem. Nihil corrupti
-        dolorem, rem tempore eum error, quo enim veritatis, mollitia animi
-        adipisci.
-      </div>
+      <div className="project-title">{projectName}</div>
+      <div className="project-desc">{details}</div>
       <div className="project-tags">
-        <button className="project-tag">React</button>
-        <button className="project-tag">Material UI</button>
-        <button className="project-tag">Node</button>
+        {tags.map((item) => (
+          <button className="project-tag" key={item}>
+            {item}
+          </button>
+        ))}
       </div>
       <div className="project-links">
-        <a
-          href="https://github.com/Sreejan-22"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href={live} target="_blank" rel="noreferrer">
           View Live
         </a>
         &nbsp;&nbsp;&nbsp;
-        <a
-          href="https://github.com/Sreejan-22"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href={code} target="_blank" rel="noreferrer">
           View Source
         </a>
       </div>
-      <img src={project} alt="" className="project-img" />
+      <img src={image} alt="" className="project-img" />
       <div className="project-options">
         <span>
           <BiUpvote />

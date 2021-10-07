@@ -1,5 +1,5 @@
-export const getDate = () => {
-  const now = new Date();
+export const getDate = (dateString) => {
+  const now = new Date(dateString);
   let day = now.getDate();
   day = day < 10 ? "0" + day : day;
   let month = now.getMonth() + 1;

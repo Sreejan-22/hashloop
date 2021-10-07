@@ -3,12 +3,17 @@ import ReactDOM from "react-dom";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 // import { authReducer } from "./slices/auth.slice";
+import { combineReducers } from "redux";
 import { projectReducer } from "./slices/project.slice";
 import "./index.css";
 import App from "./App";
 
+const rootReducer = combineReducers({
+  project: projectReducer,
+});
+
 const store = configureStore({
-  reducer: projectReducer,
+  reducer: rootReducer,
 });
 
 ReactDOM.render(

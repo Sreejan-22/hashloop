@@ -15,6 +15,7 @@ const projectSlice = createSlice({
       state.projectsLoading = true;
     },
     getProjectsSuccess: (state, { payload }) => {
+      console.log(payload);
       state.allProjects = payload;
       state.projectsError = false;
       state.projectsLoading = false;
@@ -44,7 +45,11 @@ export function fetchProjects() {
     try {
       const res = await fetch(`${baseUrl}/projects`);
       let data = await res.json();
-      dispatch(getProjectsSuccess(data));
+      if (data.success) {
+        dispatch(getProjectsSuccess(data.projects));
+      } else {
+        throw data.message;
+      }
     } catch (err) {
       dispatch(getProjectsFailure());
     }
