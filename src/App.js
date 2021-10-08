@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import Feed from "./pages/Feed/Feed";
@@ -9,20 +14,26 @@ import ExploreAll from "./pages/ExploreAll/ExploreAll";
 import Saved from "./pages/Saved/Saved";
 import Notifications from "./pages/Notifications/Notifications";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./App.css";
+import { isAuthenticated } from "./utils/auth";
 
 function App() {
   return (
     <Router>
       <Switch>
+        <Route path="/signup">
+          {isAuthenticated() ? <Redirect to="/" /> : <Signup />}
+        </Route>
+        <Route path="/login">
+          {isAuthenticated() ? <Redirect to="/" /> : <Login />}
+        </Route>
         <Route path="/profile" component={Profile} />
         <Route path="/projects" component={SingleProject} />
         <Route path="/tags" component={Explore} />
         <Route path="/explore" component={ExploreAll} />
-        <Route path="/saved" component={Saved} />
-        <Route path="/notifications" component={Notifications} />
-        <Route path="/signup" component={Signup} />
-        <Route path="/login" component={Login} />
+        <PrivateRoute path="/saved" component={Saved} />
+        <PrivateRoute path="/notifications" component={Notifications} />
         <Route exact path="/" component={Feed} />
         <Route path="*">
           <PageNotFound />
