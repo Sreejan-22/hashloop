@@ -31,7 +31,7 @@ function App() {
         </Route>
         <Route path="/profile" component={Profile} />
         <Route path="/projects" component={SingleProject} />
-        <Route path="/create" component={Create} />
+        <PrivateRoute path="/create" component={Create} />
         <Route path="/tags" component={Explore} />
         <Route path="/explore" component={ExploreAll} />
         <PrivateRoute path="/saved" component={Saved} />
