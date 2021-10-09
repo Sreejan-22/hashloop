@@ -1,7 +1,6 @@
 import { useHistory } from "react-router";
 import Layout from "../../components/Layout/Layout";
 import Button from "@mui/material/Button";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material";
