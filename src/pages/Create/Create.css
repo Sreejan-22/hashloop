@@ -28,6 +28,10 @@
   padding: 0rem 1rem;
 }
 
+input::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
 .add-tag-btn {
   width: 60px;
   padding: 0.5rem 0.3rem;
@@ -35,4 +39,12 @@
   background-color: #9e9e9e;
   border: 1px solid black;
   align-self: flex-end;
+}
+
+.display-tags {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }
