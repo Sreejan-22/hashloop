@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { projectSelector, fetchProjects } from "../../slices/project.slice";
 import Layout from "../../components/Layout/Layout";
@@ -39,12 +40,12 @@ const Feed = () => {
           &nbsp;&nbsp;
           <span>Feed</span>
         </div>
-        <button className="new-project-btn">
+        <Link to="/create" className="new-project-btn">
           <span>
             <FiEdit style={{ height: "1.2rem", width: "1.2rem" }} />
           </span>
           <span>&nbsp;&nbsp;New Project</span>
-        </button>
+        </Link>
         <div className="feed-content">
           <>
             {allProjects.map(

@@ -9,6 +9,7 @@ import Login from "./pages/Login/Login";
 import Feed from "./pages/Feed/Feed";
 import Profile from "./pages/Profile/Profile";
 import SingleProject from "./pages/SingleProject/SingleProject";
+import Create from "./pages/Create/Create";
 import Explore from "./pages/Explore/Explore";
 import ExploreAll from "./pages/ExploreAll/ExploreAll";
 import Saved from "./pages/Saved/Saved";
@@ -30,6 +31,7 @@ function App() {
         </Route>
         <Route path="/profile" component={Profile} />
         <Route path="/projects" component={SingleProject} />
+        <Route path="/create" component={Create} />
         <Route path="/tags" component={Explore} />
         <Route path="/explore" component={ExploreAll} />
         <PrivateRoute path="/saved" component={Saved} />
