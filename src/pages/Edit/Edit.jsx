@@ -199,6 +199,18 @@ const Edit = () => {
             }
           }}
         />
+        {currentProject.image && (
+          <>
+            <br />
+            <p>Original image Preview</p>
+            <br />
+            <img
+              src={img}
+              alt=""
+              style={{ height: "200px", width: "100%", objectFit: "cover" }}
+            />
+          </>
+        )}
         <br />
         <br />
         <Button variant="contained" type="submit">
