@@ -84,11 +84,11 @@ const Create = () => {
     };
 
     if (tags.length) {
-      submitData = { ...submitData, tags };
+      submitData.tags = tags;
     }
 
     if (live.length) {
-      submitData = { ...submitData, live };
+      submitData.live = live;
     }
 
     setLoading(true);
@@ -101,45 +101,47 @@ const Create = () => {
       try {
         const res = await fetch(`${baseUrl}/upload`, {
           method: "POST",
-          body: formData,
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
+          body: formData,
         });
 
-        const data = res.json();
+        const data = await res.json();
         if (data.success) {
-          submitData = { ...submitData, image: data.imgUrl };
+          submitData.image = data.imageUrl;
         } else {
           notifyError("Failed to upload image");
-          console.log(data.error);
+          setLoading(false);
+          return;
         }
       } catch (err) {
-        console.log(err);
         notifyError("Failed to upload image");
+        setLoading(false);
+        return;
       }
     }
 
+    // create project
     try {
       const res = await fetch(`${baseUrl}/projects`, {
         method: "POST",
         headers: {
-          "Content-Type": "Application/json",
+          "Content-Type": "application/json",
           Authorization: `Bearer ${user.token}`,
         },
         body: JSON.stringify(submitData),
       });
-      const data = res.json();
+      const data = await res.json();
       if (data.success) {
         setLoading(false);
         history.push("/");
       } else {
         setLoading(false);
         notifyError("Failed to create project");
-        console.log(data.error);
       }
     } catch (err) {
-      console.log(err);
+      setLoading(false);
       notifyError("Failed to create project");
     }
   };
