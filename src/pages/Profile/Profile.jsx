@@ -1,13 +1,13 @@
 import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   projectSelector,
   fetchProjectsOfUser,
 } from "../../slices/project.slice";
-import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import Project from "../../components/Project/Project";
-import { BiArrowBack } from "react-icons/bi";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import { GrLocation } from "react-icons/gr";
 import {
   AiOutlineGithub,
@@ -51,11 +51,7 @@ const Profile = () => {
             <CircularProgress color="primary" size="5rem" />
           </div>
         )}
-        <div className="profile-page-header">
-          <BiArrowBack onClick={() => history.goBack()} />
-          &nbsp;&nbsp;&nbsp;
-          <span>Mahesh Sharma</span>
-        </div>
+        <PageHeader text="Mahesh Sharma" />
         <div className="profile-info-container">
           <img src={profilecover} alt="" className="profile-cover-img" />
           <div className="profile-pic">

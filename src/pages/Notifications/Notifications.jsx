@@ -1,18 +1,12 @@
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
-import { BiArrowBack } from "react-icons/bi";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import "./Notifications.css";
 
 const Notifications = () => {
-  const history = useHistory();
-
   return (
     <Layout>
-      <div className="profile-page-header">
-        <BiArrowBack onClick={() => history.goBack()} />
-        &nbsp;&nbsp;&nbsp;
-        <span>Notifications</span>
-      </div>
+      <PageHeader text="Notifications" />
       <div className="notifs-container">
         <div className="notif">
           <b>

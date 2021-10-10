@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import Project from "../../components/Project/Project";
-import { BiArrowBack } from "react-icons/bi";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import "./ExploreAll.css";
 
 const tags = [
@@ -27,16 +26,11 @@ const tags = [
 ];
 
 const ExploreAll = () => {
-  const history = useHistory();
   const [show, setShow] = useState("trending");
 
   return (
     <Layout>
-      <div className="profile-page-header">
-        <BiArrowBack onClick={() => history.goBack()} />
-        &nbsp;&nbsp;&nbsp;
-        <span>Explore</span>
-      </div>
+      <PageHeader text="Explore" />
       <div className="tags-wrapper">
         <div className="tags-container">
           <h5>Tags</h5>
