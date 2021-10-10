@@ -18,6 +18,7 @@ import { getUser } from "../../utils/auth";
 import { notifyError } from "../../utils/notifyToasts";
 
 const projectTags = [...allTags];
+const user = getUser();
 
 const theme = createTheme({
   palette: {
@@ -74,12 +75,83 @@ const Edit = () => {
   const [tags, setTags] = useState(currentProject.tags || []);
   const [code, setCode] = useState(currentProject.code);
   const [live, setLive] = useState(currentProject.live || "");
-  const [img, setImg] = useState(currentProject.image || "");
+  const [img, setImg] = useState(currentProject.image || null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    let submitData = {
+      projectName: name,
+      details,
+      code,
+    };
+
+    if (tags.length) {
+      submitData.tags = tags;
+    }
+
+    if (live.length) {
+      submitData.live = live;
+    }
+
+    setLoading(true);
+
+    if (img) {
+      const formData = new FormData();
+      formData.append("image", img);
+
+      try {
+        const res = await fetch(`${baseUrl}/upload`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: formData,
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          submitData.image = data.imageUrl;
+        } else {
+          notifyError("Failed to upload image");
+          setLoading(false);
+          return;
+        }
+      } catch (err) {
+        notifyError("Failed to upload image");
+        setLoading(false);
+        return;
+      }
+    }
+
+    // update project
+    try {
+      const res = await fetch(`${baseUrl}/projects/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(submitData),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setLoading(false);
+        history.push("/");
+      } else {
+        setLoading(false);
+        notifyError(data.message);
+      }
+    } catch (err) {
+      setLoading(false);
+      notifyError("Failed to update project");
+    }
+  };
 
   return (
     <Layout>
       <PageHeader text="Edit project" />
-      <form className="create-project-container">
+      <form className="create-project-container" onSubmit={handleSubmit}>
         <label htmlFor="project-name" className="create-label">
           Project Name*
         </label>
@@ -205,7 +277,7 @@ const Edit = () => {
             <p>Original image Preview</p>
             <br />
             <img
-              src={img}
+              src={currentProject.image}
               alt=""
               style={{ height: "200px", width: "100%", objectFit: "cover" }}
             />
