@@ -50,6 +50,7 @@ const Feed = () => {
           <>
             {allProjects.map(
               ({
+                username,
                 author,
                 projectName,
                 details,
@@ -62,6 +63,7 @@ const Feed = () => {
                 _id,
               }) => (
                 <Project
+                  username={username}
                   author={author}
                   projectName={projectName}
                   details={details}

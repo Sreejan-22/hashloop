@@ -13,10 +13,11 @@ import {
 } from "react-icons/bi";
 import profile from "../../assets/profile.png";
 import "./Project.css";
-import { isAuthenticated } from "../../utils/auth";
+import { isAuthenticated, getUser } from "../../utils/auth";
 import { getDate } from "../../utils/date";
 
 const Project = ({
+  username,
   author,
   projectName,
   details,
@@ -81,8 +82,18 @@ const Project = ({
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={handleClose}>Follow</MenuItem>
-              <MenuItem onClick={handleClose}>Report</MenuItem>
+              {getUser().username === username && (
+                <MenuItem onClick={handleClose}>Edit</MenuItem>
+              )}
+              {getUser().username === username && (
+                <MenuItem onClick={handleClose}>Delete</MenuItem>
+              )}
+              {getUser().username !== username && (
+                <MenuItem onClick={handleClose}>Follow</MenuItem>
+              )}
+              {getUser().username !== username && (
+                <MenuItem onClick={handleClose}>Report</MenuItem>
+              )}
             </StyledMenu>
           </>
         )}
