@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
-// import { projectSelector } from "../../slices/project.slice";
 import Layout from "../../components/Layout/Layout";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Button from "@mui/material/Button";
@@ -65,7 +63,6 @@ const useStyles = makeStyles({
 const Edit = () => {
   const classes = useStyles();
   const history = useHistory();
-  // const dispatch = useDispatch();
   const { id } = useParams();
   const currentProject = history.location.state.project;
   const [loading, setLoading] = useState(false);
@@ -96,7 +93,7 @@ const Edit = () => {
 
     setLoading(true);
 
-    if (img) {
+    if (img && typeof img !== "string") {
       const formData = new FormData();
       formData.append("image", img);
 
