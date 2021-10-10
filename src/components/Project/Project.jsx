@@ -15,6 +15,10 @@ import profile from "../../assets/profile.png";
 import "./Project.css";
 import { isAuthenticated, getUser } from "../../utils/auth";
 import { getDate } from "../../utils/date";
+import { baseUrl } from "../../utils/constants";
+import { notifyError } from "../../utils/notifyToasts";
+
+const user = getUser();
 
 const Project = ({
   username,
@@ -56,6 +60,29 @@ const Project = ({
   };
   const handleClose2 = () => {
     setAnchorComment(null);
+  };
+
+  const handleDelete = async (e) => {
+    handleClose();
+
+    if (window.confirm("Do you want to delete this project?")) {
+      try {
+        const res = await fetch(`${baseUrl}/projects/${id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        const data = await res.json();
+        if (data.success) {
+          window.location.reload();
+        } else {
+          notifyError(data.message);
+        }
+      } catch (err) {
+        notifyError("Failed to delete project");
+      }
+    }
   };
 
   return (
@@ -107,7 +134,7 @@ const Project = ({
                 </MenuItem>
               )}
               {getUser().username === username && (
-                <MenuItem onClick={handleClose}>Delete</MenuItem>
+                <MenuItem onClick={handleDelete}>Delete</MenuItem>
               )}
               {getUser().username !== username && (
                 <MenuItem onClick={handleClose}>Follow</MenuItem>
