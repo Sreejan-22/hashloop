@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { projectSelector } from "../../slices/project.slice";
 import Layout from "../../components/Layout/Layout";
 import PageHeader from "../../components/PageHeader/PageHeader";
 import Button from "@mui/material/Button";
@@ -10,7 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { CircularProgress } from "@mui/material";
-import "./Create.css";
+import "./Edit.css";
 import { allTags, baseUrl } from "../../utils/constants";
 import { getUser } from "../../utils/auth";
 import { notifyError } from "../../utils/notifyToasts";
@@ -59,97 +61,25 @@ const useStyles = makeStyles({
   },
 });
 
-const Create = () => {
+const Edit = () => {
   const classes = useStyles();
   const history = useHistory();
+  // const dispatch = useDispatch();
+  const { id } = useParams();
+  const currentProject = history.location.state.project;
   const [loading, setLoading] = useState(false);
-  const [name, setName] = useState("");
-  const [details, setDetails] = useState("");
+  const [name, setName] = useState(currentProject.projectName);
+  const [details, setDetails] = useState(currentProject.details);
   const [currentTag, setCurrentTag] = useState("");
-  const [tags, setTags] = useState([]);
-  const [code, setCode] = useState("");
-  const [live, setLive] = useState("");
-  const [img, setImg] = useState(null);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const user = getUser();
-
-    let submitData = {
-      username: user.username,
-      author: user.name,
-      projectName: name,
-      details,
-      code,
-    };
-
-    if (tags.length) {
-      submitData.tags = tags;
-    }
-
-    if (live.length) {
-      submitData.live = live;
-    }
-
-    setLoading(true);
-
-    // upload image
-    if (img) {
-      const formData = new FormData();
-      formData.append("image", img);
-
-      try {
-        const res = await fetch(`${baseUrl}/upload`, {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-          body: formData,
-        });
-
-        const data = await res.json();
-        if (data.success) {
-          submitData.image = data.imageUrl;
-        } else {
-          notifyError("Failed to upload image");
-          setLoading(false);
-          return;
-        }
-      } catch (err) {
-        notifyError("Failed to upload image");
-        setLoading(false);
-        return;
-      }
-    }
-
-    // create project
-    try {
-      const res = await fetch(`${baseUrl}/projects`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
-        },
-        body: JSON.stringify(submitData),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setLoading(false);
-        history.push("/");
-      } else {
-        setLoading(false);
-        notifyError("Failed to create project");
-      }
-    } catch (err) {
-      setLoading(false);
-      notifyError("Failed to create project");
-    }
-  };
+  const [tags, setTags] = useState(currentProject.tags || []);
+  const [code, setCode] = useState(currentProject.code);
+  const [live, setLive] = useState(currentProject.live || "");
+  const [img, setImg] = useState(currentProject.image || "");
 
   return (
     <Layout>
-      <PageHeader text="Create a new project" />
-      <form className="create-project-container" onSubmit={handleSubmit}>
+      <PageHeader text="Edit project" />
+      <form className="create-project-container">
         <label htmlFor="project-name" className="create-label">
           Project Name*
         </label>
@@ -158,6 +88,7 @@ const Create = () => {
           id="project-name"
           className="create-project-input"
           required
+          defaultValue={name}
           onChange={(e) => setName(e.target.value)}
         />
         <label htmlFor="project-details" className="create-label">
@@ -175,6 +106,7 @@ const Create = () => {
             outline: "none",
           }}
           required
+          defaultValue={details}
           onChange={(e) => setDetails(e.target.value)}
         ></textarea>
         <label htmlFor="project-tags" className="create-label">
@@ -240,6 +172,7 @@ const Create = () => {
           id="project-code"
           className="create-project-input"
           required
+          defaultValue={code}
           onChange={(e) => setCode(e.target.value)}
         />
         <label htmlFor="project-link" className="create-label">
@@ -249,6 +182,7 @@ const Create = () => {
           type="text"
           id="project-link"
           className="create-project-input"
+          defaultValue={live}
           onChange={(e) => setLive(e.target.value)}
         />
         <label htmlFor="project-img" className="create-label">
@@ -284,4 +218,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Edit;

@@ -73,6 +73,7 @@ const Feed = () => {
                   image={image}
                   createdAt={createdAt}
                   upvotes={upvotes}
+                  id={_id}
                   key={_id}
                 />
               )

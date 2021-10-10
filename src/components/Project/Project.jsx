@@ -27,6 +27,7 @@ const Project = ({
   image,
   createdAt,
   upvotes,
+  id,
 }) => {
   const history = useHistory();
   const [showComments, setShowComments] = useState(false);
@@ -83,7 +84,27 @@ const Project = ({
               }}
             >
               {getUser().username === username && (
-                <MenuItem onClick={handleClose}>Edit</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose();
+                    const project = {
+                      username,
+                      author,
+                      projectName,
+                      details,
+                      tags,
+                      code,
+                      live,
+                      image,
+                      createdAt,
+                      upvotes,
+                      id,
+                    };
+                    history.push(`/edit/${id}`, { project });
+                  }}
+                >
+                  Edit
+                </MenuItem>
               )}
               {getUser().username === username && (
                 <MenuItem onClick={handleClose}>Delete</MenuItem>
