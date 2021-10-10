@@ -1,0 +1,9 @@
+.profile-page-header {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+.profile-page-header > svg {
+  cursor: pointer;
+}

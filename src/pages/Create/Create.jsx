@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
 import Layout from "../../components/Layout/Layout";
+import PageHeader from "../../components/PageHeader/PageHeader";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material";
-import { BiArrowBack } from "react-icons/bi";
 import CloseIcon from "@mui/icons-material/Close";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -148,11 +148,7 @@ const Create = () => {
 
   return (
     <Layout>
-      <div className="profile-page-header">
-        <BiArrowBack onClick={() => history.goBack()} />
-        &nbsp;&nbsp;&nbsp;
-        <span>Create a new project</span>
-      </div>
+      <PageHeader text="Create a new project" />
       <form className="create-project-container" onSubmit={handleSubmit}>
         <label htmlFor="project-name" className="create-label">
           Project Name*
