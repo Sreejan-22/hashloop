@@ -8,6 +8,7 @@ const initialState = {
   userProjects: [],
   userProjectsLoading: false,
   userProjectsError: false,
+  upvoteError: false,
 };
 
 const projectSlice = createSlice({
@@ -38,6 +39,22 @@ const projectSlice = createSlice({
       state.userProjectsError = true;
       state.userProjectsLoading = false;
     },
+    updateUpvoteCount: (state, { payload }) => {
+      let projectIndex;
+      let project;
+      state.allProjects.forEach((item, index) => {
+        if (item._id === payload.id) {
+          projectIndex = index;
+          project = item;
+        }
+      });
+      project.upvotes = payload.newCount;
+      project.upvoters = payload.newUpvotersList;
+      state.allProjects[projectIndex] = project;
+    },
+    setUpvoteError: (state, { payload }) => {
+      state.upvoteError = payload;
+    },
   },
 });
 
@@ -49,6 +66,7 @@ export const {
   loadUserProjects,
   getUserProjectsSuccess,
   getUserProjectsFailure,
+  updateUpvoteCount,
 } = projectSlice.actions;
 
 // selector
@@ -93,3 +111,26 @@ export function fetchProjectsOfUser(username) {
     }
   };
 }
+
+// export async function updateUpvoteCountDB(id, token, newCount, newUpvoterList) {
+//   return async (dispatch) => {
+//     try {
+//       const res = await fetch(`${baseUrl}/upvotes/${id}`, {
+//         method: "PUT",
+//         headers: {
+//           Authorization: `Bearer ${token}`,
+//         },
+//         body: JSON.stringify({
+//           newCount,
+//           newUpvoterList,
+//         }),
+//       });
+//       const data = await res.json();
+//       if (!data.success) {
+//         dispatch(setUpvoteError(true))
+//       }
+//     } catch (err) {
+//       dispatch(setUpvoteError(true));
+//     }
+//   };
+// }

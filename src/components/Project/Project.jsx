@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateUpvoteCount } from "../../slices/project.slice";
 import { StyledMenu, StyledCommentMenu } from "../StyledMenu/StyledMenu";
 import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { BiCommentDetail, BiShareAlt, BiBookmark } from "react-icons/bi";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import profile from "../../assets/profile.png";
 import upvotefilled from "../../assets/upvotefilled.svg";
 import upvoteoutlined from "../../assets/upvoteoutlined.svg";
@@ -13,7 +17,7 @@ import "./Project.css";
 import { isAuthenticated, getUser } from "../../utils/auth";
 import { getDate } from "../../utils/date";
 import { baseUrl } from "../../utils/constants";
-import { notifyError } from "../../utils/notifyToasts";
+import { notifyError, notifySuccess } from "../../utils/notifyToasts";
 
 const user = getUser();
 
@@ -28,12 +32,19 @@ const Project = ({
   image,
   createdAt,
   upvotes,
+  upvoters,
   id,
 }) => {
   const history = useHistory();
   const [showComments, setShowComments] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorComment, setAnchorComment] = useState(null);
+
+  const isUpvotedInitial = upvoters.includes(getUser().username) ? true : false;
+  const [isUpvoted, setIsUpvoted] = useState(isUpvotedInitial);
+
+  const dispatch = useDispatch();
+
   const open = Boolean(anchorEl);
   const open2 = Boolean(anchorComment);
 
@@ -79,6 +90,51 @@ const Project = ({
       } catch (err) {
         notifyError("Failed to delete project");
       }
+    }
+  };
+
+  const handleUpvote = async () => {
+    if (isAuthenticated()) {
+      // if isUpvoted is false, after clicking on the upvote button it will become true and vice versa
+      const newCount = isUpvoted ? upvotes - 1 : upvotes + 1;
+      let newUpvotersList = [...upvoters];
+      if (isUpvoted) {
+        newUpvotersList = newUpvotersList.filter(
+          (item) => item !== getUser().username
+        );
+      } else {
+        newUpvotersList.push(getUser().username);
+      }
+
+      // update frontend
+      setIsUpvoted(!isUpvoted);
+      dispatch(updateUpvoteCount({ id, newCount, newUpvotersList }));
+
+      // update database
+      const upvoteData = {
+        newCount,
+        newUpvotersList,
+      };
+      try {
+        const res = await fetch(`${baseUrl}/upvotes/${id}`, {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${getUser().token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(upvoteData),
+        });
+        const data = await res.json();
+        if (!data.success) {
+          notifyError(data.message);
+        } else {
+          notifySuccess("upvoted");
+        }
+      } catch (err) {
+        notifyError("Failed to upvote project");
+      }
+    } else {
+      history.push("/login");
     }
   };
 
@@ -165,9 +221,10 @@ const Project = ({
       <div className="project-options">
         <span>
           <img
-            src={upvoteoutlined}
+            src={isUpvoted ? upvotefilled : upvoteoutlined}
             alt=""
             style={{ height: "18px", width: "18px" }}
+            onClick={handleUpvote}
           />{" "}
           &nbsp;&nbsp; <span className="upvotes">{upvotes}</span>
         </span>
@@ -249,6 +306,7 @@ const Project = ({
           </div>
         </>
       )}
+      <ToastContainer />
     </div>
   );
 };
