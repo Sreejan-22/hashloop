@@ -5,13 +5,10 @@ import { StyledMenu, StyledCommentMenu } from "../StyledMenu/StyledMenu";
 import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import {
-  BiUpvote,
-  BiCommentDetail,
-  BiShareAlt,
-  BiBookmark,
-} from "react-icons/bi";
+import { BiCommentDetail, BiShareAlt, BiBookmark } from "react-icons/bi";
 import profile from "../../assets/profile.png";
+import upvotefilled from "../../assets/upvotefilled.svg";
+import upvoteoutlined from "../../assets/upvoteoutlined.svg";
 import "./Project.css";
 import { isAuthenticated, getUser } from "../../utils/auth";
 import { getDate } from "../../utils/date";
@@ -167,8 +164,12 @@ const Project = ({
       <img src={image} alt="" className="project-img" />
       <div className="project-options">
         <span>
-          <BiUpvote />
-          &nbsp; <span className="upvotes">{upvotes}</span>
+          <img
+            src={upvoteoutlined}
+            alt=""
+            style={{ height: "18px", width: "18px" }}
+          />{" "}
+          &nbsp;&nbsp; <span className="upvotes">{upvotes}</span>
         </span>
         <BiCommentDetail />
         <BiShareAlt />
@@ -235,7 +236,12 @@ const Project = ({
                 </div>
                 <div className="comment-text">Looks cool lets talk</div>
                 <div className="comment-icons">
-                  <BiUpvote />{" "}
+                  {/* <BiUpvote />{" "} */}
+                  <img
+                    src={upvoteoutlined}
+                    alt=""
+                    style={{ height: "20px", width: "18px" }}
+                  />{" "}
                   <span> &nbsp;&nbsp;Upvote &nbsp;&#8226;&nbsp; 2</span>
                 </div>
               </div>
