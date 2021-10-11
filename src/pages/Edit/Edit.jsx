@@ -85,6 +85,8 @@ const Edit = () => {
 
     if (tags.length) {
       submitData.tags = tags;
+    } else {
+      submitData.tags = [];
     }
 
     if (live.length) {
