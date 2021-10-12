@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   projectSelector,
@@ -26,12 +26,13 @@ const tempTags = ["HTML", "CSS", "Javascript", "React", "Node", "MongoDB"];
 
 const Profile = () => {
   const history = useHistory();
+  const { username } = useParams();
   const dispatch = useDispatch();
   const { userProjects, userProjectsLoading, userProjectsError } =
     useSelector(projectSelector);
 
   useEffect(() => {
-    dispatch(fetchProjectsOfUser(getUser().username));
+    dispatch(fetchProjectsOfUser(username));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -96,8 +97,10 @@ const Profile = () => {
               <h5>Bangalore, India</h5>
             </div>
             <div className="profile-tags">
-              {tempTags.map((item) => (
-                <button className="profile-tag">{item}</button>
+              {tempTags.map((item, index) => (
+                <button className="profile-tag" key={`${item}-${index}`}>
+                  {item}
+                </button>
               ))}
             </div>
             <div className="profile-links">

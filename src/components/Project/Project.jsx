@@ -145,12 +145,12 @@ const Project = ({
   return (
     <div className="project">
       <div className="project-header">
-        <Link to="/profile">
+        <Link to={`/profile/${username}`}>
           <img src={profile} alt="" className="profile-img" />
         </Link>
         <div className="project-header-child">
           <div>
-            <Link to="/profile">
+            <Link to={`/profile/${username}`}>
               {author} &#8226; <span>{getDate(createdAt)}</span>
             </Link>
           </div>
