@@ -77,6 +77,7 @@ const Login = () => {
               username: data.user.username,
               email: data.user.email,
               token: data.token,
+              profileId: data.profile.profileId,
             };
             localStorage.setItem("user", JSON.stringify(userData));
             history.push("/");
