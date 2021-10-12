@@ -8,7 +8,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 import "./Menu.css";
-import { isAuthenticated } from "../../utils/auth";
+import { isAuthenticated, getUser } from "../../utils/auth";
 
 const Menu = () => {
   const history = useHistory();
@@ -57,7 +57,7 @@ const Menu = () => {
         {isAuthenticated() && (
           <>
             <Link
-              to="/profile"
+              to={`/profile/${getUser().username}`}
               className={`menu-item ${
                 active === "profile" ? "active-menu-item" : ""
               }`}
