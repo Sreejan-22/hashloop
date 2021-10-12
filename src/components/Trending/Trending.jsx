@@ -10,7 +10,7 @@ const Trending = () => {
       <div className="trending">
         <h5>Trending</h5>
         <>
-          {[1, 2, 3, 4].map((item, index) => (
+          {[1, 2, 3].map((item, index) => (
             <div className="trending-project" key={`trending-${index}`}>
               <div className="trending-project-desc">
                 <p>A better Twitter</p>
@@ -24,7 +24,7 @@ const Trending = () => {
       <div className="follow-suggestions">
         <h5>Follow Suggestions</h5>
         <>
-          {[1, 2, 3, 4].map((item, index) => (
+          {[1, 2, 3].map((item, index) => (
             <div className="follow-profile-container" key={`follow-${index}`}>
               <Link to="/profile" className="follow-profile">
                 <img src={profile} alt="" className="follow-profile-img" />
