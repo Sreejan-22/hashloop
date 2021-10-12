@@ -91,6 +91,8 @@ const Edit = () => {
 
     if (live.length) {
       submitData.live = live;
+    } else {
+      submitData.live = null;
     }
 
     setLoading(true);

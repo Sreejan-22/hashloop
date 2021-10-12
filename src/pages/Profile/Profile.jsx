@@ -144,6 +144,7 @@ const Profile = () => {
                 image,
                 createdAt,
                 upvotes,
+                upvoters,
                 _id,
               }) => (
                 <Project
@@ -156,6 +157,7 @@ const Profile = () => {
                   image={image}
                   createdAt={createdAt}
                   upvotes={upvotes}
+                  upvoters={upvoters}
                   key={_id}
                 />
               )

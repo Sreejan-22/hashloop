@@ -213,15 +213,17 @@ const Project = ({
         ))}
       </div>
       <div className="project-links">
-        <a href={live} target="_blank" rel="noreferrer">
-          View Live
-        </a>
+        {live && (
+          <a href={live} target="_blank" rel="noreferrer">
+            View Live
+          </a>
+        )}
         &nbsp;&nbsp;&nbsp;
         <a href={code} target="_blank" rel="noreferrer">
           View Source
         </a>
       </div>
-      <img src={image} alt="" className="project-img" />
+      {image && <img src={image} alt="" className="project-img" />}
       <div className="project-options">
         <span>
           <img
