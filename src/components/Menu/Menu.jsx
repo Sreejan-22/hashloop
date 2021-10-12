@@ -6,7 +6,7 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import NotificationsIcon from "@mui/icons-material/Notifications";
+// import NotificationsIcon from "@mui/icons-material/Notifications";
 import "./Menu.css";
 import { isAuthenticated } from "../../utils/auth";
 
@@ -74,7 +74,7 @@ const Menu = () => {
               <BookmarkIcon />
               &nbsp;&nbsp;Saved
             </Link>
-            <Link
+            {/* <Link
               to="/notifications"
               className={`menu-item ${
                 active === "notifications" ? "active-menu-item" : ""
@@ -82,7 +82,7 @@ const Menu = () => {
             >
               <NotificationsIcon />
               &nbsp;&nbsp;Notifications
-            </Link>
+            </Link> */}
             <div
               className={`menu-item ${
                 active === "logout" ? "active-menu-item" : ""

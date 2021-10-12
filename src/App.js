@@ -14,7 +14,7 @@ import Edit from "./pages/Edit/Edit";
 import Explore from "./pages/Explore/Explore";
 import ExploreAll from "./pages/ExploreAll/ExploreAll";
 import Saved from "./pages/Saved/Saved";
-import Notifications from "./pages/Notifications/Notifications";
+// import Notifications from "./pages/Notifications/Notifications";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./App.css";
@@ -37,7 +37,7 @@ function App() {
         <Route path="/tags" component={Explore} />
         <Route path="/explore" component={ExploreAll} />
         <PrivateRoute path="/saved" component={Saved} />
-        <PrivateRoute path="/notifications" component={Notifications} />
+        {/* <PrivateRoute path="/notifications" component={Notifications} /> */}
         <Route exact path="/" component={Feed} />
         <Route path="*">
           <PageNotFound />
