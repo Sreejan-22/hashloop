@@ -2,7 +2,7 @@ import Layout from "../../components/Layout/Layout";
 import Project from "../../components/Project/Project";
 import PageHeader from "../../components/PageHeader/PageHeader";
 
-import "./SingleProject.css";
+import "./ProjectWithComments.css";
 
 const SingleProject = () => {
   return (
