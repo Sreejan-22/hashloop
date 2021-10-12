@@ -40,7 +40,11 @@ const Project = ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorComment, setAnchorComment] = useState(null);
 
-  const isUpvotedInitial = upvoters.includes(getUser().username) ? true : false;
+  const isUpvotedInitial = isAuthenticated()
+    ? upvoters.includes(getUser().username)
+      ? true
+      : false
+    : false;
   const [isUpvoted, setIsUpvoted] = useState(isUpvotedInitial);
 
   const dispatch = useDispatch();
