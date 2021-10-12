@@ -8,7 +8,7 @@ import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import Feed from "./pages/Feed/Feed";
 import Profile from "./pages/Profile/Profile";
-import SingleProject from "./pages/SingleProject/SingleProject";
+import SingleProject from "./pages/SingleProject/ProjectWithComments";
 import Create from "./pages/Create/Create";
 import Edit from "./pages/Edit/Edit";
 import Explore from "./pages/Explore/Explore";
