@@ -21,13 +21,19 @@ const Menu = () => {
     if (history.location.pathname.includes("/explore")) {
       setActive("explore");
     }
-    if (history.location.pathname.includes(`/profile/${getUser().username}`)) {
+    if (
+      isAuthenticated() &&
+      history.location.pathname.includes(`/profile/${getUser().username}`)
+    ) {
       setActive("profile");
     }
-    if (history.location.pathname.includes("/saved")) {
+    if (isAuthenticated() && history.location.pathname.includes("/saved")) {
       setActive("saved");
     }
-    if (history.location.pathname.includes("/notifications")) {
+    if (
+      isAuthenticated() &&
+      history.location.pathname.includes("/notifications")
+    ) {
       setActive("notifications");
     }
   }, [history.location.pathname]);
