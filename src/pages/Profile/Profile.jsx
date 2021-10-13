@@ -18,7 +18,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import { CircularProgress } from "@mui/material";
 import profile from "../../assets/profile.png";
 import profilecover from "../../assets/profilecover.png";
-import message from "../../assets/message.svg";
+// import message from "../../assets/message.svg";
 import "./Profile.css";
 import { isAuthenticated, getUser } from "../../utils/auth.js";
 import { baseUrl } from "../../utils/constants";
@@ -109,7 +109,15 @@ const Profile = () => {
                     cursor: "pointer",
                   }}
                 /> */}
-                    <button className="follow-btn">Follow</button>
+                    {isAuthenticated() ? (
+                      profileData.username === getUser().username ? (
+                        <button className="follow-btn">Edit Profile</button>
+                      ) : (
+                        <button className="follow-btn">Follow</button>
+                      )
+                    ) : (
+                      <button className="follow-btn">Follow</button>
+                    )}
                   </div>
                 </div>
                 <div className="profile-bio">
