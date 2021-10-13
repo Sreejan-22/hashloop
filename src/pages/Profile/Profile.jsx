@@ -24,8 +24,6 @@ import { isAuthenticated, getUser } from "../../utils/auth.js";
 import { baseUrl } from "../../utils/constants";
 import { notifyError } from "../../utils/notifyToasts";
 
-const tempTags = ["HTML", "CSS", "Javascript", "React", "Node", "MongoDB"];
-
 const Profile = () => {
   const history = useHistory();
   const { username } = useParams();
@@ -80,10 +78,17 @@ const Profile = () => {
           <>
             <PageHeader text={profileData.name} />
             <div className="profile-info-container">
-              <img src={profilecover} alt="" className="profile-cover-img" />
+              {"cover" in profileData ? (
+                <img src={profilecover} alt="" className="profile-cover-img" />
+              ) : (
+                <div
+                  className="profile-cover-img"
+                  style={{ backgroundColor: "rgb(207, 217, 222)" }}
+                ></div>
+              )}
               <div className="profile-pic">
                 <img
-                  src={profile}
+                  src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                   alt=""
                   style={{
                     height: "100%",
@@ -93,6 +98,7 @@ const Profile = () => {
                     border: "1px solid white",
                   }}
                 />
+                {/* <AccountCircleIcon /> */}
               </div>
               <div className="profile-details">
                 <div className="profile-name-container">
@@ -116,49 +122,66 @@ const Profile = () => {
                         <button className="follow-btn">Follow</button>
                       )
                     ) : (
-                      <button className="follow-btn">Follow</button>
+                      <button
+                        className="follow-btn"
+                        onClick={() => history.push("/login")}
+                      >
+                        Follow
+                      </button>
                     )}
                   </div>
                 </div>
                 <div className="profile-bio">
-                  Senior Software Engineer @Microsoft | Creator of India’s
-                  biggest programming community | Tweets about JavaScript,
-                  ReactJS, Career and Startups
+                  {"bio" in profileData ? profileData.bio : null}
                 </div>
                 <div className="profile-location">
-                  <GrLocation />
+                  {"city" in profileData || "country" in profileData ? (
+                    <GrLocation />
+                  ) : null}
                   &nbsp;&nbsp;
-                  <h5>Bangalore, India</h5>
+                  <h5>
+                    {"city" in profileData ? `${profileData.city}, ` : null}
+                    {"country" in profileData ? profileData.country : null}
+                  </h5>
                 </div>
                 <div className="profile-tags">
-                  {tempTags.map((item, index) => (
-                    <button className="profile-tag" key={`${item}-${index}`}>
-                      {item}
-                    </button>
-                  ))}
+                  {"skills" in profileData &&
+                    profileData.skills.map((item, index) => (
+                      <button className="profile-tag" key={`${item}-${index}`}>
+                        {item}
+                      </button>
+                    ))}
                 </div>
                 <div className="profile-links">
-                  <a href="https://github.com/Sreejan-22">
-                    <AiOutlineGithub />
-                  </a>
-                  <a href="https://github.com/Sreejan-22">
-                    <AiOutlineTwitter />
-                  </a>
-                  <a href="https://github.com/Sreejan-22">
-                    <AiFillLinkedin />
-                  </a>
-                  <a href="https://github.com/Sreejan-22">
-                    <LanguageIcon />
-                  </a>
+                  {"github" in profileData && (
+                    <a href={profileData.github}>
+                      <AiOutlineGithub />
+                    </a>
+                  )}
+                  {"twitter" in profileData && (
+                    <a href={profileData.twitter}>
+                      <AiOutlineTwitter />
+                    </a>
+                  )}
+                  {"linkedin" in profileData && (
+                    <a href={profileData.linkedin}>
+                      <AiFillLinkedin />
+                    </a>
+                  )}
+                  {"portfolio" in profileData && (
+                    <a href={profileData.portfolio}>
+                      <LanguageIcon />
+                    </a>
+                  )}
                 </div>
                 <div className="profile-follower-data">
                   <div className="followers">
-                    <span>316</span>&nbsp;
+                    <span>{profileData.followers}</span>&nbsp;
                     <span style={{ fontSize: "0.8rem" }}>Followers</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                   </div>
                   <div className="following">
-                    <span>116</span>&nbsp;
+                    <span>{profileData.following}</span>&nbsp;
                     <span style={{ fontSize: "0.8rem" }}>Following</span>
                     &nbsp;&nbsp;
                   </div>
