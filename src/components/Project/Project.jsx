@@ -35,7 +35,6 @@ const Project = ({
   upvoters,
   id,
 }) => {
-  console.log(username, getUser().username);
   const history = useHistory();
   const [showComments, setShowComments] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
