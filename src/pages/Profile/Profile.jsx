@@ -192,6 +192,7 @@ const Profile = () => {
               <>
                 {userProjects.map(
                   ({
+                    username,
                     author,
                     projectName,
                     details,
@@ -205,6 +206,7 @@ const Profile = () => {
                     _id,
                   }) => (
                     <Project
+                      username={username}
                       author={author}
                       projectName={projectName}
                       details={details}

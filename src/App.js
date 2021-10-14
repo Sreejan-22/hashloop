@@ -8,6 +8,7 @@ import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import Feed from "./pages/Feed/Feed";
 import Profile from "./pages/Profile/Profile";
+import EditProfile from "./pages/EditProfile/EditProfile";
 import SingleProject from "./pages/SingleProject/ProjectWithComments";
 import Create from "./pages/Create/Create";
 import Edit from "./pages/Edit/Edit";
@@ -31,6 +32,7 @@ function App() {
           {isAuthenticated() ? <Redirect to="/" /> : <Login />}
         </Route>
         <Route path="/profile/:username" component={Profile} />
+        <PrivateRoute path="/editprofile/:username" component={EditProfile} />
         <Route path="/projects" component={SingleProject} />
         <PrivateRoute path="/create" component={Create} />
         <PrivateRoute path="/edit/:id" component={Edit} />
