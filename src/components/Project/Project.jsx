@@ -131,8 +131,6 @@ const Project = ({
         const data = await res.json();
         if (!data.success) {
           notifyError(data.message);
-        } else {
-          notifySuccess("upvoted");
         }
       } catch (err) {
         notifyError("Failed to upvote project");

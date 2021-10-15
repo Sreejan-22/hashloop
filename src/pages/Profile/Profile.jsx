@@ -117,7 +117,14 @@ const Profile = () => {
                 /> */}
                     {isAuthenticated() ? (
                       profileData.username === getUser().username ? (
-                        <button className="follow-btn">Edit Profile</button>
+                        <button
+                          className="follow-btn"
+                          onClick={() =>
+                            history.push(`/editprofile/${profileData.username}`)
+                          }
+                        >
+                          Edit Profile
+                        </button>
                       ) : (
                         <button className="follow-btn">Follow</button>
                       )
