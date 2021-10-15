@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
@@ -12,31 +11,6 @@ import { isAuthenticated, getUser } from "../../utils/auth";
 
 const Menu = () => {
   const history = useHistory();
-  const [active, setActive] = useState("feed");
-
-  useEffect(() => {
-    if (history.location.pathname === "/") {
-      setActive("feed");
-    }
-    if (history.location.pathname.includes("/explore")) {
-      setActive("explore");
-    }
-    if (
-      isAuthenticated() &&
-      history.location.pathname.includes(`/profile/${getUser().username}`)
-    ) {
-      setActive("profile");
-    }
-    if (isAuthenticated() && history.location.pathname.includes("/saved")) {
-      setActive("saved");
-    }
-    if (
-      isAuthenticated() &&
-      history.location.pathname.includes("/notifications")
-    ) {
-      setActive("notifications");
-    }
-  }, [history.location.pathname]);
 
   return (
     <div className="feed-menu">
@@ -44,57 +18,34 @@ const Menu = () => {
       <br />
       <br />
       <div className="menu-items">
-        <Link
-          to="/"
-          className={`menu-item ${active === "feed" ? "active-menu-item" : ""}`}
-        >
+        <Link to="/" className="menu-item">
           <HomeIcon />
           &nbsp;&nbsp;Feed
         </Link>
-        <Link
-          to="/explore"
-          className={`menu-item ${
-            active === "explore" ? "active-menu-item" : ""
-          }`}
-        >
+        <Link to="/explore" className="menu-item">
           <ExploreIcon />
           &nbsp;&nbsp;Explore
         </Link>
         {isAuthenticated() && (
           <>
-            <Link
-              to={`/profile/${getUser().username}`}
-              className={`menu-item ${
-                active === "profile" ? "active-menu-item" : ""
-              }`}
-            >
+            <Link to={`/profile/${getUser().username}`} className="menu-item">
               <PersonIcon />
               &nbsp;&nbsp;Profile
             </Link>
-            <Link
-              to="/saved"
-              className={`menu-item ${
-                active === "saved" ? "active-menu-item" : ""
-              }`}
-            >
+            <Link to="/saved" className="menu-item">
               <BookmarkIcon />
               &nbsp;&nbsp;Saved
             </Link>
             {/* <Link
               to="/notifications"
-              className={`menu-item ${
-                active === "notifications" ? "active-menu-item" : ""
-              }`}
+              className="menu-item"
             >
               <NotificationsIcon />
               &nbsp;&nbsp;Notifications
             </Link> */}
             <div
-              className={`menu-item ${
-                active === "logout" ? "active-menu-item" : ""
-              }`}
+              className="menu-item"
               onClick={() => {
-                setActive("logout");
                 localStorage.removeItem("user");
                 if (history.location.pathname === "/") {
                   window.location.reload();

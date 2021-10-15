@@ -26,6 +26,10 @@
   cursor: pointer;
 }
 
+.menu-item:hover {
+  background-color: #f4f2f9;
+}
+
 .active-menu-item {
   background-color: #f4f2f9;
 }
