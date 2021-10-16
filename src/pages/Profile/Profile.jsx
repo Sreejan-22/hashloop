@@ -8,6 +8,7 @@ import {
 import Layout from "../../components/Layout/Layout";
 import Project from "../../components/Project/Project";
 import PageHeader from "../../components/PageHeader/PageHeader";
+import EditProfileModal from "../../components/EditProfileModal/EditProfileModal";
 import { GrLocation } from "react-icons/gr";
 import {
   AiOutlineGithub,
@@ -30,6 +31,7 @@ const Profile = () => {
   const dispatch = useDispatch();
   const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const { userProjects, userProjectsLoading, userProjectsError } =
     useSelector(projectSelector);
 
@@ -58,6 +60,14 @@ const Profile = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <Layout>
@@ -104,23 +114,13 @@ const Profile = () => {
                 <div className="profile-name-container">
                   <h4>{profileData.name}</h4>
                   <div>
-                    {/* <img
-                  src={message}
-                  alt=""
-                  className="message-icon"
-                  style={{
-                    width: "34px",
-                    height: "34px",
-                    marginRight: "1rem",
-                    cursor: "pointer",
-                  }}
-                /> */}
                     {isAuthenticated() ? (
                       profileData.username === getUser().username ? (
                         <button
                           className="follow-btn"
                           onClick={() =>
-                            history.push(`/editprofile/${profileData.username}`)
+                            // history.push(`/editprofile/${profileData.username}`)
+                            handleClickOpen()
                           }
                         >
                           Edit Profile
@@ -233,6 +233,7 @@ const Profile = () => {
           </>
         )}
       </>
+      <EditProfileModal open={open} handleClose={handleClose} />
     </Layout>
   );
 };
