@@ -1,3 +1,4 @@
+import Tags from "../Tags/Tags";
 import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -51,39 +52,34 @@ const EditProfileModal = ({ open, handleClose }) => {
           />
           <br />
           <br />
-          <OutlinedInput placeholder="City" multiline minRows="1" />
+          <OutlinedInput
+            placeholder="City"
+            sx={{ width: "49%", marginRight: "4px" }}
+          />
           &nbsp; &nbsp;
-          <OutlinedInput placeholder="Country" multiline minRows="1" />
+          <OutlinedInput placeholder="Country" sx={{ width: "48%" }} />
           <br />
           <br />
-          <OutlinedInput
-            placeholder="Github"
-            multiline
-            minRows="1"
-            className="full-width-input"
-          />
+          {/* <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={skills}
+            sx={{ width: "100%" }}
+            renderInput={(params) => <TextField {...params} label="Movie" />}
+          /> */}
+          <Tags />
+          <br />
+          <OutlinedInput placeholder="Github" className="full-width-input" />
           <br />
           <br />
-          <OutlinedInput
-            placeholder="LinkedIn"
-            multiline
-            minRows="1"
-            className="full-width-input"
-          />
+          <OutlinedInput placeholder="LinkedIn" className="full-width-input" />
           <br />
           <br />
-          <OutlinedInput
-            placeholder="Twitter"
-            multiline
-            minRows="1"
-            className="full-width-input"
-          />
+          <OutlinedInput placeholder="Twitter" className="full-width-input" />
           <br />
           <br />
           <OutlinedInput
             placeholder="Portfolio website"
-            multiline
-            minRows="1"
             className="full-width-input"
           />
         </DialogContent>
