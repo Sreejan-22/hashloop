@@ -98,7 +98,11 @@ const Profile = () => {
               )}
               <div className="profile-pic">
                 <img
-                  src="https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                  src={
+                    "pic" in profileData
+                      ? profileData.pic
+                      : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                  }
                   alt=""
                   style={{
                     height: "100%",

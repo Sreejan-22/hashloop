@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 import Tags from "../Tags/Tags";
 import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
@@ -9,8 +10,14 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import "./EditProfileModal.css";
+import { baseUrl } from "../../utils/constants";
+import { notifyError } from "../../utils/notifyToasts";
+import { getUser } from "../../utils/auth";
+
+const user = getUser();
 
 const EditProfileModal = ({ open, handleClose }) => {
+  const history = useHistory();
   const [pic, setPic] = useState(null);
   const [cover, setCover] = useState(null);
   const [bio, setBio] = useState("");
@@ -22,7 +29,7 @@ const EditProfileModal = ({ open, handleClose }) => {
   const [twitter, setTwitter] = useState("");
   const [portfolio, setPortfolio] = useState("");
 
-  const editProfile = (e) => {
+  const editProfile = async (e) => {
     e.preventDefault();
 
     const submitData = {
@@ -38,7 +45,77 @@ const EditProfileModal = ({ open, handleClose }) => {
       portfolio,
     };
 
-    console.log(submitData);
+    // upload profile pic
+    if (pic && typeof pic !== "string") {
+      const formData = new FormData();
+      formData.append("image", pic);
+
+      try {
+        const res = await fetch(`${baseUrl}/upload`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: formData,
+        });
+        const data = await res.json();
+        if (data.success) {
+          submitData.pic = data.imageUrl;
+        } else {
+          notifyError("Failed to upload profile picture");
+        }
+      } catch (err) {
+        notifyError("Failed to upload profile picture");
+        return;
+      }
+    }
+
+    // upload cover pic
+    if (cover && typeof cover !== "string") {
+      const formData = new FormData();
+      formData.append("image", cover);
+
+      try {
+        const res = await fetch(`${baseUrl}/upload`, {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: formData,
+        });
+        const data = await res.json();
+        if (data.success) {
+          submitData.cover = data.imageUrl;
+        } else {
+          notifyError("Failed to upload cover picture");
+        }
+      } catch (err) {
+        notifyError("Failed to upload cover picture");
+        return;
+      }
+    }
+
+    // edit/update profile
+    try {
+      const res = await fetch(`${baseUrl}/profile/${user.username}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(submitData),
+      });
+      const data = await res.json();
+      console.log(data);
+      if (data.success) {
+        handleClose();
+        history.push(`/profile/${user.username}`);
+      } else {
+        notifyError(data.message);
+      }
+    } catch (err) {
+      notifyError("Failed to update profile");
+    }
   };
 
   return (
@@ -167,7 +244,6 @@ const EditProfileModal = ({ open, handleClose }) => {
             disableElevation
             onClick={(e) => {
               editProfile(e);
-              handleClose();
             }}
           >
             Update
