@@ -237,7 +237,13 @@ const Profile = () => {
           </>
         )}
       </>
-      <EditProfileModal open={open} handleClose={handleClose} />
+      {open && (
+        <EditProfileModal
+          open={open}
+          handleClose={handleClose}
+          profileData={profileData}
+        />
+      )}
     </Layout>
   );
 };

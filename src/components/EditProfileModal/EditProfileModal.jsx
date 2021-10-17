@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import Tags from "../Tags/Tags";
 import { Button } from "@mui/material";
@@ -16,18 +16,18 @@ import { getUser } from "../../utils/auth";
 
 const user = getUser();
 
-const EditProfileModal = ({ open, handleClose }) => {
+const EditProfileModal = ({ open, handleClose, profileData }) => {
   const history = useHistory();
   const [pic, setPic] = useState(null);
   const [cover, setCover] = useState(null);
-  const [bio, setBio] = useState("");
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
-  const [skills, setSkills] = useState([]);
-  const [github, setGithub] = useState("");
-  const [linkedin, setLinkedin] = useState("");
-  const [twitter, setTwitter] = useState("");
-  const [portfolio, setPortfolio] = useState("");
+  const [bio, setBio] = useState(profileData.bio || "");
+  const [city, setCity] = useState(profileData.city || "");
+  const [country, setCountry] = useState(profileData.country || "");
+  const [skills, setSkills] = useState(profileData.skills || []);
+  const [github, setGithub] = useState(profileData.github || "");
+  const [linkedin, setLinkedin] = useState(profileData.linkedin || "");
+  const [twitter, setTwitter] = useState(profileData.twitter || "");
+  const [portfolio, setPortfolio] = useState(profileData.portfolio || "");
 
   const editProfile = async (e) => {
     e.preventDefault();
@@ -175,6 +175,7 @@ const EditProfileModal = ({ open, handleClose }) => {
               marginTop: "0.5rem",
             }}
             className="full-width-input"
+            value={bio}
             onChange={(e) => setBio(e.target.value)}
           />
           <br />
@@ -182,12 +183,14 @@ const EditProfileModal = ({ open, handleClose }) => {
           <OutlinedInput
             placeholder="City"
             sx={{ width: "49%", marginRight: "2px" }}
+            value={city}
             onChange={(e) => setCity(e.target.value)}
           />
           &nbsp; &nbsp;
           <OutlinedInput
             placeholder="Country"
             sx={{ width: "48%" }}
+            value={country}
             onChange={(e) => setCountry(e.target.value)}
           />
           <br />
@@ -199,11 +202,12 @@ const EditProfileModal = ({ open, handleClose }) => {
             sx={{ width: "100%" }}
             renderInput={(params) => <TextField {...params} label="Movie" />}
           /> */}
-          <Tags setSkills={setSkills} />
+          <Tags setSkills={setSkills} defaultValue={skills} />
           <br />
           <OutlinedInput
             placeholder="Github"
             className="full-width-input"
+            defaultValue={skills}
             onChange={(e) => setGithub(e.target.value)}
           />
           <br />
@@ -211,6 +215,7 @@ const EditProfileModal = ({ open, handleClose }) => {
           <OutlinedInput
             placeholder="LinkedIn"
             className="full-width-input"
+            defaultValue={linkedin}
             onChange={(e) => setLinkedin(e.target.value)}
           />
           <br />
@@ -218,6 +223,7 @@ const EditProfileModal = ({ open, handleClose }) => {
           <OutlinedInput
             placeholder="Twitter"
             className="full-width-input"
+            defaultValue={twitter}
             onChange={(e) => setTwitter(e.target.value)}
           />
           <br />
@@ -225,6 +231,7 @@ const EditProfileModal = ({ open, handleClose }) => {
           <OutlinedInput
             placeholder="Portfolio website"
             className="full-width-input"
+            defaultValue={portfolio}
             onChange={(e) => setPortfolio(e.target.value)}
           />
         </DialogContent>

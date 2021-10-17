@@ -8,7 +8,7 @@ const skills = [];
 // allTags.forEach((item) => skills.push({ label: item }));
 allTags.forEach((item) => skills.push(item));
 
-const Tags = ({ setSkills }) => {
+const Tags = ({ setSkills, defaultValue }) => {
   return (
     <Stack spacing={3} sx={{ width: 500 }}>
       <Autocomplete
@@ -18,6 +18,7 @@ const Tags = ({ setSkills }) => {
         getOptionLabel={(option) => option}
         filterSelectedOptions
         renderInput={(params) => <TextField {...params} label="Skills" />}
+        value={defaultValue}
         onChange={(e, value) => setSkills(value)}
       />
     </Stack>
