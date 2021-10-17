@@ -232,7 +232,25 @@ const Project = ({
           />{" "}
           &nbsp;&nbsp; <span className="upvotes">{upvotes}</span>
         </span>
-        <BiCommentDetail />
+        <BiCommentDetail
+          onClick={() => {
+            const project = {
+              username,
+              author,
+              projectName,
+              details,
+              tags,
+              code,
+              live,
+              image,
+              createdAt,
+              upvotes,
+              upvoters,
+              id,
+            };
+            history.push(`/projects/${id}`, { project });
+          }}
+        />
         <BiShareAlt />
         <BiBookmark />
       </div>

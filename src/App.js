@@ -31,7 +31,7 @@ function App() {
           {isAuthenticated() ? <Redirect to="/" /> : <Login />}
         </Route>
         <Route path="/profile/:username" component={Profile} />
-        <Route path="/projects" component={SingleProject} />
+        <Route path="/projects/:id" component={SingleProject} />
         <PrivateRoute path="/create" component={Create} />
         <PrivateRoute path="/edit/:id" component={Edit} />
         <Route path="/tags" component={Explore} />
