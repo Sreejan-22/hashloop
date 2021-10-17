@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Tags from "../Tags/Tags";
 import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
@@ -10,6 +11,36 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import "./EditProfileModal.css";
 
 const EditProfileModal = ({ open, handleClose }) => {
+  const [pic, setPic] = useState(null);
+  const [cover, setCover] = useState(null);
+  const [bio, setBio] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [skills, setSkills] = useState([]);
+  const [github, setGithub] = useState("");
+  const [linkedin, setLinkedin] = useState("");
+  const [twitter, setTwitter] = useState("");
+  const [portfolio, setPortfolio] = useState("");
+
+  const editProfile = (e) => {
+    e.preventDefault();
+
+    const submitData = {
+      pic,
+      cover,
+      bio,
+      city,
+      country,
+      skills,
+      github,
+      linkedin,
+      twitter,
+      portfolio,
+    };
+
+    console.log(submitData);
+  };
+
   return (
     <div>
       <Dialog open={open} onClose={handleClose}>
@@ -33,12 +64,30 @@ const EditProfileModal = ({ open, handleClose }) => {
         <DialogContent dividers>
           <label htmlFor="profile-pic">Profile Picture</label>
           <br />
-          <input type="file" id="profile-pic" style={{ marginTop: "0.5rem" }} />
+          <input
+            type="file"
+            id="profile-pic"
+            style={{ marginTop: "0.5rem" }}
+            onChange={(e) => {
+              if (e.target.files.length) {
+                setPic(e.target.files[0]);
+              }
+            }}
+          />
           <br />
           <br />
-          <label htmlFor="profile-pic">Header Image</label>
+          <label htmlFor="cover-pic">Header Image</label>
           <br />
-          <input type="file" id="header-pic" style={{ marginTop: "0.5rem" }} />
+          <input
+            type="file"
+            id="cover-pic"
+            style={{ marginTop: "0.5rem" }}
+            onChange={(e) => {
+              if (e.target.files.length) {
+                setCover(e.target.files[0]);
+              }
+            }}
+          />
           <br />
           <br />
           <OutlinedInput
@@ -49,15 +98,21 @@ const EditProfileModal = ({ open, handleClose }) => {
               marginTop: "0.5rem",
             }}
             className="full-width-input"
+            onChange={(e) => setBio(e.target.value)}
           />
           <br />
           <br />
           <OutlinedInput
             placeholder="City"
-            sx={{ width: "49%", marginRight: "4px" }}
+            sx={{ width: "49%", marginRight: "2px" }}
+            onChange={(e) => setCity(e.target.value)}
           />
           &nbsp; &nbsp;
-          <OutlinedInput placeholder="Country" sx={{ width: "48%" }} />
+          <OutlinedInput
+            placeholder="Country"
+            sx={{ width: "48%" }}
+            onChange={(e) => setCountry(e.target.value)}
+          />
           <br />
           <br />
           {/* <Autocomplete
@@ -67,20 +122,33 @@ const EditProfileModal = ({ open, handleClose }) => {
             sx={{ width: "100%" }}
             renderInput={(params) => <TextField {...params} label="Movie" />}
           /> */}
-          <Tags />
+          <Tags setSkills={setSkills} />
           <br />
-          <OutlinedInput placeholder="Github" className="full-width-input" />
+          <OutlinedInput
+            placeholder="Github"
+            className="full-width-input"
+            onChange={(e) => setGithub(e.target.value)}
+          />
           <br />
           <br />
-          <OutlinedInput placeholder="LinkedIn" className="full-width-input" />
+          <OutlinedInput
+            placeholder="LinkedIn"
+            className="full-width-input"
+            onChange={(e) => setLinkedin(e.target.value)}
+          />
           <br />
           <br />
-          <OutlinedInput placeholder="Twitter" className="full-width-input" />
+          <OutlinedInput
+            placeholder="Twitter"
+            className="full-width-input"
+            onChange={(e) => setTwitter(e.target.value)}
+          />
           <br />
           <br />
           <OutlinedInput
             placeholder="Portfolio website"
             className="full-width-input"
+            onChange={(e) => setPortfolio(e.target.value)}
           />
         </DialogContent>
         <DialogActions>
@@ -97,7 +165,10 @@ const EditProfileModal = ({ open, handleClose }) => {
             size="small"
             variant="contained"
             disableElevation
-            onClick={handleClose}
+            onClick={(e) => {
+              editProfile(e);
+              handleClose();
+            }}
           >
             Update
           </Button>

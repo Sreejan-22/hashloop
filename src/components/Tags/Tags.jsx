@@ -5,18 +5,20 @@ import Stack from "@mui/material/Stack";
 import { allTags } from "../../utils/constants";
 
 const skills = [];
-allTags.forEach((item) => skills.push({ label: item }));
+// allTags.forEach((item) => skills.push({ label: item }));
+allTags.forEach((item) => skills.push(item));
 
-const Tags = () => {
+const Tags = ({ setSkills }) => {
   return (
     <Stack spacing={3} sx={{ width: 500 }}>
       <Autocomplete
         multiple
         id="tags-outlined"
         options={skills}
-        getOptionLabel={(option) => option.label}
+        getOptionLabel={(option) => option}
         filterSelectedOptions
         renderInput={(params) => <TextField {...params} label="Skills" />}
+        onChange={(e, value) => setSkills(value)}
       />
     </Stack>
   );
