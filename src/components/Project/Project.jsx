@@ -3,7 +3,8 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateUpvoteCount } from "../../slices/project.slice";
-import { StyledMenu, StyledCommentMenu } from "../StyledMenu/StyledMenu";
+import { StyledMenu } from "../StyledMenu/StyledMenu";
+import CommentSection from "../CommentSection/CommentSection";
 import MenuItem from "@mui/material/MenuItem";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
@@ -38,7 +39,6 @@ const Project = ({
   const history = useHistory();
   const [showComments, setShowComments] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [anchorComment, setAnchorComment] = useState(null);
 
   const isUpvotedInitial = isAuthenticated()
     ? upvoters.includes(getUser().username)
@@ -50,7 +50,6 @@ const Project = ({
   const dispatch = useDispatch();
 
   const open = Boolean(anchorEl);
-  const open2 = Boolean(anchorComment);
 
   useEffect(() => {
     if (history.location.pathname.includes("/projects")) {
@@ -65,13 +64,6 @@ const Project = ({
   };
   const handleClose = () => {
     setAnchorEl(null);
-  };
-
-  const handleClick2 = (e) => {
-    setAnchorComment(e.currentTarget);
-  };
-  const handleClose2 = () => {
-    setAnchorComment(null);
   };
 
   const handleDelete = async (e) => {
@@ -140,11 +132,21 @@ const Project = ({
     }
   };
 
+  const postComment = () => {};
+
   return (
     <div className="project">
       <div className="project-header">
         <Link to={`/profile/${username}`}>
-          <img src={profile} alt="" className="profile-img" />
+          <img
+            src={
+              username === "sam"
+                ? profile
+                : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+            }
+            alt=""
+            className="profile-img"
+          />
         </Link>
         <div className="project-header-child">
           <div>
@@ -254,80 +256,8 @@ const Project = ({
         <BiShareAlt />
         <BiBookmark />
       </div>
-      {showComments && (
-        <>
-          <hr className="divider" />
-          <div className="comment-section">
-            <div className="post-comment">
-              <div>
-                <Link to="/profile">
-                  <img src={profile} alt="" className="profile-img" />
-                </Link>
-                <OutlinedInput
-                  placeholder="Enter comment"
-                  multiline
-                  minRows="1"
-                  style={{
-                    padding: "10px 14px",
-                    marginLeft: "1rem",
-                    flexGrow: "0.9",
-                  }}
-                />
-              </div>
-              <button className="post-comment-btn">Post</button>
-            </div>
-            <br />
-            <br />
-            {[1, 2].map((item) => (
-              <div className="comment-box" key={item}>
-                <div className="project-header">
-                  <Link to="/profile">
-                    <img src={profile} alt="" className="profile-img" />
-                  </Link>
-                  <div className="project-header-child">
-                    <div>
-                      <Link to="/profile">
-                        Mahesh Sharma &#8226; <span>21/03/21</span>
-                      </Link>
-                    </div>
-                    <div>
-                      <span>React / Vue Developer</span>
-                    </div>
-                  </div>
-                  {isAuthenticated() && (
-                    <>
-                      <MoreHorizIcon onClick={handleClick2} />
-                      <StyledCommentMenu
-                        id="basic-menu"
-                        anchorEl={anchorComment}
-                        open={open2}
-                        onClose={handleClose2}
-                        MenuListProps={{
-                          "aria-labelledby": "basic-button",
-                        }}
-                        borderRadius="6"
-                        padding="0"
-                      >
-                        <MenuItem onClick={handleClose2}>Report</MenuItem>
-                      </StyledCommentMenu>
-                    </>
-                  )}
-                </div>
-                <div className="comment-text">Looks cool lets talk</div>
-                <div className="comment-icons">
-                  {/* <BiUpvote />{" "} */}
-                  <img
-                    src={upvoteoutlined}
-                    alt=""
-                    style={{ height: "20px", width: "18px" }}
-                  />{" "}
-                  <span> &nbsp;&nbsp;Upvote &nbsp;&#8226;&nbsp; 2</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
+      {/* comments section */}
+      {showComments && <CommentSection username={username} />}
       <ToastContainer />
     </div>
   );
