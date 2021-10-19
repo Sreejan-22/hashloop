@@ -90,6 +90,34 @@ const CommentSection = ({ username, projectId }) => {
     }
   };
 
+  const deleteComment = async (id, index) => {
+    handleClose2();
+
+    if (window.confirm("Do you want to delete this comment?")) {
+      try {
+        const res = await fetch(`${baseUrl}/comments/${id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        const data = await res.json();
+        if (data.success) {
+          setAllComments((prev) => {
+            const temp = [...prev];
+            temp.splice(index, 1);
+            return temp;
+          });
+        } else {
+          notifyError("Failed to delete comment");
+        }
+      } catch (err) {
+        notifyError("Failed to delete comment");
+      }
+    }
+  };
+
   return (
     <>
       <hr className="divider" />
@@ -153,7 +181,7 @@ const CommentSection = ({ username, projectId }) => {
         <br />
         {commentsLoading && <p>Loading...</p>}
         {!commentsLoading &&
-          allComments.map((item) => (
+          allComments.map((item, index) => (
             <div className="comment-box" key={item._id}>
               <div className="project-header">
                 <Link to={`/profile/${item.username}`}>
@@ -191,7 +219,11 @@ const CommentSection = ({ username, projectId }) => {
                     >
                       <MenuItem onClick={handleClose2}>Report</MenuItem>
                       {user.username === item.username && (
-                        <MenuItem onClick={handleClose2}>Delete</MenuItem>
+                        <MenuItem
+                          onClick={() => deleteComment(item._id, index)}
+                        >
+                          Delete
+                        </MenuItem>
                       )}
                     </StyledCommentMenu>
                   </>
