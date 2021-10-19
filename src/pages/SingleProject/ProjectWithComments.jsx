@@ -8,7 +8,6 @@ import "./ProjectWithComments.css";
 const SingleProject = () => {
   const history = useHistory();
   const currentProject = history.location.state.project;
-  console.log(currentProject);
 
   return (
     <Layout>

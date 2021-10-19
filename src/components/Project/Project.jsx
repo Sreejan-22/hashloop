@@ -132,8 +132,6 @@ const Project = ({
     }
   };
 
-  const postComment = () => {};
-
   return (
     <div className="project">
       <div className="project-header">
@@ -257,7 +255,7 @@ const Project = ({
         <BiBookmark />
       </div>
       {/* comments section */}
-      {showComments && <CommentSection username={username} />}
+      {showComments && <CommentSection username={username} projectId={id} />}
       <ToastContainer />
     </div>
   );

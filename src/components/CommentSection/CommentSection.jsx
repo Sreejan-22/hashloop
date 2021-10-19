@@ -1,23 +1,93 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { StyledCommentMenu } from "../StyledMenu/StyledMenu";
 import MenuItem from "@mui/material/MenuItem";
+import Button from "@mui/material/Button";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { CircularProgress } from "@mui/material";
 import profile from "../../assets/profile.png";
 import "./CommentSection.css";
-import { isAuthenticated } from "../../utils/auth";
+import { isAuthenticated, getUser } from "../../utils/auth";
+import { baseUrl } from "../../utils/constants";
+import { notifyError } from "../../utils/notifyToasts";
+import { getDate } from "../../utils/date";
 
-const CommentSection = ({ username }) => {
+const user = getUser();
+
+const CommentSection = ({ username, projectId }) => {
   const [anchorComment, setAnchorComment] = useState(null);
+  const [comment, setComment] = useState("");
+  const [allComments, setAllComments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [commentsLoading, setCommentsLoading] = useState(false);
 
   const open2 = Boolean(anchorComment);
+
+  useEffect(() => {
+    setCommentsLoading(true);
+
+    fetch(`${baseUrl}/comments/${projectId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          setAllComments(data.comments);
+        } else {
+          notifyError("Failed to fetch comments");
+        }
+        setCommentsLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        notifyError("Failed to fetch comments");
+      });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClick2 = (e) => {
     setAnchorComment(e.currentTarget);
   };
   const handleClose2 = () => {
     setAnchorComment(null);
+  };
+
+  const postComment = async () => {
+    if (comment.length) {
+      setLoading(true);
+      setComment("");
+      try {
+        const res = await fetch(`${baseUrl}/comments`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({
+            projectId,
+            username,
+            author: user.name,
+            commentText: comment,
+          }),
+        });
+
+        const data = await res.json();
+        if (data.success) {
+          setAllComments((prev) => {
+            const temp = [...prev];
+            temp.push(data.comment);
+            return temp;
+          });
+          setLoading(false);
+        } else {
+          setLoading(false);
+          notifyError("Failed to post comment");
+        }
+      } catch (err) {
+        setLoading(false);
+        notifyError("Failed to post comment");
+      }
+    }
   };
 
   return (
@@ -46,54 +116,86 @@ const CommentSection = ({ username }) => {
                 marginLeft: "1rem",
                 flexGrow: "0.9",
               }}
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
             />
           </div>
-          <button className="post-comment-btn">Post</button>
+          {/* <button className="post-comment-btn" onClick={postComment}>
+            Post <CircularProgress style={{ color: "white" }} />
+          </button> */}
+          {loading ? (
+            <Button
+              variant="contained"
+              sx={{
+                textTransform: "capitalize",
+                backgroundColor: "#4399ff",
+                height: "2.5rem",
+                fontFamily: "Montserrat, sans-serif",
+              }}
+              endIcon={
+                <CircularProgress
+                  sx={{ color: "white" }}
+                  thickness="3"
+                  size="1rem"
+                />
+              }
+              onClick={postComment}
+            >
+              Post
+            </Button>
+          ) : (
+            <button className="post-comment-btn" onClick={postComment}>
+              Post
+            </button>
+          )}
         </div>
         <br />
         <br />
-        {[1, 2].map((item) => (
-          <div className="comment-box" key={item}>
-            <div className="project-header">
-              <Link to="/profile">
-                <img
-                  src={
-                    username === "sam"
-                      ? profile
-                      : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
-                  }
-                  alt=""
-                  className="profile-img"
-                />
-              </Link>
-              <div className="project-header-child">
-                <div>
-                  <Link to="/profile">
-                    Mahesh Sharma &#8226; <span>21/03/21</span>
-                  </Link>
+        {commentsLoading && <p>Loading...</p>}
+        {!commentsLoading &&
+          allComments.map((item) => (
+            <div className="comment-box" key={item._id}>
+              <div className="project-header">
+                <Link to={`/profile/${item.username}`}>
+                  <img
+                    src={
+                      username === "sam"
+                        ? profile
+                        : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                    }
+                    alt=""
+                    className="profile-img"
+                  />
+                </Link>
+                <div className="project-header-child">
+                  <div>
+                    <Link to="/profile">
+                      {item.author} &#8226;{" "}
+                      <span>{getDate(item.createdAt)}</span>
+                    </Link>
+                  </div>
                 </div>
+                {isAuthenticated() && (
+                  <>
+                    <MoreHorizIcon onClick={handleClick2} />
+                    <StyledCommentMenu
+                      id="basic-menu"
+                      anchorEl={anchorComment}
+                      open={open2}
+                      onClose={handleClose2}
+                      MenuListProps={{
+                        "aria-labelledby": "basic-button",
+                      }}
+                      // borderRadius="6"
+                      padding="0"
+                    >
+                      <MenuItem onClick={handleClose2}>Report</MenuItem>
+                    </StyledCommentMenu>
+                  </>
+                )}
               </div>
-              {isAuthenticated() && (
-                <>
-                  <MoreHorizIcon onClick={handleClick2} />
-                  <StyledCommentMenu
-                    id="basic-menu"
-                    anchorEl={anchorComment}
-                    open={open2}
-                    onClose={handleClose2}
-                    MenuListProps={{
-                      "aria-labelledby": "basic-button",
-                    }}
-                    borderRadius="6"
-                    padding="0"
-                  >
-                    <MenuItem onClick={handleClose2}>Report</MenuItem>
-                  </StyledCommentMenu>
-                </>
-              )}
-            </div>
-            <div className="comment-text">Looks cool lets talk</div>
-            {/* <div className="comment-icons">
+              <div className="comment-text">{item.commentText}</div>
+              {/* <div className="comment-icons">
                   <img
                     src={upvoteoutlined}
                     alt=""
@@ -101,8 +203,8 @@ const CommentSection = ({ username }) => {
                   />{" "}
                   <span> &nbsp;&nbsp;Upvote &nbsp;&#8226;&nbsp; 2</span>
                 </div> */}
-          </div>
-        ))}
+            </div>
+          ))}
       </div>
     </>
   );
