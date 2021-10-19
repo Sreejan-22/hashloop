@@ -65,7 +65,7 @@ const CommentSection = ({ username, projectId }) => {
           },
           body: JSON.stringify({
             projectId,
-            username,
+            username: user.username,
             author: user.name,
             commentText: comment,
           }),
@@ -99,7 +99,7 @@ const CommentSection = ({ username, projectId }) => {
             <Link to="/profile">
               <img
                 src={
-                  username === "sam"
+                  user.username === "sam"
                     ? profile
                     : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                 }
@@ -159,7 +159,7 @@ const CommentSection = ({ username, projectId }) => {
                 <Link to={`/profile/${item.username}`}>
                   <img
                     src={
-                      username === "sam"
+                      item.username === "sam"
                         ? profile
                         : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                     }
@@ -190,6 +190,9 @@ const CommentSection = ({ username, projectId }) => {
                       padding="0"
                     >
                       <MenuItem onClick={handleClose2}>Report</MenuItem>
+                      {user.username === item.username && (
+                        <MenuItem onClick={handleClose2}>Delete</MenuItem>
+                      )}
                     </StyledCommentMenu>
                   </>
                 )}
