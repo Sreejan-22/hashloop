@@ -122,61 +122,73 @@ const CommentSection = ({ username, projectId }) => {
     <>
       <hr className="divider" />
       <div className="comment-section">
-        <div className="post-comment">
+        {!isAuthenticated() ? (
           <div>
-            <Link to="/profile">
-              <img
-                src={
-                  user.username === "sam"
-                    ? profile
-                    : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
-                }
-                alt=""
-                className="profile-img"
-              />
+            <Link
+              to="/login"
+              style={{ textDecoration: "underline", color: "blue" }}
+            >
+              Login
             </Link>
-            <OutlinedInput
-              placeholder="Enter comment"
-              multiline
-              minRows="1"
-              style={{
-                padding: "10px 14px",
-                marginLeft: "1rem",
-                flexGrow: "0.9",
-              }}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-            />
+            &nbsp;to comment
           </div>
-          {/* <button className="post-comment-btn" onClick={postComment}>
+        ) : (
+          <div className="post-comment">
+            <div>
+              <Link to={`/profile/${user.username}`}>
+                <img
+                  src={
+                    user.username === "sam"
+                      ? profile
+                      : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                  }
+                  alt=""
+                  className="profile-img"
+                />
+              </Link>
+              <OutlinedInput
+                placeholder="Enter comment"
+                multiline
+                minRows="1"
+                style={{
+                  padding: "10px 14px",
+                  marginLeft: "1rem",
+                  flexGrow: "0.9",
+                }}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+            </div>
+            {/* <button className="post-comment-btn" onClick={postComment}>
             Post <CircularProgress style={{ color: "white" }} />
           </button> */}
-          {loading ? (
-            <Button
-              variant="contained"
-              sx={{
-                textTransform: "capitalize",
-                backgroundColor: "#4399ff",
-                height: "2.5rem",
-                fontFamily: "Montserrat, sans-serif",
-              }}
-              endIcon={
-                <CircularProgress
-                  sx={{ color: "white" }}
-                  thickness="3"
-                  size="1rem"
-                />
-              }
-              onClick={postComment}
-            >
-              Post
-            </Button>
-          ) : (
-            <button className="post-comment-btn" onClick={postComment}>
-              Post
-            </button>
-          )}
-        </div>
+            {loading ? (
+              <Button
+                variant="contained"
+                sx={{
+                  textTransform: "capitalize",
+                  backgroundColor: "#4399ff",
+                  height: "2.5rem",
+                  fontFamily: "Montserrat, sans-serif",
+                }}
+                endIcon={
+                  <CircularProgress
+                    sx={{ color: "white" }}
+                    thickness="3"
+                    size="1rem"
+                  />
+                }
+                onClick={postComment}
+              >
+                Post
+              </Button>
+            ) : (
+              <button className="post-comment-btn" onClick={postComment}>
+                Post
+              </button>
+            )}
+          </div>
+        )}
         <br />
         <br />
         {commentsLoading && <p>Loading...</p>}
@@ -197,7 +209,7 @@ const CommentSection = ({ username, projectId }) => {
                 </Link>
                 <div className="project-header-child">
                   <div>
-                    <Link to="/profile">
+                    <Link to={`/profile/${item.username}`}>
                       {item.author} &#8226;{" "}
                       <span>{getDate(item.createdAt)}</span>
                     </Link>
