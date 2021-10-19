@@ -25,6 +25,8 @@ import { isAuthenticated, getUser } from "../../utils/auth.js";
 import { baseUrl } from "../../utils/constants";
 import { notifyError } from "../../utils/notifyToasts";
 
+const user = getUser();
+
 const Profile = () => {
   const history = useHistory();
   const { username } = useParams();
@@ -34,6 +36,7 @@ const Profile = () => {
   const [open, setOpen] = useState(false);
   const { userProjects, userProjectsLoading, userProjectsError } =
     useSelector(projectSelector);
+  const [following, setFollowing] = useState(false);
 
   useEffect(() => {
     async function fetchProfileDetails() {
@@ -43,12 +46,24 @@ const Profile = () => {
         const data = await res.json();
         if (data.success) {
           setProfileData(data.profile);
+          setFollowing((prev) => {
+            if (
+              isAuthenticated() &&
+              data.profile.followers.includes(user.username)
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          });
           setLoading(false);
         } else {
+          console.log("error here");
           setLoading(false);
           notifyError("Failed to fetch profile details");
         }
       } catch (err) {
+        console.log("error here", err);
         setLoading(false);
         notifyError("Failed to fetch profile details");
       }
@@ -67,6 +82,40 @@ const Profile = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleFollow = async () => {
+    let follow = following;
+    follow = !follow;
+
+    try {
+      const res = await fetch(`${baseUrl}/follow`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({
+          follow,
+          follower: user.username,
+          person: profileData.username,
+        }),
+      });
+
+      const data = await res.json();
+      if (data.success) {
+        setProfileData((prev) => {
+          const temp = { ...prev };
+          temp.followers = following ? temp.followers - 1 : temp.followers + 1;
+          return temp;
+        });
+        setFollowing(!following);
+      } else {
+        notifyError("An error occurred");
+      }
+    } catch (err) {
+      notifyError("An error occurred");
+    }
   };
 
   return (
@@ -130,7 +179,9 @@ const Profile = () => {
                           Edit Profile
                         </button>
                       ) : (
-                        <button className="follow-btn">Follow</button>
+                        <button className="follow-btn" onClick={handleFollow}>
+                          {following ? "Following" : "Follow"}
+                        </button>
                       )
                     ) : (
                       <button
@@ -187,12 +238,22 @@ const Profile = () => {
                 </div>
                 <div className="profile-follower-data">
                   <div className="followers">
-                    <span>{profileData.followers}</span>&nbsp;
+                    <span>
+                      {"followers" in profileData
+                        ? profileData.followers.length
+                        : ""}
+                    </span>
+                    &nbsp;
                     <span style={{ fontSize: "0.8rem" }}>Followers</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                   </div>
                   <div className="following">
-                    <span>{profileData.following}</span>&nbsp;
+                    <span>
+                      {"following" in profileData
+                        ? profileData.following.length
+                        : ""}
+                    </span>
+                    &nbsp;
                     <span style={{ fontSize: "0.8rem" }}>Following</span>
                     &nbsp;&nbsp;
                   </div>
