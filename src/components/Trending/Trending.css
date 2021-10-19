@@ -1,4 +1,6 @@
 .feed-right {
+  position: sticky;
+  top: 1rem;
   width: 65%;
   display: flex;
   flex-direction: column;

@@ -1,6 +1,6 @@
 .feed-menu {
-  /* position: fixed; */
-  /* width: 223px; */
+  position: sticky;
+  top: 1rem;
   display: flex;
   flex-direction: column;
   border-radius: var(--border-radius);
