@@ -119,6 +119,15 @@
   margin: 0.8rem;
 }
 
+.link-to-signup {
+  color: #282c40;
+  font-weight: 600;
+}
+
+.link-to-signup:hover {
+  text-decoration: underline;
+}
+
 @media screen and (min-width: 1700px) {
   .signin-wrapper {
     --marginvalue: 8rem;

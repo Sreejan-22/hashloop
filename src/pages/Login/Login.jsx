@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { notifyError } from "../../utils/notifyToasts";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -134,6 +134,12 @@ const Login = () => {
               Sign In
             </button>
           </form>
+          <div style={{ alignSelf: "center" }}>
+            Don't have an account?{" "}
+            <Link to="/signup" className="link-to-signup">
+              Sign up
+            </Link>
+          </div>
         </div>
       </div>
       {loading ? (

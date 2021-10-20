@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import {
   handleServerError,
   handleSignupError,
@@ -203,6 +203,12 @@ const Signup = () => {
               Sign Up
             </button>
           </form>
+          <div style={{ alignSelf: "center" }}>
+            Already have an account?{" "}
+            <Link to="/login" className="link-to-login">
+              Login
+            </Link>
+          </div>
         </div>
       </div>
       {loading ? (
