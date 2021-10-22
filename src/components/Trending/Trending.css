@@ -35,20 +35,32 @@
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr; */
+  column-gap: 10px;
   background-color: #f4f2f9;
   border-radius: 8px;
   margin-bottom: 0.7rem;
   cursor: pointer;
+  height: 4rem;
+  width: 100%;
 }
 
 .trending-project-desc {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 0.5rem;
 }
 
 .trending-project-desc > h6 {
   color: #999999;
+}
+
+.trending-project-img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .follow-suggestions {

@@ -1,26 +1,59 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  trendingSelector,
+  fetchTrendingProjects,
+} from "../../slices/trending.slice";
+import { CircularProgress } from "@mui/material";
 import trending from "../../assets/trending.png";
 import profile from "../../assets/profile.png";
 import "./Trending.css";
+import { notifyError } from "../../utils/notifyToasts";
 
 const Trending = () => {
+  const dispatch = useDispatch();
+  const { trendingProjects, trendingLoading, trendingError } =
+    useSelector(trendingSelector);
+
+  useEffect(() => {
+    dispatch(fetchTrendingProjects());
+  }, [dispatch]);
+
+  if (trendingError) {
+    notifyError("An error occurred");
+  }
+
   return (
     <div className="feed-right">
       <input type="text" placeholder="Search" className="search" />
-      <div className="trending">
-        <h5>Trending</h5>
-        <>
-          {[1, 2, 3].map((item, index) => (
-            <div className="trending-project" key={`trending-${index}`}>
-              <div className="trending-project-desc">
-                <p>A better Twitter</p>
-                <h6>by Rahul Mehra</h6>
+      {trendingLoading && <CircularProgress />}
+      {trendingProjects.length && (
+        <div className="trending">
+          <h5>Trending</h5>
+          <>
+            {trendingProjects.map((item) => (
+              <div className="trending-project" key={item._id}>
+                <div
+                  className={`trending-project-desc ${
+                    "image" in item ? "trending-project-desc2" : ""
+                  }`}
+                >
+                  <p>{item.projectName}</p>
+                  <h6>by {item.author}</h6>
+                </div>
+                {"image" in item && (
+                  <img
+                    src={"image" in item ? item.image : ""}
+                    alt=""
+                    className="trending-project-img"
+                  />
+                )}
               </div>
-              <img src={trending} alt="" className="trending-project-img" />
-            </div>
-          ))}
-        </>
-      </div>
+            ))}
+          </>
+        </div>
+      )}
       <div className="follow-suggestions">
         <h5>Follow Suggestions</h5>
         <>

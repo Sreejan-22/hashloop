@@ -5,15 +5,19 @@ import { Provider } from "react-redux";
 // import { authReducer } from "./slices/auth.slice";
 import { combineReducers } from "redux";
 import { projectReducer } from "./slices/project.slice";
+import { trendingReducer } from "./slices/trending.slice";
 import "./index.css";
 import App from "./App";
 
-const rootReducer = combineReducers({
-  project: projectReducer,
-});
+// const rootReducer = combineReducers({
+//   project: projectReducer,
+// });
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    project: projectReducer,
+    trending: trendingReducer,
+  },
 });
 
 ReactDOM.render(
