@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   trendingSelector,
@@ -12,6 +12,7 @@ import "./Trending.css";
 import { notifyError } from "../../utils/notifyToasts";
 
 const Trending = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { trendingProjects, trendingLoading, trendingError } =
     useSelector(trendingSelector);
@@ -33,7 +34,42 @@ const Trending = () => {
           <h5>Trending</h5>
           <>
             {trendingProjects.map((item) => (
-              <div className="trending-project" key={item._id}>
+              <div
+                to={`/projects/${item._id}`}
+                className="trending-project"
+                key={item._id}
+                onClick={() => {
+                  const {
+                    username,
+                    author,
+                    projectName,
+                    details,
+                    tags,
+                    code,
+                    live,
+                    image,
+                    createdAt,
+                    upvotes,
+                    upvoters,
+                  } = item;
+                  const id = item._id;
+                  const project = {
+                    username,
+                    author,
+                    projectName,
+                    details,
+                    tags,
+                    code,
+                    live,
+                    image,
+                    createdAt,
+                    upvotes,
+                    upvoters,
+                    id,
+                  };
+                  history.push(`/projects/${id}`, { project });
+                }}
+              >
                 <div
                   className={`trending-project-desc ${
                     "image" in item ? "trending-project-desc2" : ""
