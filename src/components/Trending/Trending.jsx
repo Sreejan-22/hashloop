@@ -93,15 +93,19 @@ const Trending = () => {
       <div className="follow-suggestions">
         <h5>Follow Suggestions</h5>
         <>
-          {[1, 2, 3].map((item, index) => (
-            <div className="follow-profile-container" key={`follow-${index}`}>
-              <Link to="/profile" className="follow-profile">
-                <img src={profile} alt="" className="follow-profile-img" />
-                <span>Mahesh Sharma</span>
-              </Link>
-              <button className="follow-btn">Follow</button>
-            </div>
-          ))}
+          {trendingProjects.length &&
+            trendingProjects.map((item, index) => (
+              <div className="follow-profile-container" key={`follow-${index}`}>
+                <Link
+                  to={`/profile/${item.username}`}
+                  className="follow-profile"
+                >
+                  <img src={profile} alt="" className="follow-profile-img" />
+                  <span>{item.author}</span>
+                </Link>
+                <button className="follow-btn">Follow</button>
+              </div>
+            ))}
         </>
       </div>
     </div>
