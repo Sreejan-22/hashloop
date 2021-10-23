@@ -39,35 +39,7 @@ const Trending = () => {
                 className="trending-project"
                 key={item._id}
                 onClick={() => {
-                  const {
-                    username,
-                    author,
-                    projectName,
-                    details,
-                    tags,
-                    code,
-                    live,
-                    image,
-                    createdAt,
-                    upvotes,
-                    upvoters,
-                  } = item;
-                  const id = item._id;
-                  const project = {
-                    username,
-                    author,
-                    projectName,
-                    details,
-                    tags,
-                    code,
-                    live,
-                    image,
-                    createdAt,
-                    upvotes,
-                    upvoters,
-                    id,
-                  };
-                  history.push(`/projects/${id}`, { project });
+                  history.push(`/projects/${item._id}`, { project: item });
                 }}
               >
                 <div
