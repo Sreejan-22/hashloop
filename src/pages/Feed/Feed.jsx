@@ -48,38 +48,9 @@ const Feed = () => {
         </Link>
         <div className="feed-content">
           <>
-            {allProjects.map(
-              ({
-                username,
-                author,
-                projectName,
-                details,
-                tags,
-                code,
-                live,
-                image,
-                createdAt,
-                upvotes,
-                upvoters,
-                _id,
-              }) => (
-                <Project
-                  username={username}
-                  author={author}
-                  projectName={projectName}
-                  details={details}
-                  tags={tags}
-                  code={code}
-                  live={live}
-                  image={image}
-                  createdAt={createdAt}
-                  upvotes={upvotes}
-                  upvoters={upvoters}
-                  id={_id}
-                  key={_id}
-                />
-              )
-            )}
+            {allProjects.map((item) => (
+              <Project project={item} key={item._id} />
+            ))}
           </>
         </div>
       </>

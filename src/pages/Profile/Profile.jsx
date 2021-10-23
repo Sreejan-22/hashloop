@@ -262,37 +262,9 @@ const Profile = () => {
             </div>
             <div className="feed-content">
               <>
-                {userProjects.map(
-                  ({
-                    username,
-                    author,
-                    projectName,
-                    details,
-                    tags,
-                    code,
-                    live,
-                    image,
-                    createdAt,
-                    upvotes,
-                    upvoters,
-                    _id,
-                  }) => (
-                    <Project
-                      username={username}
-                      author={author}
-                      projectName={projectName}
-                      details={details}
-                      tags={tags}
-                      code={code}
-                      live={live}
-                      image={image}
-                      createdAt={createdAt}
-                      upvotes={upvotes}
-                      upvoters={upvoters}
-                      key={_id}
-                    />
-                  )
-                )}
+                {userProjects.map((item) => (
+                  <Project project={item} key={item._id} />
+                ))}
               </>
             </div>
           </>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { StyledCommentMenu } from "../StyledMenu/StyledMenu";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
@@ -15,7 +15,8 @@ import { getDate } from "../../utils/date";
 
 const user = getUser();
 
-const CommentSection = ({ username, projectId }) => {
+const CommentSection = () => {
+  const projectId = useParams().id;
   const [anchorComment, setAnchorComment] = useState(null);
   const [comment, setComment] = useState("");
   const [allComments, setAllComments] = useState([]);

@@ -14,7 +14,7 @@ const SingleProject = () => {
       <>
         <PageHeader text="Project" />
         <div className="feed-content">
-          <Project {...currentProject} />
+          <Project project={currentProject} />
         </div>
       </>
     </Layout>

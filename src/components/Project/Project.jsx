@@ -22,23 +22,25 @@ import { notifyError, notifySuccess } from "../../utils/notifyToasts";
 
 const user = getUser();
 
-const Project = ({
-  username,
-  author,
-  projectName,
-  details,
-  tags,
-  code,
-  live,
-  image,
-  createdAt,
-  upvotes,
-  upvoters,
-  id,
-}) => {
+const Project = ({ project }) => {
   const history = useHistory();
   const [showComments, setShowComments] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const {
+    username,
+    author,
+    projectName,
+    details,
+    tags,
+    code,
+    live,
+    image,
+    createdAt,
+    upvotes,
+    upvoters,
+    _id: id,
+  } = project;
 
   const isUpvotedInitial = isAuthenticated()
     ? upvoters.includes(getUser().username)
@@ -111,6 +113,7 @@ const Project = ({
         newCount,
         newUpvotersList,
       };
+
       try {
         const res = await fetch(`${baseUrl}/upvotes/${id}`, {
           method: "PUT",
@@ -169,19 +172,6 @@ const Project = ({
                 <MenuItem
                   onClick={() => {
                     handleClose();
-                    const project = {
-                      username,
-                      author,
-                      projectName,
-                      details,
-                      tags,
-                      code,
-                      live,
-                      image,
-                      createdAt,
-                      upvotes,
-                      id,
-                    };
                     history.push(`/edit/${id}`, { project });
                   }}
                 >
@@ -234,20 +224,6 @@ const Project = ({
         </span>
         <BiCommentDetail
           onClick={() => {
-            const project = {
-              username,
-              author,
-              projectName,
-              details,
-              tags,
-              code,
-              live,
-              image,
-              createdAt,
-              upvotes,
-              upvoters,
-              id,
-            };
             history.push(`/projects/${id}`, { project });
           }}
         />
@@ -255,7 +231,7 @@ const Project = ({
         <BiBookmark />
       </div>
       {/* comments section */}
-      {showComments && <CommentSection username={username} projectId={id} />}
+      {showComments && <CommentSection />}
       <ToastContainer />
     </div>
   );
