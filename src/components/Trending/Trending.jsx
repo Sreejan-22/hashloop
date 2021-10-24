@@ -29,7 +29,7 @@ const Trending = () => {
 
   return (
     <div className="feed-right">
-      <input type="text" placeholder="Search" className="search" />
+      <input type="text" placeholder="Search developers" className="search" />
       {trendingLoading && <CircularProgress />}
       {trendingProjects.length && (
         <div className="trending">
