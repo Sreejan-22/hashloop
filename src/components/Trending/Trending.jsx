@@ -6,6 +6,8 @@ import {
   fetchTrendingProjects,
 } from "../../slices/trending.slice";
 import { CircularProgress } from "@mui/material";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import trending from "../../assets/trending.png";
 import profile from "../../assets/profile.png";
 import "./Trending.css";
@@ -80,6 +82,7 @@ const Trending = () => {
             ))}
         </>
       </div>
+      <ToastContainer />
     </div>
   );
 };

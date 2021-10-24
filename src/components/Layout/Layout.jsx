@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import Menu from "../Menu/Menu";
 import Trending from "../Trending/Trending";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import "./Layout.css";
 
 const Layout = ({ children }) => {
@@ -27,7 +25,6 @@ const Layout = ({ children }) => {
           </Link>
         </footer>
       )}
-      <ToastContainer />
     </div>
   );
 };
