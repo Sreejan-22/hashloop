@@ -22,18 +22,6 @@ const Feed = () => {
 
   return (
     <Layout>
-      {projectsLoading && (
-        <div
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "5rem",
-          }}
-        >
-          <CircularProgress color="primary" size="5rem" />
-        </div>
-      )}
       <>
         <div className="feed-header">
           <HomeIcon />
@@ -46,6 +34,18 @@ const Feed = () => {
           </span>
           <span>&nbsp;&nbsp;New Project</span>
         </Link>
+        {projectsLoading && (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "5rem",
+            }}
+          >
+            <CircularProgress color="primary" size="5rem" />
+          </div>
+        )}
         <div className="feed-content">
           <>
             {allProjects.map((item) => (
