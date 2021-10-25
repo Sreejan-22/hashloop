@@ -34,7 +34,7 @@ function App() {
         <Route path="/projects/:id" component={SingleProject} />
         <PrivateRoute path="/create" component={Create} />
         <PrivateRoute path="/edit/:id" component={Edit} />
-        <Route path="/tags" component={Explore} />
+        {/* <Route path="/tags" component={Explore} /> */}
         <Route path="/explore" component={ExploreAll} />
         <PrivateRoute path="/saved" component={Saved} />
         {/* <PrivateRoute path="/notifications" component={Notifications} /> */}

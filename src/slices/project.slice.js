@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getUser } from "../utils/auth";
 import { baseUrl } from "../utils/constants";
+import { notifyError } from "../utils/notifyToasts";
 
 const initialState = {
   allProjects: [],
@@ -9,6 +11,8 @@ const initialState = {
   userProjectsLoading: false,
   userProjectsError: false,
   upvoteError: false,
+  projectsWithTag: null,
+  projectsWithTagLoading: false,
 };
 
 const projectSlice = createSlice({
@@ -55,6 +59,19 @@ const projectSlice = createSlice({
     setUpvoteError: (state, { payload }) => {
       state.upvoteError = payload;
     },
+    loadProjectsWithTag: (state) => {
+      state.projectsWithTagLoading = true;
+    },
+    getProjectsWithTagSuccess: (state, { payload }) => {
+      state.projectsWithTag = payload;
+      state.projectsWithTagLoading = false;
+    },
+    getProjectsWithTagFailure: (state) => {
+      state.projectsWithTagLoading = false;
+    },
+    makeProjectsWithTagNull: (state) => {
+      state.projectsWithTag = null;
+    },
   },
 });
 
@@ -67,6 +84,10 @@ export const {
   getUserProjectsSuccess,
   getUserProjectsFailure,
   updateUpvoteCount,
+  loadProjectsWithTag,
+  getProjectsWithTagSuccess,
+  getProjectsWithTagFailure,
+  makeProjectsWithTagNull,
 } = projectSlice.actions;
 
 // selector
@@ -108,6 +129,32 @@ export function fetchProjectsOfUser(username) {
       }
     } catch (err) {
       dispatch(getUserProjectsFailure());
+    }
+  };
+}
+
+export function fetchProjectsWithTag(tag) {
+  return async (dispatch) => {
+    dispatch(loadProjectsWithTag());
+
+    try {
+      const res = await fetch(`${baseUrl}/tags/${tag}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getUser().token}`,
+        },
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        dispatch(getProjectsWithTagSuccess(data.projects));
+      } else {
+        dispatch(getProjectsWithTagFailure());
+        notifyError("Failed to fetch projects with this tag");
+      }
+    } catch (err) {
+      dispatch(getProjectsWithTagFailure());
+      notifyError("Failed to fetch projects with this tag");
     }
   };
 }

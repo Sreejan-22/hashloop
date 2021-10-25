@@ -8,6 +8,8 @@ export const allTags = [
   "node",
   "express",
   "mongodb",
+  "auth0",
+  "styled-components",
   "typescript",
   "python",
   "java",
