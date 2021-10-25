@@ -125,7 +125,7 @@ const Signup = () => {
               username: username.text,
               email: email.text,
               token: data.token,
-              profileId: data.profile.profileId,
+              profile_id: data.profile._id,
             };
             localStorage.setItem("user", JSON.stringify(userData));
             history.push("/");

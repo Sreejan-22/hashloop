@@ -40,6 +40,7 @@ const Project = ({ project }) => {
     upvotes,
     upvoters,
     _id: id,
+    authorId,
   } = project;
 
   const isUpvotedInitial = isAuthenticated()
@@ -141,8 +142,8 @@ const Project = ({ project }) => {
         <Link to={`/profile/${username}`}>
           <img
             src={
-              username === "sam"
-                ? profile
+              "pic" in authorId
+                ? authorId.pic
                 : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
             }
             alt=""

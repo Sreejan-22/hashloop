@@ -76,6 +76,7 @@ const Create = () => {
     const user = getUser();
 
     let submitData = {
+      authorId: user.profile_id,
       username: user.username,
       author: user.name,
       projectName: name,
