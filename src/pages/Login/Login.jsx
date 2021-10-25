@@ -123,13 +123,13 @@ const Login = () => {
               }
               error={password.error}
             />
-            <a
+            {/* <a
               href="https://github.com/Sreejan-22"
               className="forgot-password-text"
             >
               Forgot Password?
             </a>
-            <br />
+            <br /> */}
             <button className="signin-submit-btn" onClick={handleSubmit}>
               Sign In
             </button>
