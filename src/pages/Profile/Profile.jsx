@@ -58,12 +58,10 @@ const Profile = () => {
           });
           setLoading(false);
         } else {
-          console.log("error here");
           setLoading(false);
           notifyError("Failed to fetch profile details");
         }
       } catch (err) {
-        console.log("error here", err);
         setLoading(false);
         notifyError("Failed to fetch profile details");
       }

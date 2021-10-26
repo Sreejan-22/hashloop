@@ -106,7 +106,6 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
         body: JSON.stringify(submitData),
       });
       const data = await res.json();
-      console.log(data);
       if (data.success) {
         handleClose();
         history.push(`/profile/${user.username}`);

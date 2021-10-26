@@ -11,6 +11,7 @@ import { makeStyles } from "@mui/styles";
 import { CircularProgress } from "@mui/material";
 import amico from "../../assets/amico.svg";
 import "./Signup.css";
+import { notifyError } from "../../utils/notifyToasts";
 
 const theme = createTheme({
   palette: {
@@ -141,7 +142,7 @@ const Signup = () => {
         })
         .catch((err) => {
           setLoading(false);
-          console.log(err);
+          notifyError("Failed to sign up");
         });
     }
   };

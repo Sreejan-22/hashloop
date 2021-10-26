@@ -53,7 +53,7 @@ const CommentSection = () => {
   const postComment = async () => {
     if (comment.length) {
       setLoading(true);
-      setComment("");
+
       try {
         const res = await fetch(`${baseUrl}/comments`, {
           method: "POST",
@@ -77,8 +77,10 @@ const CommentSection = () => {
             temp.push(data.comment);
             return temp;
           });
+          setComment("");
           setLoading(false);
         } else {
+          setComment("");
           setLoading(false);
           notifyError("Failed to post comment");
         }
@@ -190,17 +192,19 @@ const CommentSection = () => {
         )}
         <br />
         <br />
-        {commentsLoading && <p>Loading...</p>}
-        {!commentsLoading &&
+        {commentsLoading ? (
+          <p>Loading...</p>
+        ) : (
           allComments.map((item, index) => (
             <div className="comment-box" key={item._id}>
               <div className="project-header">
                 <Link to={`/profile/${item.username}`}>
                   <img
                     src={
-                      "pic" in item.authorId
-                        ? item.authorId.pic
-                        : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                      // "pic" in item.authorId
+                      //   ? item.authorId.pic
+                      //   : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                      "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                     }
                     alt=""
                     className="profile-img"
@@ -250,7 +254,8 @@ const CommentSection = () => {
                   <span> &nbsp;&nbsp;Upvote &nbsp;&#8226;&nbsp; 2</span>
                 </div> */}
             </div>
-          ))}
+          ))
+        )}
       </div>
     </>
   );
