@@ -127,3 +127,25 @@
   width: 30px;
   border-radius: 50%;
 }
+
+@media screen and (min-width: 1850px) {
+  .trending-project {
+    height: 5rem;
+  }
+
+  .feed-right {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .feed-right {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .feed-right {
+    width: 85%;
+  }
+}

@@ -59,3 +59,58 @@ footer button {
 footer button:hover {
   background-color: rgb(212, 211, 211);
 }
+
+@media screen and (min-width: 1950px) {
+  .layout {
+    grid-template-columns: 1fr 1.1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1850px) {
+  .layout {
+    grid-template-columns: 1fr 1.2fr 1fr;
+  }
+
+  .layout-left {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .layout {
+    grid-template-columns: 1fr 1.4fr 1fr;
+  }
+  .layout-left {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .layout {
+    grid-template-columns: 1fr 1.7fr 1fr;
+  }
+  .layout-left {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .layout {
+    grid-template-columns: 100px 1.7fr 1fr;
+    column-gap: 1.5rem;
+  }
+
+  .layout-left {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .layout-right-container {
+    display: none;
+  }
+
+  .layout {
+    grid-template-columns: 100px 1fr 1rem;
+  }
+}

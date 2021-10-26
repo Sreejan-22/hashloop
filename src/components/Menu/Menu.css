@@ -33,3 +33,15 @@
 .active-menu-item {
   background-color: #f4f2f9;
 }
+
+@media screen and (min-width: 1025px) {
+  .search-icon {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .menu-item > text {
+    display: none;
+  }
+}
