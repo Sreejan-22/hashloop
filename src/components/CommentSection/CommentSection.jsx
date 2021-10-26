@@ -201,10 +201,9 @@ const CommentSection = () => {
                 <Link to={`/profile/${item.username}`}>
                   <img
                     src={
-                      // "pic" in item.authorId
-                      //   ? item.authorId.pic
-                      //   : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
-                      "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                      item.authorId.hasOwnProperty("pic")
+                        ? item.authorId.pic
+                        : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                     }
                     alt=""
                     className="profile-img"
