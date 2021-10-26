@@ -49,7 +49,7 @@ const Profile = () => {
           setFollowing((prev) => {
             if (
               isAuthenticated() &&
-              data.profile.followers.includes(user.username)
+              data.profile.followers.includes(getUser().username)
             ) {
               return true;
             } else {

@@ -126,6 +126,7 @@ const Signup = () => {
               email: email.text,
               token: data.token,
               profile_id: data.profile._id,
+              pic: "pic" in data.profile ? data.profile.pic : null,
             };
             localStorage.setItem("user", JSON.stringify(userData));
             history.push("/");

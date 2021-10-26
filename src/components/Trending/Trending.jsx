@@ -157,7 +157,15 @@ const Trending = () => {
                   to={`/profile/${item.username}`}
                   className="follow-profile"
                 >
-                  <img src={profile} alt="" className="follow-profile-img" />
+                  <img
+                    src={
+                      "pic" in item.authorId
+                        ? item.authorId.pic
+                        : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                    }
+                    alt=""
+                    className="follow-profile-img"
+                  />
                   <span>{item.author}</span>
                 </Link>
                 <button className="follow-btn">Follow</button>

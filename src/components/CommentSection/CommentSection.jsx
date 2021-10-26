@@ -6,14 +6,11 @@ import Button from "@mui/material/Button";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { CircularProgress } from "@mui/material";
-import profile from "../../assets/profile.png";
 import "./CommentSection.css";
 import { isAuthenticated, getUser } from "../../utils/auth";
 import { baseUrl } from "../../utils/constants";
 import { notifyError } from "../../utils/notifyToasts";
 import { getDate } from "../../utils/date";
-
-const user = getUser();
 
 const CommentSection = () => {
   const projectId = useParams().id;
@@ -62,12 +59,13 @@ const CommentSection = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${getUser().token}`,
           },
           body: JSON.stringify({
             projectId,
-            username: user.username,
-            author: user.name,
+            authorId: getUser().profile_id,
+            username: getUser().username,
+            author: getUser().name,
             commentText: comment,
           }),
         });
@@ -100,7 +98,7 @@ const CommentSection = () => {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${getUser().token}`,
           },
         });
         const data = await res.json();
@@ -136,12 +134,12 @@ const CommentSection = () => {
         ) : (
           <div className="post-comment">
             <div>
-              <Link to={`/profile/${user.username}`}>
+              <Link to={`/profile/${getUser().username}`}>
                 <img
                   src={
-                    user.username === "sam"
-                      ? profile
-                      : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                    getUser().pic === null
+                      ? "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.pn"
+                      : getUser().pic
                   }
                   alt=""
                   className="profile-img"
@@ -200,8 +198,8 @@ const CommentSection = () => {
                 <Link to={`/profile/${item.username}`}>
                   <img
                     src={
-                      item.username === "sam"
-                        ? profile
+                      "pic" in item.authorId
+                        ? item.authorId.pic
                         : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                     }
                     alt=""
@@ -231,7 +229,7 @@ const CommentSection = () => {
                       padding="0"
                     >
                       <MenuItem onClick={handleClose2}>Report</MenuItem>
-                      {user.username === item.username && (
+                      {getUser().username === item.username && (
                         <MenuItem
                           onClick={() => deleteComment(item._id, index)}
                         >
