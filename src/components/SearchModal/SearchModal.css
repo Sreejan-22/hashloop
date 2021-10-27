@@ -1,0 +1,10 @@
+.search-modal .MuiPaper-root {
+  width: 100%;
+  height: 400px;
+}
+
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

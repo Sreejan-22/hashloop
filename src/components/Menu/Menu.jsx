@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import SearchModal from "../SearchModal/SearchModal";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import PersonIcon from "@mui/icons-material/Person";
@@ -12,6 +14,15 @@ import { isAuthenticated, getUser } from "../../utils/auth";
 
 const Menu = () => {
   const history = useHistory();
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div className="feed-menu">
@@ -21,24 +32,24 @@ const Menu = () => {
       <div className="menu-items">
         <Link to="/" className="menu-item">
           <HomeIcon />
-          &nbsp;&nbsp;<text>Feed</text>
+          &nbsp;&nbsp;<span>Feed</span>
         </Link>
         <div className="menu-item search-icon">
-          <SearchIcon />
+          <SearchIcon onClick={handleClickOpen} />
         </div>
         <Link to="/explore" className="menu-item">
           <ExploreIcon />
-          &nbsp;&nbsp;<text>Explore</text>
+          &nbsp;&nbsp;<span>Explore</span>
         </Link>
         {isAuthenticated() && (
           <>
             <Link to={`/profile/${getUser().username}`} className="menu-item">
               <PersonIcon />
-              &nbsp;&nbsp;<text>Profile</text>
+              &nbsp;&nbsp;<span>Profile</span>
             </Link>
             <Link to="/saved" className="menu-item">
               <BookmarkIcon />
-              &nbsp;&nbsp;<text>Saved</text>
+              &nbsp;&nbsp;<span>Saved</span>
             </Link>
             {/* <Link
               to="/notifications"
@@ -59,11 +70,12 @@ const Menu = () => {
               }}
             >
               <LogoutIcon />
-              &nbsp;&nbsp;<text>Logout</text>
+              &nbsp;&nbsp;<span>Logout</span>
             </div>
           </>
         )}
       </div>
+      <SearchModal open={open} handleClose={handleClose} />
     </div>
   );
 };

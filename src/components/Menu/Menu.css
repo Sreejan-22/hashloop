@@ -41,7 +41,7 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .menu-item > text {
+  .menu-item > span {
     display: none;
   }
 }

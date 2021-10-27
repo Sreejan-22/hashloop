@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useHistory } from "react-router";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Tags from "../Tags/Tags";
 import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";

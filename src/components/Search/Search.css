@@ -33,3 +33,14 @@
 .search-profile:hover {
   background-color: rgba(226, 226, 226);
 }
+
+@media screen and (max-width: 1200px) {
+  .search {
+    width: 80%;
+  }
+
+  .search-results {
+    width: 72%;
+    top: 120px;
+  }
+}
