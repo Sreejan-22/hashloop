@@ -42,7 +42,7 @@
   font-size: 20px;
 }
 
-.feed-header > div {
+.feed-header-content {
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -77,8 +77,12 @@
   width: 100%;
 }
 
-@media screen and (min-width: 768px) {
-  .menu-icon {
-    display: none !important;
+.header-search-icon {
+  display: none;
+}
+
+@media screen and (max-width: 767px) {
+  .header-search-icon {
+    display: inline;
   }
 }

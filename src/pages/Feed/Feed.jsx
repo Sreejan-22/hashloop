@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { projectSelector, fetchProjects } from "../../slices/project.slice";
 import Layout from "../../components/Layout/Layout";
 import Project from "../../components/Project/Project";
+import MaterialMenu from "../../components/MaterialMenu/MaterialMenu";
+import SearchModal from "../../components/SearchModal/SearchModal";
 import HomeIcon from "@mui/icons-material/Home";
 import { FiEdit } from "react-icons/fi";
 import { CircularProgress } from "@mui/material";
@@ -25,12 +27,15 @@ const Feed = () => {
     <Layout>
       <>
         <div className="feed-header">
-          <div>
+          <div className="feed-header-content">
             <HomeIcon />
             &nbsp;&nbsp;
             <span>Feed</span>
           </div>
-          <MoreHorizIcon className="menu-icon" />
+          <div className="header-search-icon">
+            <SearchModal />
+          </div>
+          <MaterialMenu />
         </div>
         <Link to="/create" className="new-project-btn">
           <span>

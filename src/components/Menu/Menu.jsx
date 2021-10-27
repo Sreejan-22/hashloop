@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import SearchModal from "../SearchModal/SearchModal";
@@ -7,22 +6,12 @@ import ExploreIcon from "@mui/icons-material/Explore";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import SearchIcon from "@mui/icons-material/Search";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 import "./Menu.css";
 import { isAuthenticated, getUser } from "../../utils/auth";
 
 const Menu = () => {
   const history = useHistory();
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <div className="feed-menu">
@@ -34,9 +23,10 @@ const Menu = () => {
           <HomeIcon />
           &nbsp;&nbsp;<span>Feed</span>
         </Link>
-        <div className="menu-item search-icon">
+        {/* <div className="menu-item search-icon">
           <SearchIcon onClick={handleClickOpen} />
-        </div>
+        </div> */}
+        <SearchModal />
         <Link to="/explore" className="menu-item">
           <ExploreIcon />
           &nbsp;&nbsp;<span>Explore</span>
@@ -75,7 +65,6 @@ const Menu = () => {
           </>
         )}
       </div>
-      <SearchModal open={open} handleClose={handleClose} />
     </div>
   );
 };

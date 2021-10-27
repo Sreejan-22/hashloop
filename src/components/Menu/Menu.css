@@ -34,19 +34,13 @@
   background-color: #f4f2f9;
 }
 
-@media screen and (min-width: 1025px) {
-  .search-icon {
-    display: none;
-  }
-}
-
 @media screen and (max-width: 1200px) {
   .menu-item > span {
     display: none;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .feed-menu {
     display: none;
   }
