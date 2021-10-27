@@ -114,3 +114,16 @@ footer button:hover {
     grid-template-columns: 100px 1fr 1rem;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .layout-left-container {
+    display: none;
+  }
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .layout-content-container {
+    padding: 0rem 2rem;
+  }
+}

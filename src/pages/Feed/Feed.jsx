@@ -7,6 +7,7 @@ import Project from "../../components/Project/Project";
 import HomeIcon from "@mui/icons-material/Home";
 import { FiEdit } from "react-icons/fi";
 import { CircularProgress } from "@mui/material";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import "./Feed.css";
 
 const Feed = () => {
@@ -24,9 +25,12 @@ const Feed = () => {
     <Layout>
       <>
         <div className="feed-header">
-          <HomeIcon />
-          &nbsp;&nbsp;
-          <span>Feed</span>
+          <div>
+            <HomeIcon />
+            &nbsp;&nbsp;
+            <span>Feed</span>
+          </div>
+          <MoreHorizIcon className="menu-icon" />
         </div>
         <Link to="/create" className="new-project-btn">
           <span>
