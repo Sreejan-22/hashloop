@@ -1,4 +1,6 @@
 import { useHistory } from "react-router-dom";
+import SearchModal from "../SearchModal/SearchModal";
+import MaterialMenu from "../MaterialMenu/MaterialMenu";
 import { BiArrowBack } from "react-icons/bi";
 import "./PageHeader.css";
 
@@ -7,9 +9,15 @@ const PageHeader = ({ text }) => {
 
   return (
     <div className="profile-page-header">
-      <BiArrowBack onClick={() => history.goBack()} />
-      &nbsp;&nbsp;&nbsp;
-      <span>{text}</span>
+      <div className="page-header-content">
+        <BiArrowBack onClick={() => history.goBack()} />
+        &nbsp;&nbsp;&nbsp;
+        <span>{text}</span>
+      </div>
+      <div className="header-search-icon">
+        <SearchModal />
+      </div>
+      <MaterialMenu />
     </div>
   );
 };

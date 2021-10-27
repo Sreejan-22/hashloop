@@ -4,6 +4,12 @@
   font-size: 20px;
 }
 
-.profile-page-header > svg {
+.profile-page-header svg {
   cursor: pointer;
+}
+
+.page-header-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 }
