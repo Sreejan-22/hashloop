@@ -4,16 +4,12 @@ import { styled, alpha } from "@mui/material/styles";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Divider from "@mui/material/Divider";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import SearchModal from "../SearchModal/SearchModal";
 import "./MaterialMenu.css";
 import { isAuthenticated } from "../../utils/auth";
 import { getUser } from "../../utils/auth";
@@ -73,16 +69,14 @@ const MaterialMenu = () => {
   };
 
   return (
-    <>
+    <div>
       <IconButton
         id="demo-customized-button"
         aria-controls="demo-customized-menu"
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         variant="contained"
-        disableElevation
         onClick={handleClick}
-        endIcon={<KeyboardArrowDownIcon />}
         className="menu-icon"
       >
         <MoreHorizIcon />
@@ -106,7 +100,6 @@ const MaterialMenu = () => {
           <HomeIcon />
           Feed
         </MenuItem>
-        {/* <Divider sx={{ my: 0.5 }} /> */}
         <MenuItem
           onClick={() => {
             handleClose();
@@ -118,7 +111,7 @@ const MaterialMenu = () => {
           Explore
         </MenuItem>
         {isAuthenticated() ? (
-          <>
+          <div>
             <MenuItem
               onClick={() => {
                 handleClose();
@@ -154,10 +147,10 @@ const MaterialMenu = () => {
               <LogoutIcon />
               Logout
             </MenuItem>
-          </>
+          </div>
         ) : null}
       </StyledMenu>
-    </>
+    </div>
   );
 };
 

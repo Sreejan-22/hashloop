@@ -20,7 +20,7 @@ const SearchModal = () => {
   };
 
   return (
-    <>
+    <div>
       <div className="menu-item" id="search-icon">
         <SearchIcon onClick={handleClickOpen} />
       </div>
@@ -51,7 +51,7 @@ const SearchModal = () => {
           </div>
         </DialogContent>
       </Dialog>
-    </>
+    </div>
   );
 };
 

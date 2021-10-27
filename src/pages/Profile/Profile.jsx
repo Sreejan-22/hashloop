@@ -17,9 +17,7 @@ import {
 } from "react-icons/ai";
 import LanguageIcon from "@mui/icons-material/Language";
 import { CircularProgress } from "@mui/material";
-import profile from "../../assets/profile.png";
 import profilecover from "../../assets/profilecover.png";
-// import message from "../../assets/message.svg";
 import "./Profile.css";
 import { isAuthenticated, getUser } from "../../utils/auth.js";
 import { baseUrl } from "../../utils/constants";
