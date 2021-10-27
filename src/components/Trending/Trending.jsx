@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./Trending.css";
 import { notifyError } from "../../utils/notifyToasts";
+import { isAuthenticated, getUser } from "../../utils/auth";
 
 const Trending = () => {
   const history = useHistory();
@@ -67,26 +68,40 @@ const Trending = () => {
         <h5>Follow Suggestions</h5>
         <>
           {trendingProjects.length &&
-            trendingProjects.map((item, index) => (
-              <div className="follow-profile-container" key={`follow-${index}`}>
-                <Link
-                  to={`/profile/${item.username}`}
-                  className="follow-profile"
-                >
-                  <img
-                    src={
-                      "pic" in item.authorId
-                        ? item.authorId.pic
-                        : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
-                    }
-                    alt=""
-                    className="follow-profile-img"
-                  />
-                  <span>{item.author}</span>
-                </Link>
-                <button className="follow-btn">Follow</button>
-              </div>
-            ))}
+            trendingProjects.map((item, index) => {
+              if (isAuthenticated() && item.username === getUser().username) {
+                return null;
+              } else {
+                return (
+                  <div
+                    className="follow-profile-container"
+                    key={`follow-${index}`}
+                  >
+                    <Link
+                      to={`/profile/${item.username}`}
+                      className="follow-profile"
+                    >
+                      <img
+                        src={
+                          "pic" in item.authorId
+                            ? item.authorId.pic
+                            : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
+                        }
+                        alt=""
+                        className="follow-profile-img"
+                      />
+                      <span>{item.author}</span>
+                    </Link>
+                    <button
+                      className="follow-btn"
+                      onClick={() => history.push(`/profile/${item.username}`)}
+                    >
+                      Follow
+                    </button>
+                  </div>
+                );
+              }
+            })}
         </>
       </div>
       <ToastContainer />
