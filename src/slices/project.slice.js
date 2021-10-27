@@ -138,12 +138,7 @@ export function fetchProjectsWithTag(tag) {
     dispatch(loadProjectsWithTag());
 
     try {
-      const res = await fetch(`${baseUrl}/tags/${tag}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getUser().token}`,
-        },
-      });
+      const res = await fetch(`${baseUrl}/tags/${tag}`);
       const data = await res.json();
 
       if (data.success) {
