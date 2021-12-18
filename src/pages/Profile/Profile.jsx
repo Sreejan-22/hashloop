@@ -31,14 +31,14 @@ const Profile = () => {
   const { username } = useParams();
   const dispatch = useDispatch();
   const [profileData, setProfileData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const { userProjects, userProjectsLoading } = useSelector(projectSelector);
   const [following, setFollowing] = useState(false);
 
   useEffect(() => {
     async function fetchProfileDetails() {
-      setLoading(true);
+      // setLoading(true);
       try {
         const res = await fetch(`${baseUrl}/profile/${username}`);
         const data = await res.json();

@@ -140,7 +140,7 @@ const CommentSection = () => {
                 <img
                   src={
                     getUser().pic === null
-                      ? "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.pn"
+                      ? "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                       : getUser().pic
                   }
                   alt=""

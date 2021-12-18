@@ -11,6 +11,7 @@ export const allTags = [
   "auth0",
   "styled-components",
   "typescript",
+  "firebase",
   "python",
   "java",
   "spring",
