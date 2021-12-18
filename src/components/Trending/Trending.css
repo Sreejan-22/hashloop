@@ -92,6 +92,19 @@
   border-radius: 50%;
 }
 
+.view-profile-btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: white;
+  border: 1.5px solid black;
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.3rem;
+  border-radius: 4px;
+}
+
 @media screen and (min-width: 1850px) {
   .trending-project {
     height: 5rem;

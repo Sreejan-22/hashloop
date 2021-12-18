@@ -75,7 +75,7 @@ const Trending = () => {
         </div>
       ) : null}
       <div className="follow-suggestions">
-        <h5>Follow Suggestions</h5>
+        <h5>Profile Suggestions</h5>
         <>
           {trendingProjects.length
             ? trendingProjects.map((item, index) => {
@@ -102,14 +102,12 @@ const Trending = () => {
                         />
                         <span>{item.author}</span>
                       </Link>
-                      <button
-                        className="follow-btn"
-                        onClick={() =>
-                          history.push(`/profile/${item.username}`)
-                        }
+                      <Link
+                        to={`/profile/${item.username}`}
+                        className="view-profile-btn"
                       >
-                        Follow
-                      </button>
+                        view profile
+                      </Link>
                     </div>
                   );
                 }
