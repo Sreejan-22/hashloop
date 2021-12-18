@@ -21,7 +21,15 @@ const Saved = () => {
     <Layout>
       <PageHeader text="Saved" />
       {loading ? (
-        <CircularProgress />
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <CircularProgress color="primary" />
+        </div>
       ) : (
         <div className="feed-content">
           <>
