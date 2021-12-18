@@ -6,19 +6,17 @@ import { updateUpvoteCount } from "../../slices/project.slice";
 import { StyledMenu } from "../StyledMenu/StyledMenu";
 import CommentSection from "../CommentSection/CommentSection";
 import MenuItem from "@mui/material/MenuItem";
-import OutlinedInput from "@mui/material/OutlinedInput";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { BiCommentDetail, BiShareAlt, BiBookmark } from "react-icons/bi";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import profile from "../../assets/profile.png";
 import upvotefilled from "../../assets/upvotefilled.svg";
 import upvoteoutlined from "../../assets/upvoteoutlined.svg";
 import "./Project.css";
 import { isAuthenticated, getUser } from "../../utils/auth";
 import { getDate } from "../../utils/date";
 import { baseUrl } from "../../utils/constants";
-import { notifyError, notifySuccess } from "../../utils/notifyToasts";
+import { notifyError } from "../../utils/notifyToasts";
 
 const user = getUser();
 

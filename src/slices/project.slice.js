@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getUser } from "../utils/auth";
 import { baseUrl } from "../utils/constants";
 import { notifyError } from "../utils/notifyToasts";
 

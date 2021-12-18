@@ -9,19 +9,15 @@ import SearchModal from "../../components/SearchModal/SearchModal";
 import HomeIcon from "@mui/icons-material/Home";
 import { FiEdit } from "react-icons/fi";
 import { CircularProgress } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import "./Feed.css";
 
 const Feed = () => {
   const dispatch = useDispatch();
-  const { allProjects, projectsLoading, projectsError } =
-    useSelector(projectSelector);
+  const { allProjects, projectsLoading } = useSelector(projectSelector);
 
   useEffect(() => {
     dispatch(fetchProjects());
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   return (
     <Layout>

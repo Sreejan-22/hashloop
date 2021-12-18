@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   projectSelector,
   fetchProjectsWithTag,
-  makeProjectsWithTagNull,
 } from "../../slices/project.slice";
 import { CircularProgress } from "@mui/material";
 import Layout from "../../components/Layout/Layout";
@@ -18,7 +16,6 @@ import { allTags } from "../../utils/constants";
 const ExploreAll = () => {
   // const [show, setShow] = useState("trending");
   const [currentTag, setCurrentTag] = useState("");
-  const history = useHistory();
   const dispatch = useDispatch();
   const { projectsWithTag, projectsWithTagLoading } =
     useSelector(projectSelector);
