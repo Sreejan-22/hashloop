@@ -32,8 +32,7 @@ const Profile = () => {
   const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const { userProjects, userProjectsLoading, userProjectsError } =
-    useSelector(projectSelector);
+  const { userProjects, userProjectsLoading } = useSelector(projectSelector);
   const [following, setFollowing] = useState(false);
 
   useEffect(() => {
@@ -68,9 +67,7 @@ const Profile = () => {
     fetchProfileDetails();
 
     dispatch(fetchProjectsOfUser(username));
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, username]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -126,7 +123,7 @@ const Profile = () => {
               marginTop: "5rem",
             }}
           >
-            <CircularProgress color="primary" size="5rem" />
+            <CircularProgress color="primary" />
           </div>
         )}
         {!(userProjectsLoading || loading) && (
