@@ -17,6 +17,7 @@ import { isAuthenticated, getUser } from "../../utils/auth";
 import { getDate } from "../../utils/date";
 import { baseUrl } from "../../utils/constants";
 import { notifyError } from "../../utils/notifyToasts";
+import { doesPropertyExist } from "../../utils/doesPropertyExist";
 
 const user = getUser();
 
@@ -140,7 +141,7 @@ const Project = ({ project }) => {
         <Link to={`/profile/${username}`}>
           <img
             src={
-              "pic" in authorId
+              doesPropertyExist("pic", authorId)
                 ? authorId.pic
                 : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
             }

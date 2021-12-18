@@ -22,6 +22,7 @@ import "./Profile.css";
 import { isAuthenticated, getUser } from "../../utils/auth.js";
 import { baseUrl } from "../../utils/constants";
 import { notifyError } from "../../utils/notifyToasts";
+import { doesPropertyExist } from "../../utils/doesPropertyExist";
 
 const user = getUser();
 
@@ -130,8 +131,12 @@ const Profile = () => {
           <>
             <PageHeader text={profileData.name} />
             <div className="profile-info-container">
-              {"cover" in profileData ? (
-                <img src={profilecover} alt="" className="profile-cover-img" />
+              {doesPropertyExist("cover", profileData) ? (
+                <img
+                  src={profilecover.cover}
+                  alt=""
+                  className="profile-cover-img"
+                />
               ) : (
                 <div
                   className="profile-cover-img"
@@ -141,7 +146,7 @@ const Profile = () => {
               <div className="profile-pic">
                 <img
                   src={
-                    "pic" in profileData
+                    doesPropertyExist("pic", profileData)
                       ? profileData.pic
                       : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                   }
@@ -189,63 +194,59 @@ const Profile = () => {
                 <div className="profile-bio">
                   {"bio" in profileData ? profileData.bio : null}
                 </div>
-                <div className="profile-location">
-                  {"city" in profileData || "country" in profileData ? (
+                {doesPropertyExist("city", profileData) ? (
+                  <div className="profile-location">
                     <GrLocation />
-                  ) : null}
-                  &nbsp;&nbsp;
-                  <h5>
-                    {"city" in profileData ? `${profileData.city}, ` : null}
-                    {"country" in profileData ? profileData.country : null}
-                  </h5>
-                </div>
+                    &nbsp;&nbsp;
+                    <h5>
+                      {profileData.city}
+                      {/* {"country" in profileData ? profileData.country : null} */}
+                    </h5>
+                  </div>
+                ) : null}
                 <div className="profile-tags">
-                  {"skills" in profileData &&
-                    profileData.skills.map((item, index) => (
-                      <button className="profile-tag" key={`${item}-${index}`}>
-                        {item}
-                      </button>
-                    ))}
+                  {doesPropertyExist("skills", profileData)
+                    ? profileData.skills.map((item, index) => (
+                        <button
+                          className="profile-tag"
+                          key={`${item}-${index}`}
+                        >
+                          {item}
+                        </button>
+                      ))
+                    : null}
                 </div>
                 <div className="profile-links">
-                  {"github" in profileData && (
+                  {doesPropertyExist("github", profileData) ? (
                     <a href={profileData.github}>
                       <AiOutlineGithub />
                     </a>
-                  )}
-                  {"twitter" in profileData && (
+                  ) : null}
+                  {doesPropertyExist("twitter", profileData) ? (
                     <a href={profileData.twitter}>
                       <AiOutlineTwitter />
                     </a>
-                  )}
-                  {"linkedin" in profileData && (
+                  ) : null}
+                  {doesPropertyExist("linkedin", profileData) ? (
                     <a href={profileData.linkedin}>
                       <AiFillLinkedin />
                     </a>
-                  )}
-                  {"portfolio" in profileData && (
+                  ) : null}
+                  {doesPropertyExist("portfolio", profileData) ? (
                     <a href={profileData.portfolio}>
                       <LanguageIcon />
                     </a>
-                  )}
+                  ) : null}
                 </div>
                 <div className="profile-follower-data">
                   <div className="followers">
-                    <span>
-                      {"followers" in profileData
-                        ? profileData.followers.length
-                        : ""}
-                    </span>
+                    <span>{profileData.followers.length}</span>
                     &nbsp;
                     <span style={{ fontSize: "0.8rem" }}>Followers</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                   </div>
                   <div className="following">
-                    <span>
-                      {"following" in profileData
-                        ? profileData.following.length
-                        : ""}
-                    </span>
+                    <span>{profileData.following.length}</span>
                     &nbsp;
                     <span style={{ fontSize: "0.8rem" }}>Following</span>
                     &nbsp;&nbsp;

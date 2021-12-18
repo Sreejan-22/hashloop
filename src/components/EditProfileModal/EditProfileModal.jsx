@@ -22,7 +22,7 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
   const [cover, setCover] = useState(null);
   const [bio, setBio] = useState(profileData.bio || "");
   const [city, setCity] = useState(profileData.city || "");
-  const [country, setCountry] = useState(profileData.country || "");
+  // const [country, setCountry] = useState(profileData.country || "");
   const [skills, setSkills] = useState(profileData.skills || []);
   const [github, setGithub] = useState(profileData.github || "");
   const [linkedin, setLinkedin] = useState(profileData.linkedin || "");
@@ -37,7 +37,7 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
       cover,
       bio,
       city,
-      country,
+      // country: "",
       skills,
       github,
       linkedin,
@@ -186,12 +186,12 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
             onChange={(e) => setCity(e.target.value)}
           />
           &nbsp; &nbsp;
-          <OutlinedInput
+          {/* <OutlinedInput
             placeholder="Country"
             sx={{ width: "48%" }}
             value={country}
             onChange={(e) => setCountry(e.target.value)}
-          />
+          /> */}
           <br />
           <br />
           {/* <Autocomplete
