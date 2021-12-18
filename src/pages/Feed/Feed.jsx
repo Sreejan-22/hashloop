@@ -52,7 +52,7 @@ const Feed = () => {
               marginTop: "5rem",
             }}
           >
-            <CircularProgress color="primary" size="5rem" />
+            <CircularProgress color="primary" />
           </div>
         )}
         <div className="feed-content">
