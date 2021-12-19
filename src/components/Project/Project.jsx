@@ -7,7 +7,7 @@ import { StyledMenu } from "../StyledMenu/StyledMenu";
 import CommentSection from "../CommentSection/CommentSection";
 import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { BiCommentDetail, BiShareAlt, BiBookmark } from "react-icons/bi";
+import { BiCommentDetail, BiBookmark } from "react-icons/bi";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import upvotefilled from "../../assets/upvotefilled.svg";
@@ -227,7 +227,6 @@ const Project = ({ project }) => {
             history.push(`/projects/${id}`, { project });
           }}
         />
-        <BiShareAlt />
         <BiBookmark />
       </div>
       {/* comments section */}

@@ -12,6 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Trending.css";
 import { notifyError } from "../../utils/notifyToasts";
 import { isAuthenticated, getUser } from "../../utils/auth";
+import { doesPropertyExist } from "../../utils/doesPropertyExist";
 
 const Trending = () => {
   const history = useHistory();
@@ -93,7 +94,7 @@ const Trending = () => {
                       >
                         <img
                           src={
-                            "pic" in item.authorId
+                            doesPropertyExist("pic", item.authorId)
                               ? item.authorId.pic
                               : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                           }
