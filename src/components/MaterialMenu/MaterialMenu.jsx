@@ -8,7 +8,6 @@ import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import "./MaterialMenu.css";
 import { isAuthenticated } from "../../utils/auth";
@@ -121,16 +120,6 @@ const MaterialMenu = () => {
             >
               <PersonIcon />
               Profile
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                handleClose();
-                history.push("/saved");
-              }}
-              disableRipple
-            >
-              <BookmarkIcon />
-              Saved
             </MenuItem>
             <MenuItem
               onClick={() => {

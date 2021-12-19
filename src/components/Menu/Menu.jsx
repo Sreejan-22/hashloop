@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import SearchModal from "../SearchModal/SearchModal";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-// import NotificationsIcon from "@mui/icons-material/Notifications";
 import "./Menu.css";
 import { isAuthenticated, getUser } from "../../utils/auth";
 
@@ -23,10 +20,6 @@ const Menu = () => {
           <HomeIcon />
           &nbsp;&nbsp;<span>Feed</span>
         </Link>
-        {/* <div className="menu-item search-icon">
-          <SearchIcon onClick={handleClickOpen} />
-        </div> */}
-        <SearchModal />
         <Link to="/explore" className="menu-item">
           <ExploreIcon />
           &nbsp;&nbsp;<span>Explore</span>
@@ -37,17 +30,6 @@ const Menu = () => {
               <PersonIcon />
               &nbsp;&nbsp;<span>Profile</span>
             </Link>
-            <Link to="/saved" className="menu-item">
-              <BookmarkIcon />
-              &nbsp;&nbsp;<span>Saved</span>
-            </Link>
-            {/* <Link
-              to="/notifications"
-              className="menu-item"
-            >
-              <NotificationsIcon />
-              &nbsp;&nbsp;Notifications
-            </Link> */}
             <div
               className="menu-item"
               onClick={() => {

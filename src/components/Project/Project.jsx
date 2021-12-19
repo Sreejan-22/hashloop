@@ -7,7 +7,7 @@ import { StyledMenu } from "../StyledMenu/StyledMenu";
 import CommentSection from "../CommentSection/CommentSection";
 import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import { BiCommentDetail, BiBookmark } from "react-icons/bi";
+import { BiCommentDetail } from "react-icons/bi";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import upvotefilled from "../../assets/upvotefilled.svg";
@@ -156,7 +156,7 @@ const Project = ({ project }) => {
             </Link>
           </div>
         </div>
-        {isAuthenticated() && (
+        {isAuthenticated() && getUser().username === username ? (
           <>
             <MoreHorizIcon onClick={handleClick} />
             <StyledMenu
@@ -181,15 +181,9 @@ const Project = ({ project }) => {
               {getUser().username === username && (
                 <MenuItem onClick={handleDelete}>Delete</MenuItem>
               )}
-              {getUser().username !== username && (
-                <MenuItem onClick={handleClose}>Follow</MenuItem>
-              )}
-              {getUser().username !== username && (
-                <MenuItem onClick={handleClose}>Report</MenuItem>
-              )}
             </StyledMenu>
           </>
-        )}
+        ) : null}
       </div>
       <div className="project-title">{projectName}</div>
       <div className="project-desc">{details}</div>
@@ -227,7 +221,6 @@ const Project = ({ project }) => {
             history.push(`/projects/${id}`, { project });
           }}
         />
-        <BiBookmark />
       </div>
       {/* comments section */}
       {showComments && <CommentSection />}

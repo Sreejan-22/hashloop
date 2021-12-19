@@ -12,7 +12,6 @@ import SingleProject from "./pages/SingleProject/ProjectWithComments";
 import Create from "./pages/Create/Create";
 import Edit from "./pages/Edit/Edit";
 import ExploreAll from "./pages/ExploreAll/ExploreAll";
-import Saved from "./pages/Saved/Saved";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./App.css";
@@ -33,7 +32,6 @@ function App() {
         <PrivateRoute path="/create" component={Create} />
         <PrivateRoute path="/edit/:id" component={Edit} />
         <Route path="/explore" component={ExploreAll} />
-        <PrivateRoute path="/saved" component={Saved} />
         <Route exact path="/" component={Feed} />
         <Route path="*">
           <PageNotFound />
