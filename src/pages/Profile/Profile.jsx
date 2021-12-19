@@ -17,7 +17,6 @@ import {
 } from "react-icons/ai";
 import LanguageIcon from "@mui/icons-material/Language";
 import { CircularProgress } from "@mui/material";
-import profilecover from "../../assets/profilecover.png";
 import "./Profile.css";
 import { isAuthenticated, getUser } from "../../utils/auth.js";
 import { baseUrl } from "../../utils/constants";
@@ -133,7 +132,7 @@ const Profile = () => {
             <div className="profile-info-container">
               {doesPropertyExist("cover", profileData) ? (
                 <img
-                  src={profilecover.cover}
+                  src={profileData.cover}
                   alt=""
                   className="profile-cover-img"
                 />
