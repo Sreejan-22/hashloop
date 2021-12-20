@@ -19,7 +19,13 @@ import { baseUrl } from "../../utils/constants";
 import { notifyError } from "../../utils/notifyToasts";
 import { doesPropertyExist } from "../../utils/doesPropertyExist";
 
-const user = getUser();
+const isUpvoted = (upvoters) => {
+  return isAuthenticated()
+    ? upvoters.includes(getUser().username)
+      ? true
+      : false
+    : false;
+};
 
 const Project = ({ project }) => {
   const history = useHistory();
@@ -42,13 +48,6 @@ const Project = ({ project }) => {
     authorId,
   } = project;
 
-  const isUpvotedInitial = isAuthenticated()
-    ? upvoters.includes(getUser().username)
-      ? true
-      : false
-    : false;
-  const [isUpvoted, setIsUpvoted] = useState(isUpvotedInitial);
-
   const dispatch = useDispatch();
 
   const open = Boolean(anchorEl);
@@ -57,9 +56,7 @@ const Project = ({ project }) => {
     if (history.location.pathname.includes("/projects")) {
       setShowComments(true);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [history.location.pathname]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -76,7 +73,7 @@ const Project = ({ project }) => {
         const res = await fetch(`${baseUrl}/projects/${id}`, {
           method: "DELETE",
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${getUser().token}`,
           },
         });
         const data = await res.json();
@@ -94,9 +91,9 @@ const Project = ({ project }) => {
   const handleUpvote = async () => {
     if (isAuthenticated()) {
       // if isUpvoted is false, after clicking on the upvote button it will become true and vice versa
-      const newCount = isUpvoted ? upvotes - 1 : upvotes + 1;
+      const newCount = isUpvoted(upvoters) ? upvotes - 1 : upvotes + 1;
       let newUpvotersList = [...upvoters];
-      if (isUpvoted) {
+      if (isUpvoted(upvoters)) {
         newUpvotersList = newUpvotersList.filter(
           (item) => item !== getUser().username
         );
@@ -104,11 +101,9 @@ const Project = ({ project }) => {
         newUpvotersList.push(getUser().username);
       }
 
-      // update frontend
-      setIsUpvoted(!isUpvoted);
-      dispatch(updateUpvoteCount({ id, newCount, newUpvotersList }));
+      // setIsUpvoted(!isUpvoted);
+      // dispatch(updateUpvoteCount({ id, newCount, newUpvotersList }));
 
-      // update database
       const upvoteData = {
         newCount,
         newUpvotersList,
@@ -124,7 +119,9 @@ const Project = ({ project }) => {
           body: JSON.stringify(upvoteData),
         });
         const data = await res.json();
-        if (!data.success) {
+        if (data.success) {
+          dispatch(updateUpvoteCount({ id, newCount, newUpvotersList }));
+        } else {
           notifyError(data.message);
         }
       } catch (err) {
@@ -209,7 +206,7 @@ const Project = ({ project }) => {
       <div className="project-options">
         <span>
           <img
-            src={isUpvoted ? upvotefilled : upvoteoutlined}
+            src={isUpvoted(upvoters) ? upvotefilled : upvoteoutlined}
             alt=""
             style={{ height: "18px", width: "18px" }}
             onClick={handleUpvote}

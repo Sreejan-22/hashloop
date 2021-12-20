@@ -39,7 +39,7 @@ const Feed = () => {
           </span>
           <span>&nbsp;&nbsp;New Project</span>
         </Link>
-        {projectsLoading && (
+        {projectsLoading ? (
           <div
             style={{
               width: "100%",
@@ -50,14 +50,15 @@ const Feed = () => {
           >
             <CircularProgress color="primary" />
           </div>
+        ) : (
+          <div className="feed-content">
+            <>
+              {allProjects.map((item) => (
+                <Project project={item} key={item._id} />
+              ))}
+            </>
+          </div>
         )}
-        <div className="feed-content">
-          <>
-            {allProjects.map((item) => (
-              <Project project={item} key={item._id} />
-            ))}
-          </>
-        </div>
       </>
     </Layout>
   );

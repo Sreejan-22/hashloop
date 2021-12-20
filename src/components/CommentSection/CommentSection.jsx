@@ -11,6 +11,7 @@ import { isAuthenticated, getUser } from "../../utils/auth";
 import { baseUrl } from "../../utils/constants";
 import { notifyError } from "../../utils/notifyToasts";
 import { getDate } from "../../utils/date";
+import { doesPropertyExist } from "../../utils/doesPropertyExist";
 
 const CommentSection = () => {
   const projectId = useParams().id;
@@ -201,7 +202,7 @@ const CommentSection = () => {
                 <Link to={`/profile/${item.username}`}>
                   <img
                     src={
-                      item.authorId.hasOwnProperty("pic")
+                      doesPropertyExist("pic", item.authorId)
                         ? item.authorId.pic
                         : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                     }
