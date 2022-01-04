@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { baseUrl } from "../../utils/constants";
 import { notifyError } from "../../utils/notifyToasts";
+import { doesPropertyExist } from "../../utils/doesPropertyExist";
 import "./Search.css";
 
 const Search = () => {
@@ -69,7 +70,7 @@ const Search = () => {
                     &nbsp;&nbsp;
                     <img
                       src={
-                        "pic" in item
+                        doesPropertyExist("pic", item)
                           ? item.pic
                           : "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png"
                       }

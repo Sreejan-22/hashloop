@@ -12,6 +12,7 @@ import { CircularProgress } from "@mui/material";
 import amico from "../../assets/amico.svg";
 import "./Signup.css";
 import { notifyError } from "../../utils/notifyToasts";
+import { doesPropertyExist } from "../../utils/doesPropertyExist";
 
 const theme = createTheme({
   palette: {
@@ -127,7 +128,9 @@ const Signup = () => {
               email: email.text,
               token: data.token,
               profile_id: data.profile._id,
-              pic: "pic" in data.profile ? data.profile.pic : null,
+              pic: doesPropertyExist("pic", data.profile)
+                ? data.profile.pic
+                : null,
             };
             localStorage.setItem("user", JSON.stringify(userData));
             history.push("/");

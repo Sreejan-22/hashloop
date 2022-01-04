@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { CircularProgress } from "@mui/material";
+import { doesPropertyExist } from "../../utils/doesPropertyExist";
 import amico from "../../assets/amico.svg";
 import "./Login.css";
 
@@ -78,7 +79,9 @@ const Login = () => {
               email: data.user.email,
               token: data.token,
               profile_id: data.profile._id,
-              pic: "pic" in data.profile ? data.profile.pic : null,
+              pic: doesPropertyExist("pic", data.profile)
+                ? data.profile.pic
+                : null,
             };
             localStorage.setItem("user", JSON.stringify(userData));
             history.push("/");
