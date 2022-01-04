@@ -213,22 +213,38 @@ const Profile = () => {
                 </div>
                 <div className="profile-links">
                   {doesPropertyExist("github", profileData) ? (
-                    <a href={profileData.github}>
+                    <a
+                      href={profileData.github}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <AiOutlineGithub />
                     </a>
                   ) : null}
                   {doesPropertyExist("twitter", profileData) ? (
-                    <a href={profileData.twitter}>
+                    <a
+                      href={profileData.twitter}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <AiOutlineTwitter />
                     </a>
                   ) : null}
                   {doesPropertyExist("linkedin", profileData) ? (
-                    <a href={profileData.linkedin}>
+                    <a
+                      href={profileData.linkedin}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <AiFillLinkedin />
                     </a>
                   ) : null}
                   {doesPropertyExist("portfolio", profileData) ? (
-                    <a href={profileData.portfolio}>
+                    <a
+                      href={profileData.portfolio}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <LanguageIcon />
                     </a>
                   ) : null}
