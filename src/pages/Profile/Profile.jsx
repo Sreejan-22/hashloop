@@ -97,11 +97,7 @@ const Profile = () => {
 
       const data = await res.json();
       if (data.success) {
-        setProfileData((prev) => {
-          const temp = { ...prev };
-          temp.followers = following ? temp.followers - 1 : temp.followers + 1;
-          return temp;
-        });
+        setProfileData(data.personProfile);
         setFollowing(!following);
       } else {
         notifyError("An error occurred");
