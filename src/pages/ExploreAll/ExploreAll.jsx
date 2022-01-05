@@ -17,7 +17,7 @@ const ExploreAll = () => {
   // const [show, setShow] = useState("trending");
   const [currentTag, setCurrentTag] = useState("");
   const dispatch = useDispatch();
-  const { projectsWithTag, projectsWithTagLoading } =
+  const { currentProjects, projectsWithTagLoading } =
     useSelector(projectSelector);
 
   const showProjectsWithTag = (tag) => {
@@ -87,8 +87,8 @@ const ExploreAll = () => {
           </div>
         ) : (
           <>
-            {projectsWithTag === null ? null : projectsWithTag.length ? (
-              projectsWithTag.map((item) => (
+            {currentTag === "" ? null : currentProjects.length ? (
+              currentProjects.map((item) => (
                 <Project project={item} key={item._id} />
               ))
             ) : (

@@ -4,6 +4,7 @@ import { notifyError } from "../utils/notifyToasts";
 
 const initialState = {
   allProjects: [],
+  currentProjects: [],
   projectsLoading: false,
   projectsError: false,
   userProjects: [],
@@ -23,6 +24,7 @@ const projectSlice = createSlice({
     },
     getProjectsSuccess: (state, { payload }) => {
       state.allProjects = payload;
+      state.currentProjects = payload;
       state.projectsError = false;
       state.projectsLoading = false;
     },
@@ -35,6 +37,7 @@ const projectSlice = createSlice({
     },
     getUserProjectsSuccess: (state, { payload }) => {
       state.userProjects = payload;
+      state.currentProjects = payload;
       state.userProjectsError = false;
       state.userProjectsLoading = false;
     },
@@ -45,7 +48,7 @@ const projectSlice = createSlice({
     updateUpvoteCount: (state, { payload }) => {
       let projectIndex;
       let project;
-      state.allProjects.forEach((item, index) => {
+      state.currentProjects.forEach((item, index) => {
         if (item._id === payload.id) {
           projectIndex = index;
           project = item;
@@ -53,7 +56,7 @@ const projectSlice = createSlice({
       });
       project.upvotes = payload.newCount;
       project.upvoters = payload.newUpvotersList;
-      state.allProjects[projectIndex] = project;
+      state.currentProjects[projectIndex] = project;
     },
     setUpvoteError: (state, { payload }) => {
       state.upvoteError = payload;
@@ -63,6 +66,7 @@ const projectSlice = createSlice({
     },
     getProjectsWithTagSuccess: (state, { payload }) => {
       state.projectsWithTag = payload;
+      state.currentProjects = payload;
       state.projectsWithTagLoading = false;
     },
     getProjectsWithTagFailure: (state) => {

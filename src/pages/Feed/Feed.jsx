@@ -13,7 +13,7 @@ import "./Feed.css";
 
 const Feed = () => {
   const dispatch = useDispatch();
-  const { allProjects, projectsLoading } = useSelector(projectSelector);
+  const { currentProjects, projectsLoading } = useSelector(projectSelector);
 
   useEffect(() => {
     dispatch(fetchProjects());
@@ -53,7 +53,7 @@ const Feed = () => {
         ) : (
           <div className="feed-content">
             <>
-              {allProjects.map((item) => (
+              {currentProjects.map((item) => (
                 <Project project={item} key={item._id} />
               ))}
             </>

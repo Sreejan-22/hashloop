@@ -32,7 +32,7 @@ const Profile = () => {
   const [profileData, setProfileData] = useState({});
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
-  const { userProjects, userProjectsLoading } = useSelector(projectSelector);
+  const { currentProjects, userProjectsLoading } = useSelector(projectSelector);
   const [following, setFollowing] = useState(false);
 
   useEffect(() => {
@@ -267,7 +267,7 @@ const Profile = () => {
             </div>
             <div className="feed-content">
               <>
-                {userProjects.map((item) => (
+                {currentProjects.map((item) => (
                   <Project project={item} key={item._id} />
                 ))}
               </>

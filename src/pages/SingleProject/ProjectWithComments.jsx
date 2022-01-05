@@ -11,8 +11,8 @@ import "./ProjectWithComments.css";
 const SingleProject = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { allProjects, projectsLoading } = useSelector(projectSelector);
-  const project = allProjects.find(
+  const { currentProjects, projectsLoading } = useSelector(projectSelector);
+  const project = currentProjects.find(
     (item) => item._id === history.location.pathname.slice(10)
   );
 
@@ -24,7 +24,7 @@ const SingleProject = () => {
     <Layout>
       <>
         <PageHeader text="Project" />
-        {projectsLoading ? (
+        {project === undefined || projectsLoading ? (
           <div
             style={{
               width: "100%",
