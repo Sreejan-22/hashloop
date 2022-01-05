@@ -3,15 +3,12 @@ import { baseUrl } from "../utils/constants";
 import { notifyError } from "../utils/notifyToasts";
 
 const initialState = {
-  allProjects: [],
   currentProjects: [],
   projectsLoading: false,
   projectsError: false,
-  userProjects: [],
   userProjectsLoading: false,
   userProjectsError: false,
   upvoteError: false,
-  projectsWithTag: null,
   projectsWithTagLoading: false,
 };
 
@@ -23,7 +20,6 @@ const projectSlice = createSlice({
       state.projectsLoading = true;
     },
     getProjectsSuccess: (state, { payload }) => {
-      state.allProjects = payload;
       state.currentProjects = payload;
       state.projectsError = false;
       state.projectsLoading = false;
@@ -36,7 +32,6 @@ const projectSlice = createSlice({
       state.userProjectsLoading = true;
     },
     getUserProjectsSuccess: (state, { payload }) => {
-      state.userProjects = payload;
       state.currentProjects = payload;
       state.userProjectsError = false;
       state.userProjectsLoading = false;
@@ -65,15 +60,11 @@ const projectSlice = createSlice({
       state.projectsWithTagLoading = true;
     },
     getProjectsWithTagSuccess: (state, { payload }) => {
-      state.projectsWithTag = payload;
       state.currentProjects = payload;
       state.projectsWithTagLoading = false;
     },
     getProjectsWithTagFailure: (state) => {
       state.projectsWithTagLoading = false;
-    },
-    makeProjectsWithTagNull: (state) => {
-      state.projectsWithTag = null;
     },
   },
 });
@@ -90,7 +81,6 @@ export const {
   loadProjectsWithTag,
   getProjectsWithTagSuccess,
   getProjectsWithTagFailure,
-  makeProjectsWithTagNull,
 } = projectSlice.actions;
 
 // selector
