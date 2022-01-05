@@ -127,3 +127,21 @@ footer button:hover {
     padding: 0rem 2rem;
   }
 }
+
+@media screen and (max-width: 650px) {
+  .layout-left-container {
+    display: none;
+  }
+  .layout {
+    grid-template-columns: auto;
+    /* display: block; */
+  }
+  .layout-content-container {
+    width: 100vw;
+    padding: 0rem 1rem;
+  }
+
+  /* .layout-content-container {
+    padding: 0rem 2rem;
+  } */
+}
