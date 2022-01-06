@@ -9,3 +9,7 @@ export const getToken = () => {
 export const getUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
+
+export const getSavedProjects = () => {
+  return isAuthenticated() ? getUser().savedProjects : [];
+};

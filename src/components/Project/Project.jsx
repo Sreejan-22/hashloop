@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { updateUpvoteCount } from "../../slices/project.slice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateUpvoteCount,
+  setSavedProjects,
+  projectSelector,
+} from "../../slices/project.slice";
 import { StyledMenu } from "../StyledMenu/StyledMenu";
 import CommentSection from "../CommentSection/CommentSection";
 import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { BiCommentDetail } from "react-icons/bi";
+import { MdBookmarkBorder, MdBookmark } from "react-icons/md";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import upvotefilled from "../../assets/upvotefilled.svg";
@@ -16,7 +21,11 @@ import "./Project.css";
 import { isAuthenticated, getUser } from "../../utils/auth";
 import { getDate } from "../../utils/date";
 import { baseUrl } from "../../utils/constants";
-import { notifyError } from "../../utils/notifyToasts";
+import {
+  notifySuccess,
+  notifyError,
+  notifyInfo,
+} from "../../utils/notifyToasts";
 import { doesPropertyExist } from "../../utils/doesPropertyExist";
 
 const isUpvoted = (upvoters) => {
@@ -31,6 +40,7 @@ const Project = ({ project }) => {
   const history = useHistory();
   const [showComments, setShowComments] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const { savedProjects } = useSelector(projectSelector);
 
   const {
     username,
@@ -101,9 +111,6 @@ const Project = ({ project }) => {
         newUpvotersList.push(getUser().username);
       }
 
-      // setIsUpvoted(!isUpvoted);
-      // dispatch(updateUpvoteCount({ id, newCount, newUpvotersList }));
-
       const upvoteData = {
         newCount,
         newUpvotersList,
@@ -129,6 +136,72 @@ const Project = ({ project }) => {
       }
     } else {
       history.push("/login");
+    }
+  };
+
+  const save = async () => {
+    if (isAuthenticated()) {
+      try {
+        const res = await fetch(
+          `${baseUrl}/saved/${getUser().username}/${id}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${getUser().token}`,
+            },
+          }
+        );
+        const data = await res.json();
+        if (data.success) {
+          let temp = [...getUser().savedProjects];
+          temp.push(id);
+          let userData = { ...getUser(), savedProjects: temp };
+          localStorage.setItem("user", JSON.stringify(userData));
+          dispatch(setSavedProjects(temp));
+          notifySuccess("Project bookmarked");
+        } else {
+          notifyError("Failed to bookmark project");
+        }
+      } catch (err) {
+        notifyError("Failed to bookmark project");
+      }
+    }
+  };
+
+  const unsave = async () => {
+    if (isAuthenticated()) {
+      try {
+        const res = await fetch(
+          `${baseUrl}/saved/${getUser().username}/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${getUser().token}`,
+            },
+          }
+        );
+        const data = await res.json();
+        if (data.success) {
+          let temp = [...getUser().savedProjects];
+          const index = temp.findIndex((item) => item === id);
+          temp.splice(index, 1);
+          let userData = { ...getUser(), savedProjects: temp };
+          localStorage.setItem("user", JSON.stringify(userData));
+          dispatch(setSavedProjects(temp));
+          if (window.location.pathname === "/saved") {
+            window.location.reload();
+          } else {
+            notifyInfo("Project removed from bookmarks");
+          }
+        } else {
+          notifyError("Failed to remove from bookmarks");
+        }
+      } catch (err) {
+        console.log(err);
+        notifyError("Failed to remove from bookmarks");
+      }
     }
   };
 
@@ -218,6 +291,19 @@ const Project = ({ project }) => {
             history.push(`/projects/${id}`, { project });
           }}
         />
+        {isAuthenticated() ? (
+          savedProjects.includes(id) ? (
+            <MdBookmark
+              style={{ height: "1.5rem", width: "1.5rem" }}
+              onClick={unsave}
+            />
+          ) : (
+            <MdBookmarkBorder
+              style={{ height: "1.5rem", width: "1.5rem" }}
+              onClick={save}
+            />
+          )
+        ) : null}
       </div>
       {/* comments section */}
       {showComments && <CommentSection />}

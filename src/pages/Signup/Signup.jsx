@@ -131,6 +131,7 @@ const Signup = () => {
               pic: doesPropertyExist("pic", data.profile)
                 ? data.profile.pic
                 : null,
+              savedProjects: data.savedProjects
             };
             localStorage.setItem("user", JSON.stringify(userData));
             history.push("/");

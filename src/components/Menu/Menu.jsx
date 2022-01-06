@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import PersonIcon from "@mui/icons-material/Person";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
 import "./Menu.css";
 import { isAuthenticated, getUser } from "../../utils/auth";
@@ -29,6 +30,10 @@ const Menu = () => {
             <Link to={`/profile/${getUser().username}`} className="menu-item">
               <PersonIcon />
               &nbsp;&nbsp;<span>Profile</span>
+            </Link>
+            <Link to="/saved" className="menu-item">
+              <BookmarkBorderIcon />
+              &nbsp;&nbsp;<span>Bookmarks</span>
             </Link>
             <div
               className="menu-item"

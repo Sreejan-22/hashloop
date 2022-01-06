@@ -71,7 +71,6 @@ const Login = () => {
         .then((res) => res.json())
         .then((data) => {
           setLoading(false);
-
           if (data.success) {
             const userData = {
               name: data.user.name,
@@ -82,6 +81,7 @@ const Login = () => {
               pic: doesPropertyExist("pic", data.profile)
                 ? data.profile.pic
                 : null,
+              savedProjects: data.savedProjects
             };
             localStorage.setItem("user", JSON.stringify(userData));
             history.push("/");

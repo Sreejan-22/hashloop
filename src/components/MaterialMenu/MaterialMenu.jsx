@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import HomeIcon from "@mui/icons-material/Home";
 import ExploreIcon from "@mui/icons-material/Explore";
 import PersonIcon from "@mui/icons-material/Person";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import "./MaterialMenu.css";
@@ -120,6 +121,10 @@ const MaterialMenu = () => {
             >
               <PersonIcon />
               Profile
+            </MenuItem>
+            <MenuItem onClick={() => history.push("/saved")}>
+              <BookmarkBorderIcon />
+              Bookmarks
             </MenuItem>
             <MenuItem
               onClick={() => {

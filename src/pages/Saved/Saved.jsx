@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { savedSelector, fetchSavedProjects } from "../../slices/saved.slice";
+import {
+  projectSelector,
+  fetchSavedProjects,
+} from "../../slices/project.slice";
 import Layout from "../../components/Layout/Layout";
 import Project from "../../components/Project/Project";
 import PageHeader from "../../components/PageHeader/PageHeader";
@@ -11,7 +14,7 @@ import { CircularProgress } from "@mui/material";
 
 const Saved = () => {
   const dispatch = useDispatch();
-  const { savedProjects, loading } = useSelector(savedSelector);
+  const { currentProjects, projectsLoading } = useSelector(projectSelector);
 
   useEffect(() => {
     dispatch(fetchSavedProjects());
@@ -20,7 +23,7 @@ const Saved = () => {
   return (
     <Layout>
       <PageHeader text="Saved" />
-      {loading ? (
+      {projectsLoading ? (
         <div
           style={{
             width: "100%",
@@ -33,9 +36,9 @@ const Saved = () => {
       ) : (
         <div className="feed-content">
           <>
-            {savedProjects.length ? (
-              savedProjects.map((item) => (
-                <Project key={item._id} project={item.projectId} />
+            {currentProjects.length ? (
+              currentProjects.map((item) => (
+                <Project key={item._id} project={item} />
               ))
             ) : (
               <h3 style={{ marginTop: "2rem", textAlign: "center" }}>

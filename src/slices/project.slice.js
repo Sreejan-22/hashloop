@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { baseUrl } from "../utils/constants";
 import { notifyError } from "../utils/notifyToasts";
+import { getUser, getSavedProjects } from "../utils/auth";
 
 const initialState = {
   currentProjects: [],
+  savedProjects: getSavedProjects(),
   projectsLoading: false,
   projectsError: false,
   userProjectsLoading: false,
@@ -53,9 +55,6 @@ const projectSlice = createSlice({
       project.upvoters = payload.newUpvotersList;
       state.currentProjects[projectIndex] = project;
     },
-    setUpvoteError: (state, { payload }) => {
-      state.upvoteError = payload;
-    },
     loadProjectsWithTag: (state) => {
       state.projectsWithTagLoading = true;
     },
@@ -65,6 +64,9 @@ const projectSlice = createSlice({
     },
     getProjectsWithTagFailure: (state) => {
       state.projectsWithTagLoading = false;
+    },
+    setSavedProjects: (state, { payload }) => {
+      state.savedProjects = payload;
     },
   },
 });
@@ -81,6 +83,7 @@ export const {
   loadProjectsWithTag,
   getProjectsWithTagSuccess,
   getProjectsWithTagFailure,
+  setSavedProjects,
 } = projectSlice.actions;
 
 // selector
@@ -146,6 +149,56 @@ export function fetchProjectsWithTag(tag) {
     }
   };
 }
+
+export function fetchSavedProjects() {
+  return async (dispatch) => {
+    dispatch(loadProjects());
+
+    try {
+      const res = await fetch(`${baseUrl}/saved/${getUser().username}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getUser().token}`,
+        },
+      });
+      const data = await res.json();
+      if (data.success) {
+        const temp = data.savedProjects.map((item) => item.projectId);
+        dispatch(getProjectsSuccess(temp));
+      } else {
+        dispatch(getProjectsFailure());
+        notifyError("Failed to fetch bookmarked projects");
+      }
+    } catch (err) {
+      dispatch(getProjectsFailure());
+      notifyError("Failed to fetch bookmarked projects");
+    }
+  };
+}
+
+// save a project
+// export function saveProject(projectId, username) {
+//   return async (dispatch) => {
+//     try {
+//       const res = await fetch(`${baseUrl}/saved/${projectId}/${username}`, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${getUser().token}`,
+//         },
+//       });
+//       const data = await res.json();
+//       if (data.success) {
+//         dipatch(save);
+//         notifySuccess("Project bookmarked");
+//       } else {
+//         notifyError("Failed to bookmark project");
+//       }
+//     } catch (err) {
+//       notifyError("Failed to bookmark project");
+//     }
+//   };
+// }
 
 // export async function updateUpvoteCountDB(id, token, newCount, newUpvoterList) {
 //   return async (dispatch) => {

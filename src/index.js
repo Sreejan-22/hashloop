@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 // import { authReducer } from "./slices/auth.slice";
 import { projectReducer } from "./slices/project.slice";
 import { trendingReducer } from "./slices/trending.slice";
+import { savedReducer } from "./slices/saved.slice";
 import "./index.css";
 import App from "./App";
 
@@ -12,6 +13,7 @@ const store = configureStore({
   reducer: {
     project: projectReducer,
     trending: trendingReducer,
+    saved: savedReducer
   },
 });
 

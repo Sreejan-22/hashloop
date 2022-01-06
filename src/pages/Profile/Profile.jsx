@@ -165,7 +165,6 @@ const Profile = () => {
                         <button
                           className="follow-btn"
                           onClick={() =>
-                            // history.push(`/editprofile/${profileData.username}`)
                             handleClickOpen()
                           }
                         >
@@ -253,7 +252,7 @@ const Profile = () => {
                   <div className="followers">
                     <span>{profileData.followers.length}</span>
                     &nbsp;
-                    <span style={{ fontSize: "0.8rem" }}>Followers</span>
+                    <span style={{ fontSize: "0.8rem" }}>{profileData.followers.length > 1 ? "Followers": "Follower"}</span>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                   </div>
                   <div className="following">
