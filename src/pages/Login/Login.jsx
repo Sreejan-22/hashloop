@@ -72,6 +72,10 @@ const Login = () => {
         .then((data) => {
           setLoading(false);
           if (data.success) {
+            let temp = [...data.savedProjects];
+            if (temp.length) {
+              temp = temp.map((item) => item.projectId);
+            }
             const userData = {
               name: data.user.name,
               username: data.user.username,
@@ -81,7 +85,7 @@ const Login = () => {
               pic: doesPropertyExist("pic", data.profile)
                 ? data.profile.pic
                 : null,
-              savedProjects: data.savedProjects
+              savedProjects: temp,
             };
             localStorage.setItem("user", JSON.stringify(userData));
             history.push("/");

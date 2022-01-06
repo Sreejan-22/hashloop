@@ -66,7 +66,11 @@ const Project = ({ project }) => {
     if (history.location.pathname.includes("/projects")) {
       setShowComments(true);
     }
-  }, [history.location.pathname]);
+
+    if (isAuthenticated()) {
+      dispatch(setSavedProjects(getUser().savedProjects));
+    }
+  }, [history.location.pathname, dispatch]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
