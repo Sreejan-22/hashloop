@@ -5,7 +5,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { CircularProgress } from "@mui/material";
 import { doesPropertyExist } from "../../utils/doesPropertyExist";
 import amico from "../../assets/amico.svg";
 import "./Login.css";
@@ -32,6 +31,12 @@ const useStyles = makeStyles({
 const Login = () => {
   const classes = useStyles();
   const history = useHistory();
+  const initialState = {
+    email: "",
+    password: "",
+    isSubmitting: "",
+  };
+  const [loginData, setLoginData] = useState(initialState);
   const [email, setEmail] = useState({
     text: "",
     error: false,
@@ -40,64 +45,69 @@ const Login = () => {
     text: "",
     error: false,
   });
-  const [loading, setLoading] = useState(false);
+  const [guestLoading, setGuestLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleInputChange = (e) => {
+    setLoginData({ ...loginData, [e.target.name]: e.target.value });
+  };
+
+  const toggleLoading = (type, value) => {
+    if (type === "guest") {
+      setGuestLoading(value);
+    } else {
+      setLoginData({ ...loginData, isSubmitting: value });
+    }
+  };
+
+  const login = async (e, isGuestLogin) => {
     e.preventDefault();
+
+    const type = isGuestLogin ? "guest" : "user";
+    const jsonData = isGuestLogin
+      ? {
+          email: process.env.REACT_APP_TEST_EMAIL,
+          password: process.env.REACT_APP_TEST_PASSWORD,
+        }
+      : { email: loginData.email, password: loginData.password };
 
     setEmail({ ...email, error: false });
     setPassword({ ...password, error: false });
 
-    if (!email.text.length) {
-      setEmail({ ...email, error: true });
-    }
-    if (!password.text.length) {
-      setPassword({ ...password, error: true });
-    }
+    toggleLoading(type, true);
 
-    if (email.text.length && password.text.length) {
-      setLoading(true);
-
-      fetch(`${process.env.REACT_APP_URL}/login`, {
+    try {
+      const res = await fetch(`${process.env.REACT_APP_URL}/login`, {
         method: "POST",
-        body: JSON.stringify({
-          email: email.text,
-          password: password.text,
-        }),
+        body: JSON.stringify(jsonData),
         headers: {
           "Content-type": "application/json",
         },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          setLoading(false);
-          if (data.success) {
-            let temp = [...data.savedProjects];
-            if (temp.length) {
-              temp = temp.map((item) => item.projectId);
-            }
-            const userData = {
-              name: data.user.name,
-              username: data.user.username,
-              email: data.user.email,
-              token: data.token,
-              profile_id: data.profile._id,
-              pic: doesPropertyExist("pic", data.profile)
-                ? data.profile.pic
-                : null,
-              savedProjects: temp,
-            };
-            localStorage.setItem("user", JSON.stringify(userData));
-            history.push("/");
-          } else {
-            // notify errors
-            if ("serverError" in data) {
-              notifyError(data.message);
-            } else {
-              notifyError(data.message);
-            }
-          }
-        });
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        let temp = [...data.savedProjects];
+        if (temp.length) {
+          temp = temp.map((item) => item.projectId);
+        }
+        const userData = {
+          name: data.user.name,
+          username: data.user.username,
+          email: data.user.email,
+          token: data.token,
+          profile_id: data.profile._id,
+          pic: doesPropertyExist("pic", data.profile) ? data.profile.pic : null,
+          savedProjects: temp,
+        };
+        localStorage.setItem("user", JSON.stringify(userData));
+        history.push("/");
+      } else {
+        toggleLoading(type, false);
+        notifyError(data.message);
+      }
+    } catch (err) {
+      toggleLoading(type, false);
+      notifyError("Something went wrong");
     }
   };
 
@@ -110,36 +120,37 @@ const Login = () => {
         <div className="right-signin-part">
           <div className="signin-heading">Sign In</div>
           <div className="signin-subheading">Welcome Back!</div>
-          <form noValidate autoComplete="off" className="signin-form">
+          <form className="signin-form" onSubmit={(e) => login(e, false)}>
             <TextField
               label="Email"
-              type="text"
+              name="email"
+              type="email"
               variant="standard"
               className={classes.textField}
               required
-              onChange={(e) => setEmail({ ...email, text: e.target.value })}
-              error={email.error}
+              disabled={loginData.isSubmitting || guestLoading}
+              value={loginData.email}
+              onChange={handleInputChange}
             />
             <TextField
               label="Password"
+              name="password"
               type="password"
               variant="standard"
               className={classes.textField}
               required
-              onChange={(e) =>
-                setPassword({ ...password, text: e.target.value })
-              }
-              error={password.error}
+              disabled={loginData.isSubmitting || guestLoading}
+              value={loginData.password}
+              onChange={handleInputChange}
             />
-            {/* <a
-              href="https://github.com/Sreejan-22"
-              className="forgot-password-text"
+            <button
+              type="submit"
+              className={`signin-submit-btn ${
+                loginData.isSubmitting || guestLoading ? "btn-disabled" : ""
+              }`}
+              disabled={guestLoading}
             >
-              Forgot Password?
-            </a>
-            <br /> */}
-            <button className="signin-submit-btn" onClick={handleSubmit}>
-              Sign In
+              {!loginData.isSubmitting ? "Sign In" : "Loading..."}
             </button>
           </form>
           <div style={{ alignSelf: "center" }}>
@@ -148,16 +159,17 @@ const Login = () => {
               Sign up
             </Link>
           </div>
+          <button
+            className={`login-test-btn ${
+              loginData.isSubmitting || guestLoading ? "btn-disabled" : ""
+            }`}
+            onClick={(e) => login(e, true)}
+            disabled={loginData.isSubmitting}
+          >
+            {!guestLoading ? "Login with test credentials" : "Loading..."}
+          </button>
         </div>
       </div>
-      {loading ? (
-        <>
-          <div className={classes.loaderWrapper}>
-            <CircularProgress className={classes.loader} />
-          </div>
-          <div className={classes.wrapper}></div>
-        </>
-      ) : null}
       <ToastContainer />
     </ThemeProvider>
   );

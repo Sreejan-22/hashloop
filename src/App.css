@@ -28,3 +28,7 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.btn-disabled {
+  background-color: rgba(0, 13, 82, 0.5);
+}

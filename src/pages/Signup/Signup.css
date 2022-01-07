@@ -57,6 +57,7 @@
   height: 70px;
   /* background: linear-gradient(180deg, #ffb648 0%, #fdc064 100%); */
   background-color: #000d52;
+  /* background-color: rgba(0, 13, 82, 0.5); => for disabled status */
   border-radius: 13.5372px;
   border: none;
   outline: none;

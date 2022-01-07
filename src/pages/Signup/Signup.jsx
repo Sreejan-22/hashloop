@@ -131,7 +131,7 @@ const Signup = () => {
               pic: doesPropertyExist("pic", data.profile)
                 ? data.profile.pic
                 : null,
-              savedProjects: data.savedProjects
+              savedProjects: data.savedProjects,
             };
             localStorage.setItem("user", JSON.stringify(userData));
             history.push("/");
@@ -205,7 +205,11 @@ const Signup = () => {
               error={password.error}
               helperText={password.errorText}
             />
-            <button className="signup-submit-btn" onClick={handleSubmit}>
+            <button
+              className="signup-submit-btn"
+              onClick={handleSubmit}
+              disabled
+            >
               Sign Up
             </button>
           </form>
