@@ -9,6 +9,7 @@ Hashloop is a social media application for viewing and sharing software projects
 - View projects posted by others
 - Post projects
 - Edit projects
+- Give feedback on projects in the comments section
 - Bookmark projects
 - Filter projects built using a particular programming language/framework
 - Trending projects section and profile suggestions
