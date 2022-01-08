@@ -17,7 +17,7 @@ Hashloop is a social media application for viewing and sharing software projects
 
 **Frontend** - React, Redux Toolkit, CSS, Material UI, React Router
 
-**Backend** - Express, MongoDB + Mongoose
+**Backend** - Express, MongoDB + Mongoose, Cloudinary(to store images)
 
 Code for the backend of the application can be found [here](https://github.com/Sreejan-22/hashloop-backend)
 
