@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import Tags from "../Tags/Tags";
 import { Button } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
@@ -17,9 +17,9 @@ import { getUser } from "../../utils/auth";
 const user = getUser();
 
 const EditProfileModal = ({ open, handleClose, profileData }) => {
-  const history = useHistory();
-  const [pic, setPic] = useState(null);
-  const [cover, setCover] = useState(null);
+  // const history = useHistory();
+  const [pic, setPic] = useState(profileData.pic || null);
+  const [cover, setCover] = useState(profileData.cover || null);
   const [bio, setBio] = useState(profileData.bio || "");
   const [city, setCity] = useState(profileData.city || "");
   // const [country, setCountry] = useState(profileData.country || "");
@@ -28,6 +28,8 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
   const [linkedin, setLinkedin] = useState(profileData.linkedin || "");
   const [twitter, setTwitter] = useState(profileData.twitter || "");
   const [portfolio, setPortfolio] = useState(profileData.portfolio || "");
+
+  // console.log(profileData);
 
   const editProfile = async (e) => {
     e.preventDefault();
@@ -95,6 +97,8 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
       }
     }
 
+    console.log(submitData);
+
     // edit/update profile
     try {
       const res = await fetch(`${baseUrl}/profile/${user.username}`, {
@@ -108,7 +112,8 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
       const data = await res.json();
       if (data.success) {
         handleClose();
-        history.push(`/profile/${user.username}`);
+        // history.push(`/profile/${user.username}`);
+        window.location.reload();
       } else {
         notifyError(data.message);
       }
