@@ -13,9 +13,7 @@ const Menu = () => {
 
   return (
     <div className="feed-menu">
-      <br />
-      <br />
-      <br />
+      &nbsp;&nbsp;&nbsp;
       <div className="menu-items">
         <Link to="/" className="menu-item">
           <HomeIcon />

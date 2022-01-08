@@ -9,6 +9,18 @@
   padding: 1rem;
 }
 
+/* .logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 2rem;
+  width: 3rem;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+} */
+
 .menu-items {
   display: flex;
   flex-direction: column;
