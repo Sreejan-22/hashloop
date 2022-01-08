@@ -8,7 +8,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { CircularProgress } from "@mui/material";
 import amico from "../../assets/amico.svg";
 import "./Signup.css";
 import { notifyError } from "../../utils/notifyToasts";
@@ -206,11 +205,11 @@ const Signup = () => {
               helperText={password.errorText}
             />
             <button
-              className="signup-submit-btn"
+              className={`signup-submit-btn ${loading ? "btn-disabled" : ""}`}
               onClick={handleSubmit}
-              disabled
+              disabled={loading}
             >
-              Sign Up
+              {loading ? "Loading..." : "Sign Up"}
             </button>
           </form>
           <div style={{ alignSelf: "center" }}>
@@ -221,14 +220,6 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      {loading ? (
-        <>
-          <div className={classes.loaderWrapper}>
-            <CircularProgress className={classes.loader} />
-          </div>
-          <div className={classes.wrapper}></div>
-        </>
-      ) : null}
       <ToastContainer />
     </ThemeProvider>
   );

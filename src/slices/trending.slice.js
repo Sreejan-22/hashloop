@@ -15,7 +15,11 @@ const trendingSlice = createSlice({
       state.trendingLoading = true;
     },
     getTrendingProjectsSuccess: (state, { payload }) => {
-      state.trendingProjects = payload;
+      let temp = payload.filter(
+        (item, index, arr) =>
+          arr.findIndex((i) => i.authorId._id === item.authorId._id) === index
+      );
+      state.trendingProjects = temp;
       state.trendingLoading = false;
       state.trendingError = false;
     },

@@ -46,7 +46,7 @@ const Trending = () => {
         <div className="trending">
           <h5>Trending</h5>
           <>
-            {trendingProjects.map((item) => (
+            {[...new Set(trendingProjects)].map((item) => (
               <div
                 to={`/projects/${item._id}`}
                 className="trending-project"
