@@ -7,8 +7,8 @@ import {
 import Layout from "../../components/Layout/Layout";
 import Project from "../../components/Project/Project";
 import PageHeader from "../../components/PageHeader/PageHeader";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {} from "react-toastify";
+
 import "./Saved.css";
 import { CircularProgress } from "@mui/material";
 
@@ -48,7 +48,6 @@ const Saved = () => {
           </>
         </div>
       )}
-      <ToastContainer />
     </Layout>
   );
 };

@@ -8,8 +8,8 @@ import { CircularProgress } from "@mui/material";
 import Layout from "../../components/Layout/Layout";
 import Project from "../../components/Project/Project";
 import PageHeader from "../../components/PageHeader/PageHeader";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {} from "react-toastify";
+
 import "./ExploreAll.css";
 import { allTags } from "../../utils/constants";
 
@@ -97,7 +97,6 @@ const ExploreAll = () => {
           </>
         )}
       </div>
-      <ToastContainer />
     </Layout>
   );
 };

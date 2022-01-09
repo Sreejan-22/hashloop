@@ -13,8 +13,6 @@ import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { BiCommentDetail } from "react-icons/bi";
 import { MdBookmarkBorder, MdBookmark } from "react-icons/md";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import upvotefilled from "../../assets/upvotefilled.svg";
 import upvoteoutlined from "../../assets/upvoteoutlined.svg";
 import "./Project.css";
@@ -311,7 +309,6 @@ const Project = ({ project }) => {
       </div>
       {/* comments section */}
       {showComments && <CommentSection />}
-      <ToastContainer />
     </div>
   );
 };

@@ -15,12 +15,15 @@ import ExploreAll from "./pages/ExploreAll/ExploreAll";
 import Saved from "./pages/Saved/Saved";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { isAuthenticated } from "./utils/auth";
 
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <Switch>
         <Route path="/signup">
           {isAuthenticated() ? <Redirect to="/" /> : <Signup />}

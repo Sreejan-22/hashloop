@@ -7,8 +7,8 @@ import {
 } from "../../slices/trending.slice";
 import Search from "../Search/Search";
 import { CircularProgress } from "@mui/material";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {} from "react-toastify";
+
 import "./Trending.css";
 import { notifyError } from "../../utils/notifyToasts";
 import { isAuthenticated, getUser } from "../../utils/auth";
@@ -116,7 +116,6 @@ const Trending = () => {
             : null}
         </>
       </div>
-      <ToastContainer />
     </div>
   );
 };

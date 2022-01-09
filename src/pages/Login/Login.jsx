@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { notifyError } from "../../utils/notifyToasts";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {} from "react-toastify";
+
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { doesPropertyExist } from "../../utils/doesPropertyExist";
@@ -170,7 +170,6 @@ const Login = () => {
           </button>
         </div>
       </div>
-      <ToastContainer />
     </ThemeProvider>
   );
 };

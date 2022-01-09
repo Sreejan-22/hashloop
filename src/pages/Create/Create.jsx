@@ -7,8 +7,8 @@ import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {} from "react-toastify";
+
 import { CircularProgress } from "@mui/material";
 import "./Create.css";
 import { allTags, baseUrl } from "../../utils/constants";
@@ -280,7 +280,6 @@ const Create = () => {
           <div className={classes.wrapper}></div>
         </>
       ) : null}
-      <ToastContainer />
     </Layout>
   );
 };

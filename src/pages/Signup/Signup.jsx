@@ -4,8 +4,8 @@ import {
   handleServerError,
   handleSignupError,
 } from "../../utils/handleSignupError";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import {} from "react-toastify";
+
 import { createTheme, TextField, ThemeProvider } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import amico from "../../assets/amico.svg";
@@ -220,7 +220,6 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </ThemeProvider>
   );
 };
