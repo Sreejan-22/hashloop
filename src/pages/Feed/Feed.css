@@ -37,9 +37,15 @@
 }
 
 .feed-header {
+  padding-top: 1rem;
+  position: sticky;
+  top: 0rem;
   display: flex;
   align-items: center;
   font-size: 20px;
+  margin-bottom: 0rem;
+  padding-bottom: 1rem;
+  background-color: var(--main-bg-color);
 }
 
 .feed-header-content {
@@ -58,6 +64,8 @@
 }
 
 .new-project-btn {
+  position: sticky;
+  top: 3.5rem;
   background-color: white;
   height: 4rem;
   border-radius: var(--border-radius);
