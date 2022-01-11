@@ -201,7 +201,6 @@ const Project = ({ project }) => {
           notifyError("Failed to remove from bookmarks");
         }
       } catch (err) {
-        console.log(err);
         notifyError("Failed to remove from bookmarks");
       }
     }

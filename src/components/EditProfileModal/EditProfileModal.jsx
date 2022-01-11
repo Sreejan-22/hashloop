@@ -29,8 +29,6 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
   const [twitter, setTwitter] = useState(profileData.twitter || "");
   const [portfolio, setPortfolio] = useState(profileData.portfolio || "");
 
-  // console.log(profileData);
-
   const editProfile = async (e) => {
     e.preventDefault();
 
@@ -96,8 +94,6 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
         return;
       }
     }
-
-    console.log(submitData);
 
     // edit/update profile
     try {
