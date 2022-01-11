@@ -13,7 +13,12 @@ const Menu = () => {
 
   return (
     <div className="feed-menu">
-      &nbsp;&nbsp;&nbsp;
+      <img
+        src="/hashloop.svg"
+        alt=""
+        className="logo"
+        onClick={() => history.push("/")}
+      />
       <div className="menu-items">
         <Link to="/" className="menu-item">
           <HomeIcon />
