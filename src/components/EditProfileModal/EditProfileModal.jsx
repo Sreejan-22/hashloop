@@ -81,7 +81,7 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
           headers: {
             Authorization: `Bearer ${user.token}`,
           },
-          body: formData,
+          body: JSON.stringify(formData),
         });
         const data = await res.json();
         if (data.success) {
