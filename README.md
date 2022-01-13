@@ -2,6 +2,8 @@
 
 ### About
 
+![screenshot_1](https://github.com/Sreejan-22/hashloop/blob/master/screenshot_1.png)
+
 Hashloop is a social media application for viewing and sharing software projects
 
 **Features**
