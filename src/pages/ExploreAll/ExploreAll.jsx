@@ -92,7 +92,9 @@ const ExploreAll = () => {
                 <Project project={item} key={item._id} />
               ))
             ) : (
-              <div>Currently there are no projects with this tag</div>
+              <div style={{ textAlign: "center" }}>
+                Currently there are no projects with this tag
+              </div>
             )}
           </>
         )}

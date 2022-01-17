@@ -218,7 +218,7 @@ const CommentSection = () => {
                     </Link>
                   </div>
                 </div>
-                {isAuthenticated() && (
+                {isAuthenticated() && getUser().username === item.username && (
                   <>
                     <MoreHorizIcon onClick={handleClick2} />
                     <StyledCommentMenu
@@ -233,13 +233,9 @@ const CommentSection = () => {
                       padding="0"
                     >
                       <MenuItem onClick={handleClose2}>Report</MenuItem>
-                      {getUser().username === item.username && (
-                        <MenuItem
-                          onClick={() => deleteComment(item._id, index)}
-                        >
-                          Delete
-                        </MenuItem>
-                      )}
+                      <MenuItem onClick={() => deleteComment(item._id, index)}>
+                        Delete
+                      </MenuItem>
                     </StyledCommentMenu>
                   </>
                 )}
