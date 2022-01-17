@@ -79,9 +79,9 @@ export function saveProject(projectId, username) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getUser().token}`,
         },
-        body: {
+        body: JSON.stringify({
           username,
-        },
+        }),
       });
       const data = await res.json();
       if (data.success) {
