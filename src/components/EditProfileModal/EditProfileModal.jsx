@@ -14,8 +14,6 @@ import { baseUrl } from "../../utils/constants";
 import { notifyError } from "../../utils/notifyToasts";
 import { getUser } from "../../utils/auth";
 
-const user = getUser();
-
 const EditProfileModal = ({ open, handleClose, profileData }) => {
   // const history = useHistory();
   const [pic, setPic] = useState(profileData.pic || null);
@@ -54,7 +52,7 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
         const res = await fetch(`${baseUrl}/upload`, {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${getUser().token}`,
           },
           body: formData,
         });
@@ -79,7 +77,7 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
         const res = await fetch(`${baseUrl}/upload`, {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${getUser().token}`,
           },
           body: formData,
         });
@@ -97,18 +95,18 @@ const EditProfileModal = ({ open, handleClose, profileData }) => {
 
     // edit/update profile
     try {
-      const res = await fetch(`${baseUrl}/profile/${user.username}`, {
+      const res = await fetch(`${baseUrl}/profile/${getUser().username}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${getUser().token}`,
         },
         body: JSON.stringify(submitData),
       });
       const data = await res.json();
       if (data.success) {
         handleClose();
-        // history.push(`/profile/${user.username}`);
+        // history.push(`/profile/${getUser().username}`);
         window.location.reload();
       } else {
         notifyError(data.message);

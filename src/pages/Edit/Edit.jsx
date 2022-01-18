@@ -16,7 +16,6 @@ import { getUser } from "../../utils/auth";
 import { notifyError } from "../../utils/notifyToasts";
 
 const projectTags = [...allTags];
-const user = getUser();
 
 const theme = createTheme({
   palette: {
@@ -105,12 +104,13 @@ const Edit = () => {
         const res = await fetch(`${baseUrl}/upload`, {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${getUser().token}`,
           },
           body: formData,
         });
 
         const data = await res.json();
+        console.log(data);
         if (data.success) {
           submitData.image = data.imageUrl;
         } else {
@@ -119,6 +119,7 @@ const Edit = () => {
           return;
         }
       } catch (err) {
+        console.log(err);
         notifyError("Failed to upload image");
         setLoading(false);
         return;
@@ -131,7 +132,7 @@ const Edit = () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${getUser().token}`,
         },
         body: JSON.stringify(submitData),
       });

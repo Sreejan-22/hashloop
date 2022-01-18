@@ -23,8 +23,6 @@ import { baseUrl } from "../../utils/constants";
 import { notifyError } from "../../utils/notifyToasts";
 import { doesPropertyExist } from "../../utils/doesPropertyExist";
 
-const user = getUser();
-
 const Profile = () => {
   const history = useHistory();
   const { username } = useParams();
@@ -80,6 +78,8 @@ const Profile = () => {
   const handleFollow = async () => {
     let follow = following;
     follow = !follow;
+
+    const user = getUser();
 
     try {
       const res = await fetch(`${baseUrl}/follow`, {
@@ -164,9 +164,7 @@ const Profile = () => {
                       profileData.username === getUser().username ? (
                         <button
                           className="follow-btn"
-                          onClick={() =>
-                            handleClickOpen()
-                          }
+                          onClick={() => handleClickOpen()}
                         >
                           Edit Profile
                         </button>
@@ -252,7 +250,11 @@ const Profile = () => {
                   <div className="followers">
                     <span>{profileData.followers.length}</span>
                     &nbsp;
-                    <span style={{ fontSize: "0.8rem" }}>{profileData.followers.length > 1 ? "Followers": "Follower"}</span>
+                    <span style={{ fontSize: "0.8rem" }}>
+                      {profileData.followers.length > 1
+                        ? "Followers"
+                        : "Follower"}
+                    </span>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                   </div>
                   <div className="following">
