@@ -33,7 +33,7 @@
   border-radius: 8px;
   margin-bottom: 0.7rem;
   cursor: pointer;
-  /* height: 4rem; */
+  height: 6rem;
   width: 100%;
 }
 
@@ -98,7 +98,6 @@
   cursor: pointer;
   background-color: white;
   border: 1.5px solid black;
-  font-family: "Montserrat", sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
   padding: 0.3rem;

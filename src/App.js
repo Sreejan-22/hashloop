@@ -31,13 +31,13 @@ function App() {
         <Route path="/login">
           {isAuthenticated() ? <Redirect to="/" /> : <Login />}
         </Route>
-        <Route path="/profile/:username" component={Profile} />
-        <Route path="/projects/:id" component={SingleProject} />
+        <PrivateRoute path="/profile/:username" component={Profile} />
+        <PrivateRoute path="/projects/:id" component={SingleProject} />
         <PrivateRoute path="/create" component={Create} />
         <PrivateRoute path="/edit/:id" component={Edit} />
-        <Route path="/explore" component={ExploreAll} />
-        <Route path="/saved" component={Saved} />
-        <Route exact path="/" component={Feed} />
+        <PrivateRoute path="/explore" component={ExploreAll} />
+        <PrivateRoute path="/saved" component={Saved} />
+        <PrivateRoute exact path="/" component={Feed} />
         <Route path="*">
           <PageNotFound />
         </Route>
